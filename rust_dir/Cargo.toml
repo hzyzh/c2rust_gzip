@@ -1,0 +1,21 @@
+[workspace]
+members = [
+]
+[package]
+name = "rust_dir"
+authors = ["C2Rust"]
+version = "0.0.0"
+publish = false
+edition = "2021"
+autobins = false
+
+[lib]
+name = "rust_dir"
+path = "lib.rs"
+crate-type = ["staticlib", "rlib"]
+[[bin]]
+path = "src/gzip.rs"
+name = "gzip"
+[dependencies]
+libc= "0.2"
+f128= "0.2"
