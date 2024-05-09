@@ -1,1 +1,4 @@
 rust_dir/target/
+rust_dir/c2rust-analyze.log
+rust_dir/inspect/
+rust_dir/polonius_cache/
