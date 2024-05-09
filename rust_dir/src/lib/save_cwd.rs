@@ -10,9 +10,9 @@ extern "C" {
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
-pub struct saved_cwd {
+pub struct saved_cwd<'h58> {
     pub desc: libc::c_int,
-    pub name: *mut libc::c_char,
+    pub name: &'h58 (libc::c_char),
 }
 pub type size_t = libc::c_ulong;
 #[no_mangle]
@@ -45,7 +45,7 @@ pub unsafe extern "C" fn restore_cwd(mut cwd: *const saved_cwd) -> libc::c_int {
     };
 }
 #[no_mangle]
-pub unsafe extern "C" fn free_cwd(mut cwd: *mut saved_cwd) {
+pub unsafe extern "C" fn free_cwd<'h0,'h1>(mut cwd: &'h0 (src::lib::save_cwd::saved_cwd<'h1>)) {
     if (*cwd).desc >= 0 as libc::c_int {
         close((*cwd).desc);
     }

@@ -37,16 +37,16 @@ pub union C2RustUnnamed_0 {
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
-pub struct tree_desc {
-    pub dyn_tree: *mut ct_data,
-    pub static_tree: *mut ct_data,
-    pub extra_bits: *mut libc::c_int,
+pub struct tree_desc<'h71,'h72,'h73> {
+    pub dyn_tree: &'h71 [core::cell::Cell<(ct_data)>],
+    pub static_tree: &'h72 [(ct_data)],
+    pub extra_bits: &'h73 [(libc::c_int)],
     pub extra_base: libc::c_int,
     pub elems: libc::c_int,
     pub max_length: libc::c_int,
     pub max_code: libc::c_int,
 }
-static mut extra_lbits: [libc::c_int; 29] = [
+static extra_lbits: [libc::c_int; 29] = [
     0 as libc::c_int,
     0 as libc::c_int,
     0 as libc::c_int,
@@ -77,7 +77,7 @@ static mut extra_lbits: [libc::c_int; 29] = [
     5 as libc::c_int,
     0 as libc::c_int,
 ];
-static mut extra_dbits: [libc::c_int; 30] = [
+static extra_dbits: [libc::c_int; 30] = [
     0 as libc::c_int,
     0 as libc::c_int,
     0 as libc::c_int,
@@ -109,7 +109,7 @@ static mut extra_dbits: [libc::c_int; 30] = [
     13 as libc::c_int,
     13 as libc::c_int,
 ];
-static mut extra_blbits: [libc::c_int; 19] = [
+static extra_blbits: [libc::c_int; 19] = [
     0 as libc::c_int,
     0 as libc::c_int,
     0 as libc::c_int,
@@ -150,7 +150,7 @@ static mut bl_tree: [ct_data; 39] = [ct_data {
     fc: C2RustUnnamed { freq: 0 },
     dl: C2RustUnnamed_0 { dad: 0 },
 }; 39];
-static mut l_desc: tree_desc = unsafe {
+static l_desc: tree_desc = unsafe {
     {
         let mut init = tree_desc {
             dyn_tree: dyn_ltree.as_ptr() as *mut _,
@@ -164,7 +164,7 @@ static mut l_desc: tree_desc = unsafe {
         init
     }
 };
-static mut d_desc: tree_desc = unsafe {
+static d_desc: tree_desc = unsafe {
     {
         let mut init = tree_desc {
             dyn_tree: dyn_dtree.as_ptr() as *mut _,
@@ -193,7 +193,7 @@ static mut bl_desc: tree_desc = unsafe {
     }
 };
 static mut bl_count: [ush; 16] = [0; 16];
-static mut bl_order: [uch; 19] = [
+static bl_order: [uch; 19] = [
     16 as libc::c_int as uch,
     17 as libc::c_int as uch,
     18 as libc::c_int as uch,
@@ -222,7 +222,7 @@ static mut length_code: [uch; 256] = [0; 256];
 static mut dist_code: [uch; 512] = [0; 512];
 static mut base_length: [libc::c_int; 29] = [0; 29];
 static mut base_dist: [libc::c_int; 30] = [0; 30];
-static mut flag_buf: [uch; 4096] = [0; 4096];
+static flag_buf: [uch; 4096] = [0; 4096];
 static mut last_lit: libc::c_uint = 0;
 static mut last_dist: libc::c_uint = 0;
 static mut last_flags: libc::c_uint = 0;

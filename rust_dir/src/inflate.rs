@@ -26,18 +26,18 @@ pub type ush = libc::c_ushort;
 pub type ulg = libc::c_ulong;
 #[derive(Copy, Clone)]
 #[repr(C)]
-pub struct huft {
+pub struct huft<'h0> {
     pub e: uch,
     pub b: uch,
-    pub v: C2RustUnnamed,
+    pub v: src::inflate::C2RustUnnamed<'h0>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
-pub union C2RustUnnamed {
+pub union C2RustUnnamed<'h0> {
     pub n: ush,
-    pub t: *mut huft,
+    pub t: *mut src::inflate::huft<'h0>,
 }
-static mut border: [libc::c_uint; 19] = [
+static border: [libc::c_uint; 19] = [
     16 as libc::c_int as libc::c_uint,
     17 as libc::c_int as libc::c_uint,
     18 as libc::c_int as libc::c_uint,
@@ -58,7 +58,7 @@ static mut border: [libc::c_uint; 19] = [
     1 as libc::c_int as libc::c_uint,
     15 as libc::c_int as libc::c_uint,
 ];
-static mut cplens: [ush; 31] = [
+static cplens: [ush; 31] = [
     3 as libc::c_int as ush,
     4 as libc::c_int as ush,
     5 as libc::c_int as ush,
@@ -91,7 +91,7 @@ static mut cplens: [ush; 31] = [
     0 as libc::c_int as ush,
     0 as libc::c_int as ush,
 ];
-static mut cplext: [ush; 31] = [
+static cplext: [ush; 31] = [
     0 as libc::c_int as ush,
     0 as libc::c_int as ush,
     0 as libc::c_int as ush,
@@ -124,7 +124,7 @@ static mut cplext: [ush; 31] = [
     99 as libc::c_int as ush,
     99 as libc::c_int as ush,
 ];
-static mut cpdist: [ush; 30] = [
+static cpdist: [ush; 30] = [
     1 as libc::c_int as ush,
     2 as libc::c_int as ush,
     3 as libc::c_int as ush,
@@ -156,7 +156,7 @@ static mut cpdist: [ush; 30] = [
     16385 as libc::c_int as ush,
     24577 as libc::c_int as ush,
 ];
-static mut cpdext: [ush; 30] = [
+static cpdext: [ush; 30] = [
     0 as libc::c_int as ush,
     0 as libc::c_int as ush,
     0 as libc::c_int as ush,
@@ -188,9 +188,9 @@ static mut cpdext: [ush; 30] = [
     13 as libc::c_int as ush,
     13 as libc::c_int as ush,
 ];
-static mut bb: ulg = 0;
-static mut bk: libc::c_uint = 0;
-static mut mask_bits: [ush; 17] = [
+static bb: ulg = 0;
+static bk: libc::c_uint = 0;
+static mask_bits: [ush; 17] = [
     0 as libc::c_int as ush,
     0x1 as libc::c_int as ush,
     0x3 as libc::c_int as ush,
@@ -209,8 +209,8 @@ static mut mask_bits: [ush; 17] = [
     0x7fff as libc::c_int as ush,
     0xffff as libc::c_int as ush,
 ];
-static mut lbits: libc::c_int = 9 as libc::c_int;
-static mut dbits: libc::c_int = 6 as libc::c_int;
+static lbits: libc::c_int = 9 as libc::c_int;
+static dbits: libc::c_int = 6 as libc::c_int;
 static mut hufts: libc::c_uint = 0;
 unsafe extern "C" fn huft_build(
     mut b: *mut libc::c_uint,

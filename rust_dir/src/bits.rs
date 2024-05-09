@@ -8,11 +8,11 @@ extern "C" {
 pub type uch = libc::c_uchar;
 pub type ush = libc::c_ushort;
 pub type file_t = libc::c_int;
-static mut zfile: file_t = 0;
-static mut bi_buf: libc::c_ushort = 0;
-static mut bi_valid: libc::c_int = 0;
+static zfile: file_t = 0;
+static bi_buf: libc::c_ushort = 0;
+static bi_valid: libc::c_int = 0;
 #[no_mangle]
-pub static mut read_buf: Option::<
+static read_buf: Option::<
     unsafe extern "C" fn(*mut libc::c_char, libc::c_uint) -> libc::c_int,
 > = None;
 #[no_mangle]

@@ -152,16 +152,16 @@ pub unsafe extern "C" fn glthread_recursive_lock_init_multithreaded(
     }
     return 0 as libc::c_int;
 }
-static mut fresh_once: pthread_once_t = 0 as libc::c_int;
+static fresh_once: pthread_once_t = 0 as libc::c_int;
 #[no_mangle]
-pub unsafe extern "C" fn glthread_once_singlethreaded(
-    mut once_control: *mut pthread_once_t,
+pub unsafe extern "C" fn glthread_once_singlethreaded<'h0>(
+    mut once_control: &'h0 mut i8,
 ) -> libc::c_int {
-    let mut firstbyte: *mut libc::c_char = once_control as *mut libc::c_char;
+    let mut firstbyte: &mut (libc::c_char) = (once_control);
     if *firstbyte as libc::c_int
-        == *(&fresh_once as *const pthread_once_t as *const libc::c_char) as libc::c_int
+        == *((&*(&fresh_once))) as libc::c_int
     {
-        *firstbyte = !(*(&fresh_once as *const pthread_once_t as *const libc::c_char)
+        *firstbyte = !(*((&*(&fresh_once)))
             as libc::c_int) as libc::c_char;
         return 1 as libc::c_int;
     } else {

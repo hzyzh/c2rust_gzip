@@ -80,9 +80,9 @@ pub type uch = libc::c_uchar;
 pub type ush = libc::c_ushort;
 pub type ulg = libc::c_ulong;
 pub type file_t = libc::c_int;
-static mut crc: ulg = 0;
+static crc: ulg = 0;
 #[no_mangle]
-pub static mut header_bytes: off_t = 0;
+static header_bytes: off_t = 0;
 #[no_mangle]
 pub unsafe extern "C" fn zip(
     mut in_0: libc::c_int,

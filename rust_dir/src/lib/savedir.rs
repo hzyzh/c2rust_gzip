@@ -44,8 +44,8 @@ pub const SAVEDIR_SORT_NAME: savedir_option = 1;
 pub const SAVEDIR_SORT_NONE: savedir_option = 0;
 #[derive(Copy, Clone)]
 #[repr(C)]
-pub struct direntry_t {
-    pub name: *mut libc::c_char,
+pub struct direntry_t<'h59> {
+    pub name: &'h59 [(libc::c_char)],
 }
 pub type comparison_function = Option::<
     unsafe extern "C" fn(*const libc::c_void, *const libc::c_void) -> libc::c_int,
@@ -113,7 +113,7 @@ unsafe extern "C" fn direntry_cmp_name(
     let mut deb: *const direntry_t = b as *const direntry_t;
     return strcmp((*dea).name, (*deb).name);
 }
-static mut comparison_function_table: [comparison_function; 2] = unsafe {
+static comparison_function_table: [comparison_function; 2] = unsafe {
     [
         None,
         Some(

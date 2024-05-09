@@ -1,11 +1,11 @@
 use ::libc;
 #[derive(Copy, Clone)]
 #[repr(C)]
-pub struct __va_list_tag {
+pub struct __va_list_tag<'h31,'h32> {
     pub gp_offset: libc::c_uint,
     pub fp_offset: libc::c_uint,
-    pub overflow_arg_area: *mut libc::c_void,
-    pub reg_save_area: *mut libc::c_void,
+    pub overflow_arg_area: &'h31 (libc::c_void),
+    pub reg_save_area: &'h32 (libc::c_void),
 }
 pub type size_t = libc::c_ulong;
 pub type wchar_t = libc::c_int;
@@ -36,13 +36,13 @@ pub const TYPE_SCHAR: arg_type = 1;
 pub const TYPE_NONE: arg_type = 0;
 #[derive(Copy, Clone)]
 #[repr(C)]
-pub struct argument {
+pub struct argument<'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40> {
     pub type_0: arg_type,
-    pub a: C2RustUnnamed,
+    pub a: src::lib::printf_args::C2RustUnnamed<'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
-pub union C2RustUnnamed {
+pub union C2RustUnnamed<'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40> {
     pub a_schar: libc::c_schar,
     pub a_uchar: libc::c_uchar,
     pub a_short: libc::c_short,
@@ -58,21 +58,21 @@ pub union C2RustUnnamed {
     pub a_longdouble: f128::f128,
     pub a_char: libc::c_int,
     pub a_wide_char: wint_t,
-    pub a_string: *const libc::c_char,
-    pub a_wide_string: *const wchar_t,
-    pub a_pointer: *mut libc::c_void,
-    pub a_count_schar_pointer: *mut libc::c_schar,
-    pub a_count_short_pointer: *mut libc::c_short,
-    pub a_count_int_pointer: *mut libc::c_int,
-    pub a_count_longint_pointer: *mut libc::c_long,
-    pub a_count_longlongint_pointer: *mut libc::c_longlong,
+    pub a_string: &'h33 (libc::c_char),
+    pub a_wide_string: &'h34 (wchar_t),
+    pub a_pointer: &'h35 (libc::c_void),
+    pub a_count_schar_pointer: &'h36 (libc::c_schar),
+    pub a_count_short_pointer: &'h37 (libc::c_short),
+    pub a_count_int_pointer: &'h38 (libc::c_int),
+    pub a_count_longint_pointer: &'h39 (libc::c_long),
+    pub a_count_longlongint_pointer: &'h40 (libc::c_longlong),
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
-pub struct arguments {
+pub struct arguments<'h41,'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40> {
     pub count: size_t,
-    pub arg: *mut argument,
-    pub direct_alloc_arg: [argument; 7],
+    pub arg: &'h41 (src::lib::printf_args::argument<'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40>),
+    pub direct_alloc_arg: [src::lib::printf_args::argument<'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40>; 7],
 }
 #[no_mangle]
 pub unsafe extern "C" fn printf_fetchargs(
@@ -144,7 +144,7 @@ pub unsafe extern "C" fn printf_fetchargs(
             16 => {
                 (*ap).a.a_wide_string = args.arg::<*const wchar_t>();
                 if ((*ap).a.a_wide_string).is_null() {
-                    static mut wide_null_string: [wchar_t; 7] = [
+                    static wide_null_string: [wchar_t; 7] = [
                         '(' as i32,
                         'N' as i32,
                         'U' as i32,

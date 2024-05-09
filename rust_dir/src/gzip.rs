@@ -362,7 +362,7 @@ pub const RSYNCABLE_OPTION: C2RustUnnamed_11 = 129;
 pub const PRESUME_INPUT_TTY_OPTION: C2RustUnnamed_11 = 128;
 pub const try_opening_directories: C2RustUnnamed_12 = 1;
 pub type C2RustUnnamed_12 = libc::c_uint;
-static mut license_msg: [*const libc::c_char; 6] = [
+static license_msg: [*const libc::c_char; 6] = [
     b"Copyright (C) 2018 Free Software Foundation, Inc.\0" as *const u8
         as *const libc::c_char,
     b"Copyright (C) 1993 Jean-loup Gailly.\0" as *const u8 as *const libc::c_char,
@@ -375,82 +375,100 @@ static mut license_msg: [*const libc::c_char; 6] = [
     0 as *const libc::c_char,
 ];
 #[inline]
-unsafe extern "C" fn get_stat_atime(mut st: *const stat) -> timespec {
+unsafe extern "C" fn get_stat_atime<'h0>(mut st: &'h0 (stat)) -> timespec {
     return (*st).st_atim;
 }
+unsafe fn get_stat_atime_shim(arg0: *const stat) -> timespec {
+    {
+    let safe_arg0 = &*arg0;
+    let safe_result = get_stat_atime(safe_arg0);
+    let result = safe_result;
+    result
+}
+}
+
 #[inline]
-unsafe extern "C" fn get_stat_mtime(mut st: *const stat) -> timespec {
+unsafe extern "C" fn get_stat_mtime<'h0>(mut st: &'h0 (stat)) -> timespec {
     return (*st).st_mtim;
 }
+unsafe fn get_stat_mtime_shim(arg0: *const stat) -> timespec {
+    {
+    let safe_arg0 = &*arg0;
+    let safe_result = get_stat_mtime(safe_arg0);
+    let result = safe_result;
+    result
+}
+}
+
 #[no_mangle]
-pub static mut inbuf: [uch; 32832] = [0; 32832];
+static inbuf: [uch; 32832] = [0; 32832];
 #[no_mangle]
-pub static mut outbuf: [uch; 18432] = [0; 18432];
+static outbuf: [uch; 18432] = [0; 18432];
 #[no_mangle]
-pub static mut d_buf: [ush; 32768] = [0; 32768];
+static d_buf: [ush; 32768] = [0; 32768];
 #[no_mangle]
-pub static mut window: [uch; 65536] = [0; 65536];
+static window: [uch; 65536] = [0; 65536];
 #[no_mangle]
-pub static mut prev: [ush; 65536] = [0; 65536];
-static mut presume_input_tty: bool = false;
-static mut synchronous: bool = false;
-static mut ascii: libc::c_int = 0 as libc::c_int;
+static prev: [ush; 65536] = [0; 65536];
+static presume_input_tty: bool = false;
+static synchronous: bool = false;
+static ascii: libc::c_int = 0 as libc::c_int;
 #[no_mangle]
-pub static mut to_stdout: libc::c_int = 0 as libc::c_int;
-static mut decompress: libc::c_int = 0 as libc::c_int;
-static mut force: libc::c_int = 0 as libc::c_int;
-static mut keep: libc::c_int = 0 as libc::c_int;
-static mut no_name: libc::c_int = -(1 as libc::c_int);
-static mut no_time: libc::c_int = -(1 as libc::c_int);
-static mut recursive: libc::c_int = 0 as libc::c_int;
-static mut list: libc::c_int = 0 as libc::c_int;
+static to_stdout: libc::c_int = 0 as libc::c_int;
+static decompress: libc::c_int = 0 as libc::c_int;
+static force: libc::c_int = 0 as libc::c_int;
+static keep: libc::c_int = 0 as libc::c_int;
+static no_name: libc::c_int = -(1 as libc::c_int);
+static no_time: libc::c_int = -(1 as libc::c_int);
+static recursive: libc::c_int = 0 as libc::c_int;
+static list: libc::c_int = 0 as libc::c_int;
 #[no_mangle]
-pub static mut verbose: libc::c_int = 0 as libc::c_int;
+static verbose: libc::c_int = 0 as libc::c_int;
 #[no_mangle]
-pub static mut quiet: libc::c_int = 0 as libc::c_int;
-static mut do_lzw: libc::c_int = 0 as libc::c_int;
+static quiet: libc::c_int = 0 as libc::c_int;
+static do_lzw: libc::c_int = 0 as libc::c_int;
 #[no_mangle]
-pub static mut test: libc::c_int = 0 as libc::c_int;
-static mut foreground: libc::c_int = 0 as libc::c_int;
+static test: libc::c_int = 0 as libc::c_int;
+static foreground: libc::c_int = 0 as libc::c_int;
 #[no_mangle]
-pub static mut program_name: *mut libc::c_char = 0 as *const libc::c_char
+static program_name: *mut libc::c_char = 0 as *const libc::c_char
     as *mut libc::c_char;
 #[no_mangle]
-pub static mut maxbits: libc::c_int = 16 as libc::c_int;
+static maxbits: libc::c_int = 16 as libc::c_int;
 #[no_mangle]
-pub static mut method: libc::c_int = 8 as libc::c_int;
+static method: libc::c_int = 8 as libc::c_int;
 #[no_mangle]
-pub static mut level: libc::c_int = 6 as libc::c_int;
+static level: libc::c_int = 6 as libc::c_int;
 #[no_mangle]
-pub static mut exit_code: libc::c_int = 0 as libc::c_int;
+static exit_code: libc::c_int = 0 as libc::c_int;
 #[no_mangle]
-pub static mut save_orig_name: libc::c_int = 0;
-static mut last_member: libc::c_int = 0;
-static mut part_nb: libc::c_int = 0;
+static save_orig_name: libc::c_int = 0;
+static last_member: libc::c_int = 0;
+static part_nb: libc::c_int = 0;
 #[no_mangle]
 pub static mut ifile_size: off_t = 0;
 static mut env: *mut libc::c_char = 0 as *const libc::c_char as *mut libc::c_char;
-static mut z_suffix: *const libc::c_char = 0 as *const libc::c_char;
-static mut z_len: size_t = 0;
+static z_suffix: *const libc::c_char = 0 as *const libc::c_char;
+static z_len: size_t = 0;
 #[no_mangle]
 pub static mut time_stamp: timespec = timespec { tv_sec: 0, tv_nsec: 0 };
-static mut caught_signals: sigset_t = sigset_t { __val: [0; 16] };
-static mut exiting_signal: libc::c_int = 0;
-static mut remove_ofname_fd: libc::c_int = -(1 as libc::c_int);
-static mut remove_ofname: [libc::c_char; 1024] = [0; 1024];
-static mut stdin_was_read: bool = false;
+static caught_signals: sigset_t = sigset_t { __val: [0; 16] };
+static exiting_signal: libc::c_int = 0;
+static remove_ofname_fd: libc::c_int = -(1 as libc::c_int);
+static remove_ofname: [libc::c_char; 1024] = [0; 1024];
+static stdin_was_read: bool = false;
 #[no_mangle]
-pub static mut bytes_in: off_t = 0;
+static bytes_in: off_t = 0;
 #[no_mangle]
-pub static mut bytes_out: off_t = 0;
-static mut total_in: off_t = 0;
-static mut total_out: off_t = 0;
+static bytes_out: off_t = 0;
+static total_in: off_t = 0;
+static total_out: off_t = 0;
 #[no_mangle]
-pub static mut ifname: [libc::c_char; 1024] = [0; 1024];
+static ifname: [libc::c_char; 1024] = [0; 1024];
 #[no_mangle]
-pub static mut ofname: [libc::c_char; 1024] = [0; 1024];
-static mut dfname: [libc::c_char; 1024] = [0; 1024];
-static mut istat: stat = stat {
+static ofname: [libc::c_char; 1024] = [0; 1024];
+static dfname: [libc::c_char; 1024] = [0; 1024];
+static istat: stat = stat {
     st_dev: 0,
     st_ino: 0,
     st_nlink: 0,
@@ -468,19 +486,19 @@ static mut istat: stat = stat {
     __glibc_reserved: [0; 3],
 };
 #[no_mangle]
-pub static mut ifd: libc::c_int = 0;
+static ifd: libc::c_int = 0;
 #[no_mangle]
-pub static mut ofd: libc::c_int = 0;
-static mut dfd: libc::c_int = -(1 as libc::c_int);
+static ofd: libc::c_int = 0;
+static dfd: libc::c_int = -(1 as libc::c_int);
 #[no_mangle]
-pub static mut insize: libc::c_uint = 0;
+static insize: libc::c_uint = 0;
 #[no_mangle]
 pub static mut inptr: libc::c_uint = 0;
 #[no_mangle]
-pub static mut outcnt: libc::c_uint = 0;
+static outcnt: libc::c_uint = 0;
 #[no_mangle]
-pub static mut rsync: libc::c_int = 0 as libc::c_int;
-static mut handled_sig: [libc::c_int; 6] = [
+static rsync: libc::c_int = 0 as libc::c_int;
+static handled_sig: [libc::c_int; 6] = [
     2 as libc::c_int,
     1 as libc::c_int,
     13 as libc::c_int,
@@ -488,13 +506,13 @@ static mut handled_sig: [libc::c_int; 6] = [
     24 as libc::c_int,
     25 as libc::c_int,
 ];
-static mut shortopts: [libc::c_char; 34] = unsafe {
+static shortopts: [libc::c_char; 34] = unsafe {
     *::core::mem::transmute::<
         &[u8; 34],
         &[libc::c_char; 34],
     >(b"ab:cdfhH?klLmMnNqrS:tvVZ123456789\0")
 };
-static mut longopts: [option; 27] = [
+static longopts: [option; 27] = [
     {
         let mut init = option {
             name: b"ascii\0" as *const u8 as *const libc::c_char,
@@ -739,7 +757,7 @@ static mut longopts: [option; 27] = [
         init
     },
 ];
-static mut work: Option::<
+static work: Option::<
     unsafe extern "C" fn(libc::c_int, libc::c_int) -> libc::c_int,
 > = unsafe {
     Some(zip as unsafe extern "C" fn(libc::c_int, libc::c_int) -> libc::c_int)
@@ -753,7 +771,7 @@ unsafe extern "C" fn try_help() {
     do_exit(1 as libc::c_int);
 }
 unsafe extern "C" fn help() {
-    static mut help_msg: [*const libc::c_char; 28] = [
+    static help_msg: [*const libc::c_char; 28] = [
         b"Compress or uncompress FILEs (by default, compress FILES in-place).\0"
             as *const u8 as *const libc::c_char,
         b"\0" as *const u8 as *const libc::c_char,
@@ -1190,7 +1208,7 @@ unsafe extern "C" fn get_input_size_and_time() {
     {
         ifile_size = istat.st_size;
         if no_time == 0 || list != 0 {
-            time_stamp = get_stat_mtime(&mut istat);
+            time_stamp = get_stat_mtime(&*(&mut istat));
         }
     }
 }
@@ -1270,7 +1288,7 @@ unsafe extern "C" fn treat_stdin() {
         }
     }
 }
-static mut dot: libc::c_char = '.' as i32 as libc::c_char;
+static dot: libc::c_char = '.' as i32 as libc::c_char;
 unsafe extern "C" fn atdir_eq(
     mut dir: *const libc::c_char,
     mut dirlen: ptrdiff_t,
@@ -1686,7 +1704,7 @@ unsafe extern "C" fn get_suffix(mut name: *mut libc::c_char) -> *mut libc::c_cha
     let mut nlen: libc::c_int = 0;
     let mut slen: libc::c_int = 0;
     let mut suffix: [libc::c_char; 33] = [0; 33];
-    static mut known_suffixes: [*const libc::c_char; 10] = [
+    static known_suffixes: [*const libc::c_char; 10] = [
         0 as *const libc::c_char,
         b".gz\0" as *const u8 as *const libc::c_char,
         b".z\0" as *const u8 as *const libc::c_char,
@@ -1796,7 +1814,7 @@ unsafe extern "C" fn open_input_file(
     let mut current_block: u64;
     let mut ilen: libc::c_int = 0;
     let mut z_suffix_errno: libc::c_int = 0 as libc::c_int;
-    static mut suffixes: [*const libc::c_char; 6] = [
+    static suffixes: [*const libc::c_char; 6] = [
         0 as *const libc::c_char,
         b".gz\0" as *const u8 as *const libc::c_char,
         b".z\0" as *const u8 as *const libc::c_char,
@@ -2482,8 +2500,8 @@ unsafe extern "C" fn get_method(mut in_0: libc::c_int) -> libc::c_int {
 }
 unsafe extern "C" fn do_list(mut ifd_0: libc::c_int, mut method_0: libc::c_int) {
     let mut crc: ulg = 0;
-    static mut first_time: libc::c_int = 1 as libc::c_int;
-    static mut methods: [*const libc::c_char; 9] = [
+    static first_time: libc::c_int = 1 as libc::c_int;
+    static methods: [*const libc::c_char; 9] = [
         b"store\0" as *const u8 as *const libc::c_char,
         b"compr\0" as *const u8 as *const libc::c_char,
         b"pack \0" as *const u8 as *const libc::c_char,
@@ -2600,7 +2618,7 @@ unsafe extern "C" fn do_list(mut ifd_0: libc::c_int, mut method_0: libc::c_int) 
         }
     }
     if verbose != 0 {
-        static mut month_abbr: [[libc::c_char; 4]; 12] = unsafe {
+        static month_abbr: [[libc::c_char; 4]; 12] = unsafe {
             [
                 *::core::mem::transmute::<&[u8; 4], &[libc::c_char; 4]>(b"Jan\0"),
                 *::core::mem::transmute::<&[u8; 4], &[libc::c_char; 4]>(b"Feb\0"),
@@ -2782,14 +2800,26 @@ unsafe extern "C" fn check_ofname() -> libc::c_int {
     }
     return 0 as libc::c_int;
 }
-unsafe extern "C" fn do_chown(
+unsafe extern "C" fn do_chown<'h0>(
     mut fd: libc::c_int,
-    mut name: *const libc::c_char,
+    mut name: &'h0 (libc::c_char),
     mut uid: uid_t,
     mut gid: gid_t,
 ) {
     let mut __x: libc::c_int = fchown(fd, uid, gid);
 }
+unsafe fn do_chown_shim(arg0: libc::c_int, arg1: *const libc::c_char, arg2: uid_t, arg3: gid_t) {
+    {
+    let safe_arg0 = arg0;
+    let safe_arg1 = &*arg1;
+    let safe_arg2 = arg2;
+    let safe_arg3 = arg3;
+    let safe_result = do_chown(safe_arg0,safe_arg1,safe_arg2,safe_arg3);
+    let result = safe_result;
+    result
+}
+}
+
 unsafe extern "C" fn copy_stat(mut ifstat: *mut stat) {
     let mut mode: mode_t = (*ifstat).st_mode
         & (0o400 as libc::c_int | 0o200 as libc::c_int | 0o100 as libc::c_int
@@ -2800,8 +2830,8 @@ unsafe extern "C" fn copy_stat(mut ifstat: *mut stat) {
     let mut r: libc::c_int = 0;
     let mut restoring: bool = false;
     let mut timespec: [timespec; 2] = [timespec { tv_sec: 0, tv_nsec: 0 }; 2];
-    timespec[0 as libc::c_int as usize] = get_stat_atime(ifstat);
-    timespec[1 as libc::c_int as usize] = get_stat_mtime(ifstat);
+    timespec[0 as libc::c_int as usize] = get_stat_atime_shim(ifstat);
+    timespec[1 as libc::c_int as usize] = get_stat_mtime_shim(ifstat);
     restoring = decompress != 0 && 0 as libc::c_int as libc::c_long <= time_stamp.tv_nsec
         && !(timespec[1 as libc::c_int as usize].tv_sec == time_stamp.tv_sec
             && timespec[1 as libc::c_int as usize].tv_nsec == time_stamp.tv_nsec);
@@ -2835,7 +2865,7 @@ unsafe extern "C" fn copy_stat(mut ifstat: *mut stat) {
             perror(ofname.as_mut_ptr());
         }
     }
-    do_chown(ofd, ofname.as_mut_ptr(), -(1 as libc::c_int) as uid_t, (*ifstat).st_gid);
+    do_chown_shim(ofd, ofname.as_mut_ptr(), -(1 as libc::c_int) as uid_t, (*ifstat).st_gid);
     r = fchmod(ofd, mode);
     if r != 0 as libc::c_int {
         let mut e_0: libc::c_int = *__errno_location();
@@ -2854,7 +2884,7 @@ unsafe extern "C" fn copy_stat(mut ifstat: *mut stat) {
             perror(ofname.as_mut_ptr());
         }
     }
-    do_chown(ofd, ofname.as_mut_ptr(), (*ifstat).st_uid, -(1 as libc::c_int) as gid_t);
+    do_chown_shim(ofd, ofname.as_mut_ptr(), (*ifstat).st_uid, -(1 as libc::c_int) as gid_t);
 }
 unsafe extern "C" fn treat_dir(mut fd: libc::c_int, mut dir: *mut libc::c_char) {
     let mut dirp: *mut DIR = 0 as *mut DIR;

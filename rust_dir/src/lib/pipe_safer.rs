@@ -6,16 +6,16 @@ extern "C" {
     fn __errno_location() -> *mut libc::c_int;
 }
 #[no_mangle]
-pub unsafe extern "C" fn pipe_safer(mut fd: *mut libc::c_int) -> libc::c_int {
+pub unsafe extern "C" fn pipe_safer<'h0>(mut fd: &'h0 mut [(libc::c_int)]) -> libc::c_int {
     if pipe(fd) == 0 as libc::c_int {
         let mut i: libc::c_int = 0;
         i = 0 as libc::c_int;
         while i < 2 as libc::c_int {
-            *fd.offset(i as isize) = fd_safer(*fd.offset(i as isize));
-            if *fd.offset(i as isize) < 0 as libc::c_int {
-                let mut e: libc::c_int = *__errno_location();
-                close(*fd.offset((1 as libc::c_int - i) as isize));
-                *__errno_location() = e;
+            *&mut (&mut (fd)[((i as isize) as usize) ..])[0] = fd_safer(*&(&(&*(fd))[((i as isize) as usize) ..])[0]);
+            if *&(&(&*(fd))[((i as isize) as usize) ..])[0] < 0 as libc::c_int {
+                let mut e: libc::c_int = (__errno_location()).get();
+                close(*&(&(&*(fd))[(((1 as libc::c_int - i) as isize) as usize) ..])[0]);
+                (__errno_location()).set((e));
                 return -(1 as libc::c_int);
             }
             i += 1;

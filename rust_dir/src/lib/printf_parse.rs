@@ -40,13 +40,13 @@ pub const TYPE_SCHAR: arg_type = 1;
 pub const TYPE_NONE: arg_type = 0;
 #[derive(Copy, Clone)]
 #[repr(C)]
-pub struct argument {
+pub struct argument<'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49> {
     pub type_0: arg_type,
-    pub a: C2RustUnnamed,
+    pub a: src::lib::printf_parse::C2RustUnnamed<'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
-pub union C2RustUnnamed {
+pub union C2RustUnnamed<'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49> {
     pub a_schar: libc::c_schar,
     pub a_uchar: libc::c_uchar,
     pub a_short: libc::c_short,
@@ -62,45 +62,45 @@ pub union C2RustUnnamed {
     pub a_longdouble: f128::f128,
     pub a_char: libc::c_int,
     pub a_wide_char: wint_t,
-    pub a_string: *const libc::c_char,
-    pub a_wide_string: *const wchar_t,
-    pub a_pointer: *mut libc::c_void,
-    pub a_count_schar_pointer: *mut libc::c_schar,
-    pub a_count_short_pointer: *mut libc::c_short,
-    pub a_count_int_pointer: *mut libc::c_int,
-    pub a_count_longint_pointer: *mut libc::c_long,
-    pub a_count_longlongint_pointer: *mut libc::c_longlong,
+    pub a_string: &'h42 (libc::c_char),
+    pub a_wide_string: &'h43 (wchar_t),
+    pub a_pointer: &'h44 (libc::c_void),
+    pub a_count_schar_pointer: &'h45 (libc::c_schar),
+    pub a_count_short_pointer: &'h46 (libc::c_short),
+    pub a_count_int_pointer: &'h47 (libc::c_int),
+    pub a_count_longint_pointer: &'h48 (libc::c_long),
+    pub a_count_longlongint_pointer: &'h49 (libc::c_longlong),
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
-pub struct arguments {
+pub struct arguments<'h50,'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49> {
     pub count: size_t,
-    pub arg: *mut argument,
-    pub direct_alloc_arg: [argument; 7],
+    pub arg: &'h50 (src::lib::printf_parse::argument<'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49>),
+    pub direct_alloc_arg: [src::lib::printf_parse::argument<'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49>; 7],
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
-pub struct char_directive {
-    pub dir_start: *const libc::c_char,
-    pub dir_end: *const libc::c_char,
+pub struct char_directive<'h51,'h52,'h53,'h54,'h55,'h56> {
+    pub dir_start: &'h51 (libc::c_char),
+    pub dir_end: &'h52 (libc::c_char),
     pub flags: libc::c_int,
-    pub width_start: *const libc::c_char,
-    pub width_end: *const libc::c_char,
+    pub width_start: &'h53 (libc::c_char),
+    pub width_end: &'h54 (libc::c_char),
     pub width_arg_index: size_t,
-    pub precision_start: *const libc::c_char,
-    pub precision_end: *const libc::c_char,
+    pub precision_start: &'h55 (libc::c_char),
+    pub precision_end: &'h56 (libc::c_char),
     pub precision_arg_index: size_t,
     pub conversion: libc::c_char,
     pub arg_index: size_t,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
-pub struct char_directives {
+pub struct char_directives<'h51,'h52,'h53,'h54,'h55,'h56,'h57> {
     pub count: size_t,
-    pub dir: *mut char_directive,
+    pub dir: &'h57 (src::lib::printf_parse::char_directive<'h51,'h52,'h53,'h54,'h55,'h56>),
     pub max_width_length: size_t,
     pub max_precision_length: size_t,
-    pub direct_alloc_dir: [char_directive; 7],
+    pub direct_alloc_dir: [src::lib::printf_parse::char_directive<'h51,'h52,'h53,'h54,'h55,'h56>; 7],
 }
 pub type intmax_t = __intmax_t;
 pub type __intmax_t = libc::c_long;

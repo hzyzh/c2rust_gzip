@@ -66,23 +66,59 @@ pub struct stat {
 pub const TIMESPEC_HZ: C2RustUnnamed = 1000000000;
 pub type C2RustUnnamed = libc::c_uint;
 #[inline]
-unsafe extern "C" fn get_stat_atime_ns(mut st: *const stat) -> libc::c_long {
+unsafe extern "C" fn get_stat_atime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
     return (*st).st_atim.tv_nsec;
 }
+unsafe fn get_stat_atime_ns_shim(arg0: *const stat) -> libc::c_long {
+    {
+    let safe_arg0 = &*arg0;
+    let safe_result = get_stat_atime_ns(safe_arg0);
+    let result = safe_result;
+    result
+}
+}
+
 #[inline]
-unsafe extern "C" fn get_stat_mtime_ns(mut st: *const stat) -> libc::c_long {
+unsafe extern "C" fn get_stat_mtime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
     return (*st).st_mtim.tv_nsec;
 }
+unsafe fn get_stat_mtime_ns_shim(arg0: *const stat) -> libc::c_long {
+    {
+    let safe_arg0 = &*arg0;
+    let safe_result = get_stat_mtime_ns(safe_arg0);
+    let result = safe_result;
+    result
+}
+}
+
 #[inline]
-unsafe extern "C" fn get_stat_atime(mut st: *const stat) -> timespec {
+unsafe extern "C" fn get_stat_atime<'h0>(mut st: &'h0 (stat)) -> timespec {
     return (*st).st_atim;
 }
+unsafe fn get_stat_atime_shim(arg0: *const stat) -> timespec {
+    {
+    let safe_arg0 = &*arg0;
+    let safe_result = get_stat_atime(safe_arg0);
+    let result = safe_result;
+    result
+}
+}
+
 #[inline]
-unsafe extern "C" fn get_stat_mtime(mut st: *const stat) -> timespec {
+unsafe extern "C" fn get_stat_mtime<'h0>(mut st: &'h0 (stat)) -> timespec {
     return (*st).st_mtim;
 }
-static mut utimensat_works_really: libc::c_int = 0;
-static mut lutimensat_works_really: libc::c_int = 0;
+unsafe fn get_stat_mtime_shim(arg0: *const stat) -> timespec {
+    {
+    let safe_arg0 = &*arg0;
+    let safe_result = get_stat_mtime(safe_arg0);
+    let result = safe_result;
+    result
+}
+}
+
+static utimensat_works_really: libc::c_int = 0;
+static lutimensat_works_really: libc::c_int = 0;
 unsafe extern "C" fn validate_timespec(mut timespec: *mut timespec) -> libc::c_int {
     let mut result: libc::c_int = 0 as libc::c_int;
     let mut utime_omit_count: libc::c_int = 0 as libc::c_int;
@@ -161,7 +197,7 @@ unsafe extern "C" fn update_timespec(
     if (*timespec.offset(0 as libc::c_int as isize)).tv_nsec
         == ((1 as libc::c_long) << 30 as libc::c_int) - 2 as libc::c_long
     {
-        *timespec.offset(0 as libc::c_int as isize) = get_stat_atime(statbuf);
+        *timespec.offset(0 as libc::c_int as isize) = get_stat_atime_shim(statbuf);
     } else if (*timespec.offset(0 as libc::c_int as isize)).tv_nsec
         == ((1 as libc::c_long) << 30 as libc::c_int) - 1 as libc::c_long
     {
@@ -170,7 +206,7 @@ unsafe extern "C" fn update_timespec(
     if (*timespec.offset(1 as libc::c_int as isize)).tv_nsec
         == ((1 as libc::c_long) << 30 as libc::c_int) - 2 as libc::c_long
     {
-        *timespec.offset(1 as libc::c_int as isize) = get_stat_mtime(statbuf);
+        *timespec.offset(1 as libc::c_int as isize) = get_stat_mtime_shim(statbuf);
     } else if (*timespec.offset(1 as libc::c_int as isize)).tv_nsec
         == ((1 as libc::c_long) << 30 as libc::c_int) - 1 as libc::c_long
     {
@@ -236,11 +272,11 @@ pub unsafe extern "C" fn fdutimens(
             if (*ts.offset(0 as libc::c_int as isize)).tv_nsec
                 == ((1 as libc::c_long) << 30 as libc::c_int) - 2 as libc::c_long
             {
-                *ts.offset(0 as libc::c_int as isize) = get_stat_atime(&mut st);
+                *ts.offset(0 as libc::c_int as isize) = get_stat_atime_shim(&mut st);
             } else if (*ts.offset(1 as libc::c_int as isize)).tv_nsec
                 == ((1 as libc::c_long) << 30 as libc::c_int) - 2 as libc::c_long
             {
-                *ts.offset(1 as libc::c_int as isize) = get_stat_mtime(&mut st);
+                *ts.offset(1 as libc::c_int as isize) = get_stat_mtime_shim(&mut st);
             }
             adjustment_needed += 1;
             adjustment_needed;
@@ -331,14 +367,14 @@ pub unsafe extern "C" fn fdutimens(
                 truncated_timeval[1 as libc::c_int
                     as usize] = *t.offset(1 as libc::c_int as isize);
                 if abig as libc::c_int != 0 && adiff == 1 as libc::c_int as libc::c_long
-                    && get_stat_atime_ns(&mut st) == 0 as libc::c_int as libc::c_long
+                    && get_stat_atime_ns_shim(&mut st) == 0 as libc::c_int as libc::c_long
                 {
                     tt = truncated_timeval.as_mut_ptr();
                     (*tt.offset(0 as libc::c_int as isize))
                         .tv_usec = 0 as libc::c_int as __suseconds_t;
                 }
                 if mbig as libc::c_int != 0 && mdiff == 1 as libc::c_int as libc::c_long
-                    && get_stat_mtime_ns(&mut st) == 0 as libc::c_int as libc::c_long
+                    && get_stat_mtime_ns_shim(&mut st) == 0 as libc::c_int as libc::c_long
                 {
                     tt = truncated_timeval.as_mut_ptr();
                     (*tt.offset(1 as libc::c_int as isize))
@@ -357,11 +393,11 @@ pub unsafe extern "C" fn fdutimens(
     return utimes(file, t as *const timeval);
 }
 #[no_mangle]
-pub unsafe extern "C" fn utimens(
-    mut file: *const libc::c_char,
-    mut timespec: *const timespec,
+pub unsafe extern "C" fn utimens<'h0,'h1>(
+    mut file: &'h0 (libc::c_char),
+    mut timespec: &'h1 (timespec),
 ) -> libc::c_int {
-    return fdutimens(-(1 as libc::c_int), file, timespec);
+    return fdutimens(-(1 as libc::c_int), core::ptr::addr_of!(*(file)), core::ptr::addr_of!(*(timespec)));
 }
 #[no_mangle]
 pub unsafe extern "C" fn lutimens(
@@ -411,11 +447,11 @@ pub unsafe extern "C" fn lutimens(
             if (*ts.offset(0 as libc::c_int as isize)).tv_nsec
                 == ((1 as libc::c_long) << 30 as libc::c_int) - 2 as libc::c_long
             {
-                *ts.offset(0 as libc::c_int as isize) = get_stat_atime(&mut st);
+                *ts.offset(0 as libc::c_int as isize) = get_stat_atime_shim(&mut st);
             } else if (*ts.offset(1 as libc::c_int as isize)).tv_nsec
                 == ((1 as libc::c_long) << 30 as libc::c_int) - 2 as libc::c_long
             {
-                *ts.offset(1 as libc::c_int as isize) = get_stat_mtime(&mut st);
+                *ts.offset(1 as libc::c_int as isize) = get_stat_mtime_shim(&mut st);
             }
             adjustment_needed += 1;
             adjustment_needed;

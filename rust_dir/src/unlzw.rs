@@ -83,7 +83,7 @@ pub type code_int = libc::c_long;
 pub type char_type = libc::c_uchar;
 pub type cmp_code_int = libc::c_ulong;
 #[no_mangle]
-pub static mut block_mode: libc::c_int = 0x80 as libc::c_int;
+static block_mode: libc::c_int = 0x80 as libc::c_int;
 #[no_mangle]
 pub unsafe extern "C" fn unlzw(
     mut in_0: libc::c_int,

@@ -35,12 +35,30 @@ pub type size_t = libc::c_ulong;
 pub struct cd_buf {
     pub fd: libc::c_int,
 }
-unsafe extern "C" fn cdb_init(mut cdb: *mut cd_buf) {
+unsafe extern "C" fn cdb_init<'h0>(mut cdb: &'h0 mut (cd_buf)) {
     (*cdb).fd = -(100 as libc::c_int);
 }
-unsafe extern "C" fn cdb_fchdir(mut cdb: *const cd_buf) -> libc::c_int {
+unsafe fn cdb_init_shim(arg0: *mut cd_buf) {
+    {
+    let safe_arg0 = &mut *arg0;
+    let safe_result = cdb_init(safe_arg0);
+    let result = safe_result;
+    result
+}
+}
+
+unsafe extern "C" fn cdb_fchdir<'h0>(mut cdb: &'h0 (cd_buf)) -> libc::c_int {
     return fchdir((*cdb).fd);
 }
+unsafe fn cdb_fchdir_shim(arg0: *const cd_buf) -> libc::c_int {
+    {
+    let safe_arg0 = &*arg0;
+    let safe_result = cdb_fchdir(safe_arg0);
+    let result = safe_result;
+    result
+}
+}
+
 unsafe extern "C" fn cdb_free(mut cdb: *const cd_buf) {
     if 0 as libc::c_int <= (*cdb).fd {
         let mut close_fail: bool = close((*cdb).fd) != 0;
@@ -104,7 +122,7 @@ pub unsafe extern "C" fn chdir_long(mut dir: *mut libc::c_char) -> libc::c_int {
     let mut dir_end: *mut libc::c_char = dir.offset(len as isize);
     let mut cdb: cd_buf = cd_buf { fd: 0 };
     let mut n_leading_slash: size_t = 0;
-    cdb_init(&mut cdb);
+    cdb_init_shim(&mut cdb);
     if (0 as libc::c_int as libc::c_ulong) < len {} else {
         __assert_fail(
             b"0 < len\0" as *const u8 as *const libc::c_char,
@@ -316,7 +334,7 @@ pub unsafe extern "C" fn chdir_long(mut dir: *mut libc::c_char) -> libc::c_int {
                     match current_block {
                         9276251943560877267 => {}
                         _ => {
-                            if !(cdb_fchdir(&mut cdb) != 0 as libc::c_int) {
+                            if !(cdb_fchdir_shim(&mut cdb) != 0 as libc::c_int) {
                                 cdb_free(&mut cdb);
                                 return 0 as libc::c_int;
                             }

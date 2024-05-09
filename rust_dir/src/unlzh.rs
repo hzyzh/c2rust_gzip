@@ -17,9 +17,9 @@ extern "C" {
 pub type voidp = *mut libc::c_void;
 pub type uch = libc::c_uchar;
 pub type ush = libc::c_ushort;
-static mut pt_len: [uch; 32] = [0; 32];
+static pt_len: [uch; 32] = [0; 32];
 static mut blocksize: libc::c_uint = 0;
-static mut pt_table: [ush; 256] = [0; 256];
+static pt_table: [ush; 256] = [0; 256];
 static mut bitbuf: ush = 0;
 static mut subbitbuf: libc::c_uint = 0;
 static mut bitcount: libc::c_int = 0;

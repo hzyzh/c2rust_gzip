@@ -45,7 +45,7 @@ pub struct _IO_FILE {
 }
 pub type _IO_lock_t = ();
 pub type FILE = _IO_FILE;
-static mut msg_done: libc::c_int = 0 as libc::c_int;
+static msg_done: libc::c_int = 0 as libc::c_int;
 #[no_mangle]
 pub unsafe extern "C" fn lzw(
     mut in_0: libc::c_int,

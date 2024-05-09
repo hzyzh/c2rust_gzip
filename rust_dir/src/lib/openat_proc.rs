@@ -23,7 +23,7 @@ pub unsafe extern "C" fn openat_proc_name(
         *buf.offset(0 as libc::c_int as isize) = '\0' as i32 as libc::c_char;
         return buf;
     }
-    static mut proc_status: libc::c_int = 0 as libc::c_int;
+    static proc_status: libc::c_int = 0 as libc::c_int;
     if proc_status == 0 {
         let mut proc_self_fd: libc::c_int = open(
             b"/proc/self/fd\0" as *const u8 as *const libc::c_char,

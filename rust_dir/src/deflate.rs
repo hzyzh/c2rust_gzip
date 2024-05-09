@@ -43,26 +43,26 @@ pub struct config {
 pub type IPos = libc::c_uint;
 static mut window_size: ulg = 0;
 #[no_mangle]
-pub static mut block_start: libc::c_long = 0;
-static mut ins_h: libc::c_uint = 0;
+static block_start: libc::c_long = 0;
+static ins_h: libc::c_uint = 0;
 #[no_mangle]
-pub static mut prev_length: libc::c_uint = 0;
+static prev_length: libc::c_uint = 0;
 #[no_mangle]
-pub static mut strstart: libc::c_uint = 0;
+static strstart: libc::c_uint = 0;
 #[no_mangle]
-pub static mut match_start: libc::c_uint = 0;
-static mut eofile: libc::c_int = 0;
-static mut lookahead: libc::c_uint = 0;
+static match_start: libc::c_uint = 0;
+static eofile: libc::c_int = 0;
+static lookahead: libc::c_uint = 0;
 #[no_mangle]
-pub static mut max_chain_length: libc::c_uint = 0;
-static mut max_lazy_match: libc::c_uint = 0;
-static mut compr_level: libc::c_int = 0;
+static max_chain_length: libc::c_uint = 0;
+static max_lazy_match: libc::c_uint = 0;
+static compr_level: libc::c_int = 0;
 #[no_mangle]
-pub static mut good_match: libc::c_uint = 0;
-static mut rsync_sum: ulg = 0;
-static mut rsync_chunk_end: ulg = 0;
-static mut nice_match: libc::c_int = 0;
-static mut configuration_table: [config; 10] = [
+static good_match: libc::c_uint = 0;
+static rsync_sum: ulg = 0;
+static rsync_chunk_end: ulg = 0;
+static nice_match: libc::c_int = 0;
+static configuration_table: [config; 10] = [
     {
         let mut init = config {
             good_length: 0 as libc::c_int as ush,

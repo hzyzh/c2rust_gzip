@@ -25,11 +25,11 @@ extern "C" {
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
-pub struct __va_list_tag {
+pub struct __va_list_tag<'h67,'h68> {
     pub gp_offset: libc::c_uint,
     pub fp_offset: libc::c_uint,
-    pub overflow_arg_area: *mut libc::c_void,
-    pub reg_save_area: *mut libc::c_void,
+    pub overflow_arg_area: &'h67 (libc::c_void),
+    pub reg_save_area: &'h68 (libc::c_void),
 }
 pub type size_t = libc::c_ulong;
 pub type wchar_t = libc::c_int;

@@ -97,7 +97,7 @@ pub type _IO_lock_t = ();
 pub type FILE = _IO_FILE;
 pub type uch = libc::c_uchar;
 pub type ulg = libc::c_ulong;
-static mut crc_32_tab: [ulg; 256] = [
+static crc_32_tab: [ulg; 256] = [
     0 as libc::c_long as ulg,
     0x77073096 as libc::c_long as ulg,
     0xee0e612c as libc::c_long as ulg,
@@ -554,26 +554,26 @@ pub unsafe extern "C" fn gzip_base_name(
     return fname;
 }
 #[no_mangle]
-pub unsafe extern "C" fn xunlink(mut filename: *mut libc::c_char) -> libc::c_int {
+pub unsafe extern "C" fn xunlink<'h0>(mut filename: &'h0 [(libc::c_char)]) -> libc::c_int {
     let mut r: libc::c_int = unlink(filename);
     return r;
 }
 #[no_mangle]
-pub unsafe extern "C" fn make_simple_name(mut name: *mut libc::c_char) {
-    let mut p: *mut libc::c_char = strrchr(name, '.' as i32);
-    if p.is_null() {
+pub unsafe extern "C" fn make_simple_name<'h0>(mut name: &'h0 mut [(libc::c_char)]) {
+    let mut p: &[core::cell::Cell<(libc::c_char)>] = strrchr(name, '.' as i32);
+    if &(p)[0].is_null() {
         return;
     }
-    if p == name {
-        p = p.offset(1);
-        p;
+    if &(p)[0] == &(&*(name))[0] {
+        p = &(p)[((1) as usize) ..];
+        &(p)[0];
     }
     loop {
-        p = p.offset(-1);
-        if *p as libc::c_int == '.' as i32 {
-            *p = '_' as i32 as libc::c_char;
+        p = &(p)[((-1) as usize) ..];
+        if (p).get() as libc::c_int == '.' as i32 {
+            (p).set(('_' as i32 as libc::c_char));
         }
-        if !(p != name) {
+        if !(&(p)[0] != &(&*(name))[0]) {
             break;
         }
     };

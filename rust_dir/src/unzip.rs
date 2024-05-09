@@ -71,9 +71,9 @@ pub type off_t = __off_t;
 pub type uch = libc::c_uchar;
 pub type ush = libc::c_ushort;
 pub type ulg = libc::c_ulong;
-static mut decrypt: libc::c_int = 0;
-static mut pkzip: libc::c_int = 0 as libc::c_int;
-static mut ext_header: libc::c_int = 0 as libc::c_int;
+static decrypt: libc::c_int = 0;
+static pkzip: libc::c_int = 0 as libc::c_int;
+static ext_header: libc::c_int = 0 as libc::c_int;
 #[no_mangle]
 pub unsafe extern "C" fn check_zipfile(mut in_0: libc::c_int) -> libc::c_int {
     let mut h: *mut uch = inbuf.as_mut_ptr().offset(inptr as isize);
