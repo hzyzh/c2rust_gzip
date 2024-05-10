@@ -1,2 +1,3 @@
 # c2rust_gzip
-Applying c2rust to transpile source codes of gzip to unsafe rust version.
+I fixed all trivial bugs as well as some non-trivial bugs of the refactored rust code. 
+'building.log' records complete output of compiler.
