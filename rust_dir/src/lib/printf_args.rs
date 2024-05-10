@@ -38,7 +38,7 @@ pub const TYPE_NONE: arg_type = 0;
 #[repr(C)]
 pub struct argument<'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40> {
     pub type_0: arg_type,
-    pub a: src::lib::printf_args::C2RustUnnamed<'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40>,
+    pub a: C2RustUnnamed<'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -71,8 +71,8 @@ pub union C2RustUnnamed<'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40> {
 #[repr(C)]
 pub struct arguments<'h41,'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40> {
     pub count: size_t,
-    pub arg: &'h41 (src::lib::printf_args::argument<'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40>),
-    pub direct_alloc_arg: [src::lib::printf_args::argument<'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40>; 7],
+    pub arg: &'h41 (argument<'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40>),
+    pub direct_alloc_arg: [argument<'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40>; 7],
 }
 #[no_mangle]
 pub unsafe extern "C" fn printf_fetchargs(

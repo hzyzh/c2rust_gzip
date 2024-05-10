@@ -570,7 +570,7 @@ pub unsafe extern "C" fn make_simple_name<'h0>(mut name: &'h0 mut [(libc::c_char
     }
     loop {
         p = &(p)[((-1) as usize) ..];
-        if (p).get() as libc::c_int == '.' as i32 {
+        if (p).get(0) as libc::c_int == '.' as i32 {
             (p).set(('_' as i32 as libc::c_char));
         }
         if !(&(p)[0] != &(&*(name))[0]) {

@@ -150,7 +150,7 @@ static mut bl_tree: [ct_data; 39] = [ct_data {
     fc: C2RustUnnamed { freq: 0 },
     dl: C2RustUnnamed_0 { dad: 0 },
 }; 39];
-static l_desc: tree_desc = unsafe {
+static mut l_desc: tree_desc = unsafe {
     {
         let mut init = tree_desc {
             dyn_tree: dyn_ltree.as_ptr() as *mut _,
@@ -164,7 +164,7 @@ static l_desc: tree_desc = unsafe {
         init
     }
 };
-static d_desc: tree_desc = unsafe {
+static mut d_desc: tree_desc = unsafe {
     {
         let mut init = tree_desc {
             dyn_tree: dyn_dtree.as_ptr() as *mut _,

@@ -29,13 +29,13 @@ pub type ulg = libc::c_ulong;
 pub struct huft<'h0> {
     pub e: uch,
     pub b: uch,
-    pub v: src::inflate::C2RustUnnamed<'h0>,
+    pub v: C2RustUnnamed<'h0>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2RustUnnamed<'h0> {
     pub n: ush,
-    pub t: *mut src::inflate::huft<'h0>,
+    pub t: *mut huft<'h0>,
 }
 static border: [libc::c_uint; 19] = [
     16 as libc::c_int as libc::c_uint,

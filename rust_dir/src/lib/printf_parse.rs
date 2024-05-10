@@ -42,7 +42,7 @@ pub const TYPE_NONE: arg_type = 0;
 #[repr(C)]
 pub struct argument<'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49> {
     pub type_0: arg_type,
-    pub a: src::lib::printf_parse::C2RustUnnamed<'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49>,
+    pub a: C2RustUnnamed<'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -75,8 +75,8 @@ pub union C2RustUnnamed<'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49> {
 #[repr(C)]
 pub struct arguments<'h50,'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49> {
     pub count: size_t,
-    pub arg: &'h50 (src::lib::printf_parse::argument<'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49>),
-    pub direct_alloc_arg: [src::lib::printf_parse::argument<'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49>; 7],
+    pub arg: &'h50 (argument<'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49>),
+    pub direct_alloc_arg: [argument<'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49>; 7],
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -97,10 +97,10 @@ pub struct char_directive<'h51,'h52,'h53,'h54,'h55,'h56> {
 #[repr(C)]
 pub struct char_directives<'h51,'h52,'h53,'h54,'h55,'h56,'h57> {
     pub count: size_t,
-    pub dir: &'h57 (src::lib::printf_parse::char_directive<'h51,'h52,'h53,'h54,'h55,'h56>),
+    pub dir: &'h57 (char_directive<'h51,'h52,'h53,'h54,'h55,'h56>),
     pub max_width_length: size_t,
     pub max_precision_length: size_t,
-    pub direct_alloc_dir: [src::lib::printf_parse::char_directive<'h51,'h52,'h53,'h54,'h55,'h56>; 7],
+    pub direct_alloc_dir: [char_directive<'h51,'h52,'h53,'h54,'h55,'h56>; 7],
 }
 pub type intmax_t = __intmax_t;
 pub type __intmax_t = libc::c_long;
