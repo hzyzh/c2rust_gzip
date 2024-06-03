@@ -4,7 +4,7 @@ extern "C" {
     fn __errno_location() -> *mut libc::c_int;
     fn close(__fd: libc::c_int) -> libc::c_int;
 }
-pub type __builtin_va_list = [__va_list_tag; 1];
+pub type __builtin_va_list<'a> = [__va_list_tag<'a, 'a>; 1];
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct __va_list_tag<'h3,'h4> {
@@ -13,7 +13,7 @@ pub struct __va_list_tag<'h3,'h4> {
     pub overflow_arg_area: &'h3 (libc::c_void),
     pub reg_save_area: &'h4 (libc::c_void),
 }
-pub type va_list = __builtin_va_list;
+pub type va_list<'a> = [__va_list_tag<'a, 'a>; 1];
 #[no_mangle]
 pub unsafe extern "C" fn rpl_fcntl(
     mut fd: libc::c_int,

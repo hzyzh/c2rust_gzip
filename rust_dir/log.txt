@@ -1,0 +1,3165 @@
+   Compiling rust_dir v0.0.0 (/home/hzy/workdir/rust/c2rust/examples/mycode/gzip/rust_dir)
+error[E0106]: missing lifetime specifiers
+ --> src/lib/open_safer.rs:6:31
+  |
+6 | pub type __builtin_va_list = [__va_list_tag; 1];
+  |                               ^^^^^^^^^^^^^ expected 2 lifetime parameters
+  |
+help: consider introducing a named lifetime parameter
+  |
+6 | pub type __builtin_va_list<'a> = [__va_list_tag<'a, 'a>; 1];
+  |                           ++++                 ++++++++
+
+error[E0106]: missing lifetime specifiers
+  --> src/lib/openat_safer.rs:11:31
+   |
+11 | pub type __builtin_va_list = [__va_list_tag; 1];
+   |                               ^^^^^^^^^^^^^ expected 2 lifetime parameters
+   |
+help: consider introducing a named lifetime parameter
+   |
+11 | pub type __builtin_va_list<'a> = [__va_list_tag<'a, 'a>; 1];
+   |                           ++++                 ++++++++
+
+error[E0106]: missing lifetime specifiers
+  --> src/lib/printf.rs:13:31
+   |
+13 | pub type __builtin_va_list = [__va_list_tag; 1];
+   |                               ^^^^^^^^^^^^^ expected 2 lifetime parameters
+   |
+help: consider introducing a named lifetime parameter
+   |
+13 | pub type __builtin_va_list<'a> = [__va_list_tag<'a, 'a>; 1];
+   |                           ++++                 ++++++++
+
+error[E0106]: missing lifetime specifier
+  --> src/lib/sig_handler.rs:17:23
+   |
+17 | pub type __sigval_t = sigval;
+   |                       ^^^^^^ expected named lifetime parameter
+   |
+help: consider introducing a named lifetime parameter
+   |
+17 | pub type __sigval_t<'a> = sigval<'a>;
+   |                    ++++         ++++
+
+error[E0106]: missing lifetime specifier
+  --> src/lib/sig_handler.rs:85:20
+   |
+85 |     pub si_sigval: sigval,
+   |                    ^^^^^^ expected named lifetime parameter
+   |
+help: consider using the `'h60` lifetime
+   |
+85 |     pub si_sigval: sigval<'h60>,
+   |                          ++++++
+
+error[E0106]: missing lifetime specifier
+  --> src/lib/sig_handler.rs:92:20
+   |
+92 |     pub si_sigval: sigval,
+   |                    ^^^^^^ expected named lifetime parameter
+   |
+help: consider using the `'h60` lifetime
+   |
+92 |     pub si_sigval: sigval<'h60>,
+   |                          ++++++
+
+warning: unnecessary parentheses around function argument
+   --> src/deflate.rs:602:17
+    |
+602 |                 (if block_start >= 0 as libc::c_long {
+    |                 ^
+...
+609 |                 }),
+    |                  ^
+    |
+    = note: `#[warn(unused_parens)]` on by default
+help: remove these parentheses
+    |
+602 ~                 if block_start >= 0 as libc::c_long {
+603 |                     &mut *window
+  ...
+608 |                     0 as *mut libc::c_void as *mut libc::c_char
+609 ~                 },
+    |
+
+warning: unnecessary parentheses around function argument
+   --> src/deflate.rs:764:21
+    |
+764 |                     (if block_start >= 0 as libc::c_long {
+    |                     ^
+...
+771 |                     }),
+    |                      ^
+    |
+help: remove these parentheses
+    |
+764 ~                     if block_start >= 0 as libc::c_long {
+765 |                         &mut *window
+  ...
+770 |                         0 as *mut libc::c_void as *mut libc::c_char
+771 ~                     },
+    |
+
+warning: unnecessary parentheses around function argument
+   --> src/deflate.rs:793:21
+    |
+793 |                     (if block_start >= 0 as libc::c_long {
+    |                     ^
+...
+800 |                     }),
+    |                      ^
+    |
+help: remove these parentheses
+    |
+793 ~                     if block_start >= 0 as libc::c_long {
+794 |                         &mut *window
+  ...
+799 |                         0 as *mut libc::c_void as *mut libc::c_char
+800 ~                     },
+    |
+
+warning: unnecessary parentheses around function argument
+   --> src/deflate.rs:819:21
+    |
+819 |                     (if block_start >= 0 as libc::c_long {
+    |                     ^
+...
+826 |                     }),
+    |                      ^
+    |
+help: remove these parentheses
+    |
+819 ~                     if block_start >= 0 as libc::c_long {
+820 |                         &mut *window
+  ...
+825 |                         0 as *mut libc::c_void as *mut libc::c_char
+826 ~                     },
+    |
+
+warning: unnecessary parentheses around method argument
+   --> src/inflate.rs:647:35
+    |
+647 |                     .wrapping_sub((if d > w { d } else { w }));
+    |                                   ^                         ^
+    |
+help: remove these parentheses
+    |
+647 -                     .wrapping_sub((if d > w { d } else { w }));
+647 +                     .wrapping_sub(if d > w { d } else { w });
+    |
+
+warning: unnecessary parentheses around type
+  --> src/lib/asnprintf.rs:16:33
+   |
+16 |     pub overflow_arg_area: &'h1 (libc::c_void),
+   |                                 ^            ^
+   |
+help: remove these parentheses
+   |
+16 -     pub overflow_arg_area: &'h1 (libc::c_void),
+16 +     pub overflow_arg_area: &'h1 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/asnprintf.rs:17:29
+   |
+17 |     pub reg_save_area: &'h2 (libc::c_void),
+   |                             ^            ^
+   |
+help: remove these parentheses
+   |
+17 -     pub reg_save_area: &'h2 (libc::c_void),
+17 +     pub reg_save_area: &'h2 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+ --> src/lib/basename_lgpl.rs:8:21
+  |
+8 |     mut name: &'h0 [(libc::c_char)],
+  |                     ^            ^
+  |
+help: remove these parentheses
+  |
+8 -     mut name: &'h0 [(libc::c_char)],
+8 +     mut name: &'h0 [libc::c_char],
+  |
+
+warning: unnecessary parentheses around type
+ --> src/lib/basename_lgpl.rs:9:11
+  |
+9 | ) -> &'h1 (libc::c_char) {
+  |           ^            ^
+  |
+help: remove these parentheses
+  |
+9 - ) -> &'h1 (libc::c_char) {
+9 + ) -> &'h1 libc::c_char {
+  |
+
+warning: unnecessary parentheses around type
+  --> src/lib/basename_lgpl.rs:10:21
+   |
+10 |     let mut base: &[(libc::c_char)] = &(name)[((0 as libc::c_int as isize) as usize) ..];
+   |                     ^            ^
+   |
+help: remove these parentheses
+   |
+10 -     let mut base: &[(libc::c_char)] = &(name)[((0 as libc::c_int as isize) as usize) ..];
+10 +     let mut base: &[libc::c_char] = &(name)[((0 as libc::c_int as isize) as usize) ..];
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/basename_lgpl.rs:11:18
+   |
+11 |     let mut p: &[(libc::c_char)] = &[0 as libc::c_char];
+   |                  ^            ^
+   |
+help: remove these parentheses
+   |
+11 -     let mut p: &[(libc::c_char)] = &[0 as libc::c_char];
+11 +     let mut p: &[libc::c_char] = &[0 as libc::c_char];
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/basename_lgpl.rs:31:56
+   |
+31 | pub unsafe extern "C" fn base_len<'h0>(mut name: &'h0 [(libc::c_char)]) -> size_t {
+   |                                                        ^            ^
+   |
+help: remove these parentheses
+   |
+31 - pub unsafe extern "C" fn base_len<'h0>(mut name: &'h0 [(libc::c_char)]) -> size_t {
+31 + pub unsafe extern "C" fn base_len<'h0>(mut name: &'h0 [libc::c_char]) -> size_t {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/chdir_long.rs:38:54
+   |
+38 | unsafe extern "C" fn cdb_init<'h0>(mut cdb: &'h0 mut (cd_buf)) {
+   |                                                      ^      ^
+   |
+help: remove these parentheses
+   |
+38 - unsafe extern "C" fn cdb_init<'h0>(mut cdb: &'h0 mut (cd_buf)) {
+38 + unsafe extern "C" fn cdb_init<'h0>(mut cdb: &'h0 mut cd_buf) {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/chdir_long.rs:50:52
+   |
+50 | unsafe extern "C" fn cdb_fchdir<'h0>(mut cdb: &'h0 (cd_buf)) -> libc::c_int {
+   |                                                    ^      ^
+   |
+help: remove these parentheses
+   |
+50 - unsafe extern "C" fn cdb_fchdir<'h0>(mut cdb: &'h0 (cd_buf)) -> libc::c_int {
+50 + unsafe extern "C" fn cdb_fchdir<'h0>(mut cdb: &'h0 cd_buf) -> libc::c_int {
+   |
+
+warning: unused label
+  --> src/lib/chdir_long.rs:77:9
+   |
+77 |         'c_970: {
+   |         ^^^^^^
+   |
+   = note: `#[warn(unused_labels)]` on by default
+
+warning: unused label
+   --> src/lib/chdir_long.rs:138:5
+    |
+138 |     'c_1569: {
+    |     ^^^^^^^
+
+warning: unused label
+   --> src/lib/chdir_long.rs:164:5
+    |
+164 |     'c_1531: {
+    |     ^^^^^^^
+
+warning: unused label
+   --> src/lib/chdir_long.rs:226:13
+    |
+226 |             'c_1360: {
+    |             ^^^^^^^
+
+warning: unused label
+   --> src/lib/chdir_long.rs:252:13
+    |
+252 |             'c_1321: {
+    |             ^^^^^^^
+
+warning: unused label
+   --> src/lib/chdir_long.rs:298:17
+    |
+298 |                 'c_1241: {
+    |                 ^^^^^^^
+
+warning: unnecessary parentheses around type
+  --> src/lib/dirname_lgpl.rs:55:61
+   |
+55 | pub unsafe extern "C" fn mdir_name<'h0,'h1>(mut file: &'h0 [(libc::c_char)]) -> &'h1 core::cell::Cell<(libc::c_char)> {
+   |                                                             ^            ^
+   |
+help: remove these parentheses
+   |
+55 - pub unsafe extern "C" fn mdir_name<'h0,'h1>(mut file: &'h0 [(libc::c_char)]) -> &'h1 core::cell::Cell<(libc::c_char)> {
+55 + pub unsafe extern "C" fn mdir_name<'h0,'h1>(mut file: &'h0 [libc::c_char]) -> &'h1 core::cell::Cell<(libc::c_char)> {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/dirname_lgpl.rs:55:103
+   |
+55 | pub unsafe extern "C" fn mdir_name<'h0,'h1>(mut file: &'h0 [(libc::c_char)]) -> &'h1 core::cell::Cell<(libc::c_char)> {
+   |                                                                                                       ^            ^
+   |
+help: remove these parentheses
+   |
+55 - pub unsafe extern "C" fn mdir_name<'h0,'h1>(mut file: &'h0 [(libc::c_char)]) -> &'h1 core::cell::Cell<(libc::c_char)> {
+55 + pub unsafe extern "C" fn mdir_name<'h0,'h1>(mut file: &'h0 [(libc::c_char)]) -> &'h1 core::cell::Cell<libc::c_char> {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/dirname_lgpl.rs:61:37
+   |
+61 |     let mut dir: &[core::cell::Cell<(libc::c_char)>] = std::cell::Cell::from_mut((malloc(
+   |                                     ^            ^
+   |
+help: remove these parentheses
+   |
+61 -     let mut dir: &[core::cell::Cell<(libc::c_char)>] = std::cell::Cell::from_mut((malloc(
+61 +     let mut dir: &[core::cell::Cell<libc::c_char>] = std::cell::Cell::from_mut((malloc(
+   |
+
+warning: unnecessary parentheses around function argument
+  --> src/lib/dirname_lgpl.rs:61:82
+   |
+61 |     let mut dir: &[core::cell::Cell<(libc::c_char)>] = std::cell::Cell::from_mut((malloc(
+   |                                                                                  ^
+...
+65 |     )));
+   |      ^
+   |
+help: remove these parentheses
+   |
+61 ~     let mut dir: &[core::cell::Cell<(libc::c_char)>] = std::cell::Cell::from_mut(malloc(
+62 |         length
+63 |             .wrapping_add(append_dot as libc::c_ulong)
+64 |             .wrapping_add(1 as libc::c_int as libc::c_ulong),
+65 ~     ));
+   |
+
+warning: unnecessary parentheses around method argument
+   --> src/lib/dirname_lgpl.rs:103:61
+    |
+103 |         (&(&(dir)[((fresh0 as isize) as usize) ..])[0]).set(('.' as i32 as libc::c_char));
+    |                                                             ^                          ^
+    |
+help: remove these parentheses
+    |
+103 -         (&(&(dir)[((fresh0 as isize) as usize) ..])[0]).set(('.' as i32 as libc::c_char));
+103 +         (&(&(dir)[((fresh0 as isize) as usize) ..])[0]).set('.' as i32 as libc::c_char);
+    |
+
+warning: unnecessary parentheses around method argument
+   --> src/lib/dirname_lgpl.rs:105:57
+    |
+105 |     (&(&(dir)[((length as isize) as usize) ..])[0]).set(('\0' as i32 as libc::c_char));
+    |                                                         ^                           ^
+    |
+help: remove these parentheses
+    |
+105 -     (&(&(dir)[((length as isize) as usize) ..])[0]).set(('\0' as i32 as libc::c_char));
+105 +     (&(&(dir)[((length as isize) as usize) ..])[0]).set('\0' as i32 as libc::c_char);
+    |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fcntl.rs:13:33
+   |
+13 |     pub overflow_arg_area: &'h3 (libc::c_void),
+   |                                 ^            ^
+   |
+help: remove these parentheses
+   |
+13 -     pub overflow_arg_area: &'h3 (libc::c_void),
+13 +     pub overflow_arg_area: &'h3 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fcntl.rs:14:29
+   |
+14 |     pub reg_save_area: &'h4 (libc::c_void),
+   |                             ^            ^
+   |
+help: remove these parentheses
+   |
+14 -     pub reg_save_area: &'h4 (libc::c_void),
+14 +     pub reg_save_area: &'h4 libc::c_void,
+   |
+
+warning: unused import: `::libc`
+ --> src/lib/fd_hook.rs:1:5
+  |
+1 | use ::libc;
+  |     ^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unnecessary parentheses around type
+  --> src/lib/fprintf.rs:28:33
+   |
+28 |     pub overflow_arg_area: &'h5 (libc::c_void),
+   |                                 ^            ^
+   |
+help: remove these parentheses
+   |
+28 -     pub overflow_arg_area: &'h5 (libc::c_void),
+28 +     pub overflow_arg_area: &'h5 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fprintf.rs:29:29
+   |
+29 |     pub reg_save_area: &'h6 (libc::c_void),
+   |                             ^            ^
+   |
+help: remove these parentheses
+   |
+29 -     pub reg_save_area: &'h6 (libc::c_void),
+29 +     pub reg_save_area: &'h6 libc::c_void,
+   |
+
+warning: unused import: `::libc`
+ --> src/lib/freading.rs:1:5
+  |
+1 | use ::libc;
+  |     ^^^^^^
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:14:28
+   |
+14 |     pub _IO_read_ptr: &'h7 (libc::c_char),
+   |                            ^            ^
+   |
+help: remove these parentheses
+   |
+14 -     pub _IO_read_ptr: &'h7 (libc::c_char),
+14 +     pub _IO_read_ptr: &'h7 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:15:28
+   |
+15 |     pub _IO_read_end: &'h8 (libc::c_char),
+   |                            ^            ^
+   |
+help: remove these parentheses
+   |
+15 -     pub _IO_read_end: &'h8 (libc::c_char),
+15 +     pub _IO_read_end: &'h8 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:16:29
+   |
+16 |     pub _IO_read_base: &'h9 (libc::c_char),
+   |                             ^            ^
+   |
+help: remove these parentheses
+   |
+16 -     pub _IO_read_base: &'h9 (libc::c_char),
+16 +     pub _IO_read_base: &'h9 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:17:31
+   |
+17 |     pub _IO_write_base: &'h10 (libc::c_char),
+   |                               ^            ^
+   |
+help: remove these parentheses
+   |
+17 -     pub _IO_write_base: &'h10 (libc::c_char),
+17 +     pub _IO_write_base: &'h10 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:18:30
+   |
+18 |     pub _IO_write_ptr: &'h11 (libc::c_char),
+   |                              ^            ^
+   |
+help: remove these parentheses
+   |
+18 -     pub _IO_write_ptr: &'h11 (libc::c_char),
+18 +     pub _IO_write_ptr: &'h11 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:19:30
+   |
+19 |     pub _IO_write_end: &'h12 (libc::c_char),
+   |                              ^            ^
+   |
+help: remove these parentheses
+   |
+19 -     pub _IO_write_end: &'h12 (libc::c_char),
+19 +     pub _IO_write_end: &'h12 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:20:29
+   |
+20 |     pub _IO_buf_base: &'h13 (libc::c_char),
+   |                             ^            ^
+   |
+help: remove these parentheses
+   |
+20 -     pub _IO_buf_base: &'h13 (libc::c_char),
+20 +     pub _IO_buf_base: &'h13 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:21:28
+   |
+21 |     pub _IO_buf_end: &'h14 (libc::c_char),
+   |                            ^            ^
+   |
+help: remove these parentheses
+   |
+21 -     pub _IO_buf_end: &'h14 (libc::c_char),
+21 +     pub _IO_buf_end: &'h14 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:22:30
+   |
+22 |     pub _IO_save_base: &'h15 (libc::c_char),
+   |                              ^            ^
+   |
+help: remove these parentheses
+   |
+22 -     pub _IO_save_base: &'h15 (libc::c_char),
+22 +     pub _IO_save_base: &'h15 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:23:32
+   |
+23 |     pub _IO_backup_base: &'h16 (libc::c_char),
+   |                                ^            ^
+   |
+help: remove these parentheses
+   |
+23 -     pub _IO_backup_base: &'h16 (libc::c_char),
+23 +     pub _IO_backup_base: &'h16 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:24:29
+   |
+24 |     pub _IO_save_end: &'h17 (libc::c_char),
+   |                             ^            ^
+   |
+help: remove these parentheses
+   |
+24 -     pub _IO_save_end: &'h17 (libc::c_char),
+24 +     pub _IO_save_end: &'h17 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:25:25
+   |
+25 |     pub _markers: &'h18 (_IO_marker),
+   |                         ^          ^
+   |
+help: remove these parentheses
+   |
+25 -     pub _markers: &'h18 (_IO_marker),
+25 +     pub _markers: &'h18 _IO_marker,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:26:23
+   |
+26 |     pub _chain: &'h19 (_IO_FILE<'h7,'h8,'h9,'h10,'h11,'h12,'h13,'h14,'h15,'h16,'h17,'h18,'h19,'h20,'h21,'h22,'h23,'h24>),
+   |                       ^                                                                                                ^
+   |
+help: remove these parentheses
+   |
+26 -     pub _chain: &'h19 (_IO_FILE<'h7,'h8,'h9,'h10,'h11,'h12,'h13,'h14,'h15,'h16,'h17,'h18,'h19,'h20,'h21,'h22,'h23,'h24>),
+26 +     pub _chain: &'h19 _IO_FILE<'h7,'h8,'h9,'h10,'h11,'h12,'h13,'h14,'h15,'h16,'h17,'h18,'h19,'h20,'h21,'h22,'h23,'h24>,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:33:22
+   |
+33 |     pub _lock: &'h20 (libc::c_void),
+   |                      ^            ^
+   |
+help: remove these parentheses
+   |
+33 -     pub _lock: &'h20 (libc::c_void),
+33 +     pub _lock: &'h20 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:35:25
+   |
+35 |     pub _codecvt: &'h21 (_IO_codecvt),
+   |                         ^           ^
+   |
+help: remove these parentheses
+   |
+35 -     pub _codecvt: &'h21 (_IO_codecvt),
+35 +     pub _codecvt: &'h21 _IO_codecvt,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:36:27
+   |
+36 |     pub _wide_data: &'h22 (_IO_wide_data),
+   |                           ^             ^
+   |
+help: remove these parentheses
+   |
+36 -     pub _wide_data: &'h22 (_IO_wide_data),
+36 +     pub _wide_data: &'h22 _IO_wide_data,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:37:30
+   |
+37 |     pub _freeres_list: &'h23 (_IO_FILE<'h7,'h8,'h9,'h10,'h11,'h12,'h13,'h14,'h15,'h16,'h17,'h18,'h19,'h20,'h21,'h22,'h23,'h24>),
+   |                              ^                                                                                                ^
+   |
+help: remove these parentheses
+   |
+37 -     pub _freeres_list: &'h23 (_IO_FILE<'h7,'h8,'h9,'h10,'h11,'h12,'h13,'h14,'h15,'h16,'h17,'h18,'h19,'h20,'h21,'h22,'h23,'h24>),
+37 +     pub _freeres_list: &'h23 _IO_FILE<'h7,'h8,'h9,'h10,'h11,'h12,'h13,'h14,'h15,'h16,'h17,'h18,'h19,'h20,'h21,'h22,'h23,'h24>,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:38:29
+   |
+38 |     pub _freeres_buf: &'h24 (libc::c_void),
+   |                             ^            ^
+   |
+help: remove these parentheses
+   |
+38 -     pub _freeres_buf: &'h24 (libc::c_void),
+38 +     pub _freeres_buf: &'h24 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/fseterr.rs:46:137
+   |
+46 | ...h10,'h11,'h12,'h13,'h14,'h15,'h16,'h17,'h18>(mut fp: &'h0 mut (_IO_FILE)) {
+   |                                                                  ^        ^
+   |
+help: remove these parentheses
+   |
+46 - pub unsafe extern "C" fn fseterr<'h0,'h1,'h2,'h3,'h4,'h5,'h6,'h7,'h8,'h9,'h10,'h11,'h12,'h13,'h14,'h15,'h16,'h17,'h18>(mut fp: &'h0 mut (_IO_FILE)) {
+46 + pub unsafe extern "C" fn fseterr<'h0,'h1,'h2,'h3,'h4,'h5,'h6,'h7,'h8,'h9,'h10,'h11,'h12,'h13,'h14,'h15,'h16,'h17,'h18>(mut fp: &'h0 mut _IO_FILE) {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/gettime.rs:16:56
+   |
+16 | pub unsafe extern "C" fn gettime<'h0>(mut ts: &'h0 mut (timespec)) {
+   |                                                        ^        ^
+   |
+help: remove these parentheses
+   |
+16 - pub unsafe extern "C" fn gettime<'h0>(mut ts: &'h0 mut (timespec)) {
+16 + pub unsafe extern "C" fn gettime<'h0>(mut ts: &'h0 mut timespec) {
+   |
+
+warning: unnecessary parentheses around assigned value
+   --> src/lib/glthread/lock.rs:160:46
+    |
+160 |     let mut firstbyte: &mut (libc::c_char) = (once_control);
+    |                                              ^            ^
+    |
+help: remove these parentheses
+    |
+160 -     let mut firstbyte: &mut (libc::c_char) = (once_control);
+160 +     let mut firstbyte: &mut (libc::c_char) = once_control;
+    |
+
+warning: unnecessary parentheses around type
+   --> src/lib/glthread/lock.rs:160:29
+    |
+160 |     let mut firstbyte: &mut (libc::c_char) = (once_control);
+    |                             ^            ^
+    |
+help: remove these parentheses
+    |
+160 -     let mut firstbyte: &mut (libc::c_char) = (once_control);
+160 +     let mut firstbyte: &mut libc::c_char = (once_control);
+    |
+
+warning: unused import: `::libc`
+ --> src/lib/glthread/threadlib.rs:1:5
+  |
+1 | use ::libc;
+  |     ^^^^^^
+
+warning: unused import: `::libc`
+ --> src/lib/localtime_buffer.rs:1:5
+  |
+1 | use ::libc;
+  |     ^^^^^^
+
+warning: unused import: `::libc`
+ --> src/lib/math.rs:1:5
+  |
+1 | use ::libc;
+  |     ^^^^^^
+
+warning: unnecessary parentheses around type
+  --> src/lib/open_safer.rs:12:34
+   |
+12 |     pub overflow_arg_area: &'h25 (libc::c_void),
+   |                                  ^            ^
+   |
+help: remove these parentheses
+   |
+12 -     pub overflow_arg_area: &'h25 (libc::c_void),
+12 +     pub overflow_arg_area: &'h25 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/open_safer.rs:13:30
+   |
+13 |     pub reg_save_area: &'h26 (libc::c_void),
+   |                              ^            ^
+   |
+help: remove these parentheses
+   |
+13 -     pub reg_save_area: &'h26 (libc::c_void),
+13 +     pub reg_save_area: &'h26 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/openat_safer.rs:17:34
+   |
+17 |     pub overflow_arg_area: &'h27 (libc::c_void),
+   |                                  ^            ^
+   |
+help: remove these parentheses
+   |
+17 -     pub overflow_arg_area: &'h27 (libc::c_void),
+17 +     pub overflow_arg_area: &'h27 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/openat_safer.rs:18:30
+   |
+18 |     pub reg_save_area: &'h28 (libc::c_void),
+   |                              ^            ^
+   |
+help: remove these parentheses
+   |
+18 -     pub reg_save_area: &'h28 (libc::c_void),
+18 +     pub reg_save_area: &'h28 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+ --> src/lib/pipe_safer.rs:9:60
+  |
+9 | pub unsafe extern "C" fn pipe_safer<'h0>(mut fd: &'h0 mut [(libc::c_int)]) -> libc::c_int {
+  |                                                            ^           ^
+  |
+help: remove these parentheses
+  |
+9 - pub unsafe extern "C" fn pipe_safer<'h0>(mut fd: &'h0 mut [(libc::c_int)]) -> libc::c_int {
+9 + pub unsafe extern "C" fn pipe_safer<'h0>(mut fd: &'h0 mut [libc::c_int]) -> libc::c_int {
+  |
+
+warning: unnecessary parentheses around method argument
+  --> src/lib/pipe_safer.rs:18:42
+   |
+18 |                 (__errno_location()).set((e));
+   |                                          ^ ^
+   |
+help: remove these parentheses
+   |
+18 -                 (__errno_location()).set((e));
+18 +                 (__errno_location()).set(e);
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf.rs:19:34
+   |
+19 |     pub overflow_arg_area: &'h29 (libc::c_void),
+   |                                  ^            ^
+   |
+help: remove these parentheses
+   |
+19 -     pub overflow_arg_area: &'h29 (libc::c_void),
+19 +     pub overflow_arg_area: &'h29 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf.rs:20:30
+   |
+20 |     pub reg_save_area: &'h30 (libc::c_void),
+   |                              ^            ^
+   |
+help: remove these parentheses
+   |
+20 -     pub reg_save_area: &'h30 (libc::c_void),
+20 +     pub reg_save_area: &'h30 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+ --> src/lib/printf_args.rs:7:34
+  |
+7 |     pub overflow_arg_area: &'h31 (libc::c_void),
+  |                                  ^            ^
+  |
+help: remove these parentheses
+  |
+7 -     pub overflow_arg_area: &'h31 (libc::c_void),
+7 +     pub overflow_arg_area: &'h31 libc::c_void,
+  |
+
+warning: unnecessary parentheses around type
+ --> src/lib/printf_args.rs:8:30
+  |
+8 |     pub reg_save_area: &'h32 (libc::c_void),
+  |                              ^            ^
+  |
+help: remove these parentheses
+  |
+8 -     pub reg_save_area: &'h32 (libc::c_void),
+8 +     pub reg_save_area: &'h32 libc::c_void,
+  |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_args.rs:61:25
+   |
+61 |     pub a_string: &'h33 (libc::c_char),
+   |                         ^            ^
+   |
+help: remove these parentheses
+   |
+61 -     pub a_string: &'h33 (libc::c_char),
+61 +     pub a_string: &'h33 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_args.rs:62:30
+   |
+62 |     pub a_wide_string: &'h34 (wchar_t),
+   |                              ^       ^
+   |
+help: remove these parentheses
+   |
+62 -     pub a_wide_string: &'h34 (wchar_t),
+62 +     pub a_wide_string: &'h34 wchar_t,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_args.rs:63:26
+   |
+63 |     pub a_pointer: &'h35 (libc::c_void),
+   |                          ^            ^
+   |
+help: remove these parentheses
+   |
+63 -     pub a_pointer: &'h35 (libc::c_void),
+63 +     pub a_pointer: &'h35 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_args.rs:64:38
+   |
+64 |     pub a_count_schar_pointer: &'h36 (libc::c_schar),
+   |                                      ^             ^
+   |
+help: remove these parentheses
+   |
+64 -     pub a_count_schar_pointer: &'h36 (libc::c_schar),
+64 +     pub a_count_schar_pointer: &'h36 libc::c_schar,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_args.rs:65:38
+   |
+65 |     pub a_count_short_pointer: &'h37 (libc::c_short),
+   |                                      ^             ^
+   |
+help: remove these parentheses
+   |
+65 -     pub a_count_short_pointer: &'h37 (libc::c_short),
+65 +     pub a_count_short_pointer: &'h37 libc::c_short,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_args.rs:66:36
+   |
+66 |     pub a_count_int_pointer: &'h38 (libc::c_int),
+   |                                    ^           ^
+   |
+help: remove these parentheses
+   |
+66 -     pub a_count_int_pointer: &'h38 (libc::c_int),
+66 +     pub a_count_int_pointer: &'h38 libc::c_int,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_args.rs:67:40
+   |
+67 |     pub a_count_longint_pointer: &'h39 (libc::c_long),
+   |                                        ^            ^
+   |
+help: remove these parentheses
+   |
+67 -     pub a_count_longint_pointer: &'h39 (libc::c_long),
+67 +     pub a_count_longint_pointer: &'h39 libc::c_long,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_args.rs:68:44
+   |
+68 |     pub a_count_longlongint_pointer: &'h40 (libc::c_longlong),
+   |                                            ^                ^
+   |
+help: remove these parentheses
+   |
+68 -     pub a_count_longlongint_pointer: &'h40 (libc::c_longlong),
+68 +     pub a_count_longlongint_pointer: &'h40 libc::c_longlong,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_args.rs:74:20
+   |
+74 |     pub arg: &'h41 (argument<'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40>),
+   |                    ^                                                 ^
+   |
+help: remove these parentheses
+   |
+74 -     pub arg: &'h41 (argument<'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40>),
+74 +     pub arg: &'h41 argument<'h33,'h34,'h35,'h36,'h37,'h38,'h39,'h40>,
+   |
+
+warning: unnecessary parentheses around assigned value
+  --> src/lib/printf_frexpl.rs:15:13
+   |
+15 |     oldcw = ({
+   |             ^
+...
+19 |     });
+   |      ^
+   |
+help: remove these parentheses
+   |
+15 ~     oldcw = {
+16 |         let mut _cw: fpucw_t = 0;
+17 |         asm!("fnstcw [{0}]", in (reg) & mut _cw, options(preserves_flags));
+18 |         _cw
+19 ~     };
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_parse.rs:65:25
+   |
+65 |     pub a_string: &'h42 (libc::c_char),
+   |                         ^            ^
+   |
+help: remove these parentheses
+   |
+65 -     pub a_string: &'h42 (libc::c_char),
+65 +     pub a_string: &'h42 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_parse.rs:66:30
+   |
+66 |     pub a_wide_string: &'h43 (wchar_t),
+   |                              ^       ^
+   |
+help: remove these parentheses
+   |
+66 -     pub a_wide_string: &'h43 (wchar_t),
+66 +     pub a_wide_string: &'h43 wchar_t,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_parse.rs:67:26
+   |
+67 |     pub a_pointer: &'h44 (libc::c_void),
+   |                          ^            ^
+   |
+help: remove these parentheses
+   |
+67 -     pub a_pointer: &'h44 (libc::c_void),
+67 +     pub a_pointer: &'h44 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_parse.rs:68:38
+   |
+68 |     pub a_count_schar_pointer: &'h45 (libc::c_schar),
+   |                                      ^             ^
+   |
+help: remove these parentheses
+   |
+68 -     pub a_count_schar_pointer: &'h45 (libc::c_schar),
+68 +     pub a_count_schar_pointer: &'h45 libc::c_schar,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_parse.rs:69:38
+   |
+69 |     pub a_count_short_pointer: &'h46 (libc::c_short),
+   |                                      ^             ^
+   |
+help: remove these parentheses
+   |
+69 -     pub a_count_short_pointer: &'h46 (libc::c_short),
+69 +     pub a_count_short_pointer: &'h46 libc::c_short,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_parse.rs:70:36
+   |
+70 |     pub a_count_int_pointer: &'h47 (libc::c_int),
+   |                                    ^           ^
+   |
+help: remove these parentheses
+   |
+70 -     pub a_count_int_pointer: &'h47 (libc::c_int),
+70 +     pub a_count_int_pointer: &'h47 libc::c_int,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_parse.rs:71:40
+   |
+71 |     pub a_count_longint_pointer: &'h48 (libc::c_long),
+   |                                        ^            ^
+   |
+help: remove these parentheses
+   |
+71 -     pub a_count_longint_pointer: &'h48 (libc::c_long),
+71 +     pub a_count_longint_pointer: &'h48 libc::c_long,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_parse.rs:72:44
+   |
+72 |     pub a_count_longlongint_pointer: &'h49 (libc::c_longlong),
+   |                                            ^                ^
+   |
+help: remove these parentheses
+   |
+72 -     pub a_count_longlongint_pointer: &'h49 (libc::c_longlong),
+72 +     pub a_count_longlongint_pointer: &'h49 libc::c_longlong,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_parse.rs:78:20
+   |
+78 |     pub arg: &'h50 (argument<'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49>),
+   |                    ^                                                 ^
+   |
+help: remove these parentheses
+   |
+78 -     pub arg: &'h50 (argument<'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49>),
+78 +     pub arg: &'h50 argument<'h42,'h43,'h44,'h45,'h46,'h47,'h48,'h49>,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_parse.rs:84:26
+   |
+84 |     pub dir_start: &'h51 (libc::c_char),
+   |                          ^            ^
+   |
+help: remove these parentheses
+   |
+84 -     pub dir_start: &'h51 (libc::c_char),
+84 +     pub dir_start: &'h51 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_parse.rs:85:24
+   |
+85 |     pub dir_end: &'h52 (libc::c_char),
+   |                        ^            ^
+   |
+help: remove these parentheses
+   |
+85 -     pub dir_end: &'h52 (libc::c_char),
+85 +     pub dir_end: &'h52 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_parse.rs:87:28
+   |
+87 |     pub width_start: &'h53 (libc::c_char),
+   |                            ^            ^
+   |
+help: remove these parentheses
+   |
+87 -     pub width_start: &'h53 (libc::c_char),
+87 +     pub width_start: &'h53 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_parse.rs:88:26
+   |
+88 |     pub width_end: &'h54 (libc::c_char),
+   |                          ^            ^
+   |
+help: remove these parentheses
+   |
+88 -     pub width_end: &'h54 (libc::c_char),
+88 +     pub width_end: &'h54 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_parse.rs:90:32
+   |
+90 |     pub precision_start: &'h55 (libc::c_char),
+   |                                ^            ^
+   |
+help: remove these parentheses
+   |
+90 -     pub precision_start: &'h55 (libc::c_char),
+90 +     pub precision_start: &'h55 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/printf_parse.rs:91:30
+   |
+91 |     pub precision_end: &'h56 (libc::c_char),
+   |                              ^            ^
+   |
+help: remove these parentheses
+   |
+91 -     pub precision_end: &'h56 (libc::c_char),
+91 +     pub precision_end: &'h56 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+   --> src/lib/printf_parse.rs:100:20
+    |
+100 |     pub dir: &'h57 (char_directive<'h51,'h52,'h53,'h54,'h55,'h56>),
+    |                    ^                                             ^
+    |
+help: remove these parentheses
+    |
+100 -     pub dir: &'h57 (char_directive<'h51,'h52,'h53,'h54,'h55,'h56>),
+100 +     pub dir: &'h57 char_directive<'h51,'h52,'h53,'h54,'h55,'h56>,
+    |
+
+warning: unnecessary parentheses around type
+  --> src/lib/save_cwd.rs:15:21
+   |
+15 |     pub name: &'h58 (libc::c_char),
+   |                     ^            ^
+   |
+help: remove these parentheses
+   |
+15 -     pub name: &'h58 (libc::c_char),
+15 +     pub name: &'h58 libc::c_char,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/save_cwd.rs:48:58
+   |
+48 | pub unsafe extern "C" fn free_cwd<'h0,'h1>(mut cwd: &'h0 (saved_cwd<'h1>)) {
+   |                                                          ^              ^
+   |
+help: remove these parentheses
+   |
+48 - pub unsafe extern "C" fn free_cwd<'h0,'h1>(mut cwd: &'h0 (saved_cwd<'h1>)) {
+48 + pub unsafe extern "C" fn free_cwd<'h0,'h1>(mut cwd: &'h0 saved_cwd<'h1>) {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/savedir.rs:48:22
+   |
+48 |     pub name: &'h59 [(libc::c_char)],
+   |                      ^            ^
+   |
+help: remove these parentheses
+   |
+48 -     pub name: &'h59 [(libc::c_char)],
+48 +     pub name: &'h59 [libc::c_char],
+   |
+
+warning: unnecessary parentheses around block return value
+   --> src/lib/savedir.rs:159:21
+    |
+159 |                     (if *entry.offset(1 as libc::c_int as isize) as libc::c_int
+    |                     ^
+...
+165 |                     })
+    |                      ^
+    |
+help: remove these parentheses
+    |
+159 ~                     if *entry.offset(1 as libc::c_int as isize) as libc::c_int
+160 |                         != '.' as i32
+  ...
+164 |                         2 as libc::c_int
+165 ~                     }
+    |
+
+warning: unnecessary parentheses around type
+  --> src/lib/sig_handler.rs:15:26
+   |
+15 |     pub sival_ptr: &'h60 (libc::c_void),
+   |                          ^            ^
+   |
+help: remove these parentheses
+   |
+15 -     pub sival_ptr: &'h60 (libc::c_void),
+15 +     pub sival_ptr: &'h60 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/sig_handler.rs:42:27
+   |
+42 |     pub _call_addr: &'h61 (libc::c_void),
+   |                           ^            ^
+   |
+help: remove these parentheses
+   |
+42 -     pub _call_addr: &'h61 (libc::c_void),
+42 +     pub _call_addr: &'h61 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/sig_handler.rs:55:24
+   |
+55 |     pub si_addr: &'h62 (libc::c_void),
+   |                        ^            ^
+   |
+help: remove these parentheses
+   |
+55 -     pub si_addr: &'h62 (libc::c_void),
+55 +     pub si_addr: &'h62 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/sig_handler.rs:68:23
+   |
+68 |     pub _lower: &'h63 (libc::c_void),
+   |                       ^            ^
+   |
+help: remove these parentheses
+   |
+68 -     pub _lower: &'h63 (libc::c_void),
+68 +     pub _lower: &'h63 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/sig_handler.rs:69:23
+   |
+69 |     pub _upper: &'h64 (libc::c_void),
+   |                       ^            ^
+   |
+help: remove these parentheses
+   |
+69 -     pub _upper: &'h64 (libc::c_void),
+69 +     pub _upper: &'h64 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+   --> src/lib/sig_handler.rs:114:49
+    |
+114 |         unsafe extern "C" fn(libc::c_int, &'h65 (siginfo_t<'h60,'h62,'h61,'h63,'h64>), &'h66 (libc::c_void)) -> (),
+    |                                                 ^                                   ^
+    |
+help: remove these parentheses
+    |
+114 -         unsafe extern "C" fn(libc::c_int, &'h65 (siginfo_t<'h60,'h62,'h61,'h63,'h64>), &'h66 (libc::c_void)) -> (),
+114 +         unsafe extern "C" fn(libc::c_int, &'h65 siginfo_t<'h60,'h62,'h61,'h63,'h64>, &'h66 (libc::c_void)) -> (),
+    |
+
+warning: unnecessary parentheses around type
+   --> src/lib/sig_handler.rs:114:94
+    |
+114 |         unsafe extern "C" fn(libc::c_int, &'h65 (siginfo_t<'h60,'h62,'h61,'h63,'h64>), &'h66 (libc::c_void)) -> (),
+    |                                                                                              ^            ^
+    |
+help: remove these parentheses
+    |
+114 -         unsafe extern "C" fn(libc::c_int, &'h65 (siginfo_t<'h60,'h62,'h61,'h63,'h64>), &'h66 (libc::c_void)) -> (),
+114 +         unsafe extern "C" fn(libc::c_int, &'h65 (siginfo_t<'h60,'h62,'h61,'h63,'h64>), &'h66 libc::c_void) -> (),
+    |
+
+warning: unnecessary parentheses around type
+   --> src/lib/sig_handler.rs:121:83
+    |
+121 | pub unsafe extern "C" fn get_handler<'h0,'h1,'h2,'h3,'h4,'h5,'h6,'h7>(mut a: &'h0 (sigaction<'h1,'h2,'h3,'h4,'h5,'h6,'h7>)) -> std::optio...
+    |                                                                                   ^                                      ^
+    |
+help: remove these parentheses
+    |
+121 - pub unsafe extern "C" fn get_handler<'h0,'h1,'h2,'h3,'h4,'h5,'h6,'h7>(mut a: &'h0 (sigaction<'h1,'h2,'h3,'h4,'h5,'h6,'h7>)) -> std::option::Option<unsafe extern "C" fn(i32)> {
+121 + pub unsafe extern "C" fn get_handler<'h0,'h1,'h2,'h3,'h4,'h5,'h6,'h7>(mut a: &'h0 sigaction<'h1,'h2,'h3,'h4,'h5,'h6,'h7>) -> std::option::Option<unsafe extern "C" fn(i32)> {
+    |
+
+warning: unnecessary parentheses around type
+  --> src/lib/stat_time.rs:43:18
+   |
+43 |     mut st: &'h0 (stat),
+   |                  ^    ^
+   |
+help: remove these parentheses
+   |
+43 -     mut st: &'h0 (stat),
+43 +     mut st: &'h0 stat,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/stat_time.rs:50:63
+   |
+50 | pub unsafe extern "C" fn get_stat_birthtime<'h0>(mut st: &'h0 (stat)) -> timespec {
+   |                                                               ^    ^
+   |
+help: remove these parentheses
+   |
+50 - pub unsafe extern "C" fn get_stat_birthtime<'h0>(mut st: &'h0 (stat)) -> timespec {
+50 + pub unsafe extern "C" fn get_stat_birthtime<'h0>(mut st: &'h0 stat) -> timespec {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/stat_time.rs:59:59
+   |
+59 | pub unsafe extern "C" fn get_stat_mtime<'h0>(mut st: &'h0 (stat)) -> timespec {
+   |                                                           ^    ^
+   |
+help: remove these parentheses
+   |
+59 - pub unsafe extern "C" fn get_stat_mtime<'h0>(mut st: &'h0 (stat)) -> timespec {
+59 + pub unsafe extern "C" fn get_stat_mtime<'h0>(mut st: &'h0 stat) -> timespec {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/stat_time.rs:65:59
+   |
+65 | pub unsafe extern "C" fn get_stat_ctime<'h0>(mut st: &'h0 (stat)) -> timespec {
+   |                                                           ^    ^
+   |
+help: remove these parentheses
+   |
+65 - pub unsafe extern "C" fn get_stat_ctime<'h0>(mut st: &'h0 (stat)) -> timespec {
+65 + pub unsafe extern "C" fn get_stat_ctime<'h0>(mut st: &'h0 stat) -> timespec {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/stat_time.rs:71:59
+   |
+71 | pub unsafe extern "C" fn get_stat_atime<'h0>(mut st: &'h0 (stat)) -> timespec {
+   |                                                           ^    ^
+   |
+help: remove these parentheses
+   |
+71 - pub unsafe extern "C" fn get_stat_atime<'h0>(mut st: &'h0 (stat)) -> timespec {
+71 + pub unsafe extern "C" fn get_stat_atime<'h0>(mut st: &'h0 stat) -> timespec {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/stat_time.rs:77:66
+   |
+77 | pub unsafe extern "C" fn get_stat_birthtime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+   |                                                                  ^    ^
+   |
+help: remove these parentheses
+   |
+77 - pub unsafe extern "C" fn get_stat_birthtime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+77 + pub unsafe extern "C" fn get_stat_birthtime_ns<'h0>(mut st: &'h0 stat) -> libc::c_long {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/stat_time.rs:83:62
+   |
+83 | pub unsafe extern "C" fn get_stat_atime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+   |                                                              ^    ^
+   |
+help: remove these parentheses
+   |
+83 - pub unsafe extern "C" fn get_stat_atime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+83 + pub unsafe extern "C" fn get_stat_atime_ns<'h0>(mut st: &'h0 stat) -> libc::c_long {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/stat_time.rs:89:62
+   |
+89 | pub unsafe extern "C" fn get_stat_ctime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+   |                                                              ^    ^
+   |
+help: remove these parentheses
+   |
+89 - pub unsafe extern "C" fn get_stat_ctime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+89 + pub unsafe extern "C" fn get_stat_ctime_ns<'h0>(mut st: &'h0 stat) -> libc::c_long {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/stat_time.rs:95:62
+   |
+95 | pub unsafe extern "C" fn get_stat_mtime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+   |                                                              ^    ^
+   |
+help: remove these parentheses
+   |
+95 - pub unsafe extern "C" fn get_stat_mtime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+95 + pub unsafe extern "C" fn get_stat_mtime_ns<'h0>(mut st: &'h0 stat) -> libc::c_long {
+   |
+
+warning: unused import: `::libc`
+ --> src/lib/unistd.rs:1:5
+  |
+1 | use ::libc;
+  |     ^^^^^^
+
+warning: unnecessary parentheses around type
+  --> src/lib/utimens.rs:69:58
+   |
+69 | unsafe extern "C" fn get_stat_atime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+   |                                                          ^    ^
+   |
+help: remove these parentheses
+   |
+69 - unsafe extern "C" fn get_stat_atime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+69 + unsafe extern "C" fn get_stat_atime_ns<'h0>(mut st: &'h0 stat) -> libc::c_long {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/utimens.rs:82:58
+   |
+82 | unsafe extern "C" fn get_stat_mtime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+   |                                                          ^    ^
+   |
+help: remove these parentheses
+   |
+82 - unsafe extern "C" fn get_stat_mtime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+82 + unsafe extern "C" fn get_stat_mtime_ns<'h0>(mut st: &'h0 stat) -> libc::c_long {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/utimens.rs:95:55
+   |
+95 | unsafe extern "C" fn get_stat_atime<'h0>(mut st: &'h0 (stat)) -> timespec {
+   |                                                       ^    ^
+   |
+help: remove these parentheses
+   |
+95 - unsafe extern "C" fn get_stat_atime<'h0>(mut st: &'h0 (stat)) -> timespec {
+95 + unsafe extern "C" fn get_stat_atime<'h0>(mut st: &'h0 stat) -> timespec {
+   |
+
+warning: unnecessary parentheses around type
+   --> src/lib/utimens.rs:108:55
+    |
+108 | unsafe extern "C" fn get_stat_mtime<'h0>(mut st: &'h0 (stat)) -> timespec {
+    |                                                       ^    ^
+    |
+help: remove these parentheses
+    |
+108 - unsafe extern "C" fn get_stat_mtime<'h0>(mut st: &'h0 (stat)) -> timespec {
+108 + unsafe extern "C" fn get_stat_mtime<'h0>(mut st: &'h0 stat) -> timespec {
+    |
+
+warning: unnecessary parentheses around type
+   --> src/lib/utimens.rs:397:20
+    |
+397 |     mut file: &'h0 (libc::c_char),
+    |                    ^            ^
+    |
+help: remove these parentheses
+    |
+397 -     mut file: &'h0 (libc::c_char),
+397 +     mut file: &'h0 libc::c_char,
+    |
+
+warning: unnecessary parentheses around type
+   --> src/lib/utimens.rs:398:24
+    |
+398 |     mut timespec: &'h1 (timespec),
+    |                        ^        ^
+    |
+help: remove these parentheses
+    |
+398 -     mut timespec: &'h1 (timespec),
+398 +     mut timespec: &'h1 timespec,
+    |
+
+warning: unnecessary parentheses around type
+  --> src/lib/vasnprintf.rs:31:34
+   |
+31 |     pub overflow_arg_area: &'h67 (libc::c_void),
+   |                                  ^            ^
+   |
+help: remove these parentheses
+   |
+31 -     pub overflow_arg_area: &'h67 (libc::c_void),
+31 +     pub overflow_arg_area: &'h67 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/vasnprintf.rs:32:30
+   |
+32 |     pub reg_save_area: &'h68 (libc::c_void),
+   |                              ^            ^
+   |
+help: remove these parentheses
+   |
+32 -     pub reg_save_area: &'h68 (libc::c_void),
+32 +     pub reg_save_area: &'h68 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/vfprintf.rs:27:34
+   |
+27 |     pub overflow_arg_area: &'h69 (libc::c_void),
+   |                                  ^            ^
+   |
+help: remove these parentheses
+   |
+27 -     pub overflow_arg_area: &'h69 (libc::c_void),
+27 +     pub overflow_arg_area: &'h69 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/vfprintf.rs:28:30
+   |
+28 |     pub reg_save_area: &'h70 (libc::c_void),
+   |                              ^            ^
+   |
+help: remove these parentheses
+   |
+28 -     pub reg_save_area: &'h70 (libc::c_void),
+28 +     pub reg_save_area: &'h70 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/xmalloc.rs:29:17
+   |
+29 |     mut p: &'h0 (libc::c_void),
+   |                 ^            ^
+   |
+help: remove these parentheses
+   |
+29 -     mut p: &'h0 (libc::c_void),
+29 +     mut p: &'h0 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/xmalloc.rs:30:22
+   |
+30 |     mut pn: &'h1 mut (size_t),
+   |                      ^      ^
+   |
+help: remove these parentheses
+   |
+30 -     mut pn: &'h1 mut (size_t),
+30 +     mut pn: &'h1 mut size_t,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/xmalloc.rs:32:11
+   |
+32 | ) -> &'h2 (libc::c_void) {
+   |           ^            ^
+   |
+help: remove these parentheses
+   |
+32 - ) -> &'h2 (libc::c_void) {
+32 + ) -> &'h2 libc::c_void {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/xmalloc.rs:78:80
+   |
+78 | pub unsafe extern "C" fn xmalloc<'h0>(mut n: size_t) -> &'h0 [core::cell::Cell<(libc::c_void)>] {
+   |                                                                                ^            ^
+   |
+help: remove these parentheses
+   |
+78 - pub unsafe extern "C" fn xmalloc<'h0>(mut n: size_t) -> &'h0 [core::cell::Cell<(libc::c_void)>] {
+78 + pub unsafe extern "C" fn xmalloc<'h0>(mut n: size_t) -> &'h0 [core::cell::Cell<libc::c_void>] {
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/xmalloc.rs:79:35
+   |
+79 |     let mut p: &[core::cell::Cell<(libc::c_void)>] = malloc(n);
+   |                                   ^            ^
+   |
+help: remove these parentheses
+   |
+79 -     let mut p: &[core::cell::Cell<(libc::c_void)>] = malloc(n);
+79 +     let mut p: &[core::cell::Cell<libc::c_void>] = malloc(n);
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/xmalloc.rs:87:17
+   |
+87 |     mut p: &'h0 (libc::c_void),
+   |                 ^            ^
+   |
+help: remove these parentheses
+   |
+87 -     mut p: &'h0 (libc::c_void),
+87 +     mut p: &'h0 libc::c_void,
+   |
+
+warning: unnecessary parentheses around type
+  --> src/lib/xmalloc.rs:89:11
+   |
+89 | ) -> &'h1 (libc::c_void) {
+   |           ^            ^
+   |
+help: remove these parentheses
+   |
+89 - ) -> &'h1 (libc::c_void) {
+89 + ) -> &'h1 libc::c_void {
+   |
+
+warning: unnecessary parentheses around type
+   --> src/lib/xmalloc.rs:102:17
+    |
+102 |     mut p: &'h0 (libc::c_void),
+    |                 ^            ^
+    |
+help: remove these parentheses
+    |
+102 -     mut p: &'h0 (libc::c_void),
+102 +     mut p: &'h0 libc::c_void,
+    |
+
+warning: unnecessary parentheses around type
+   --> src/lib/xmalloc.rs:103:22
+    |
+103 |     mut pn: &'h1 mut (size_t),
+    |                      ^      ^
+    |
+help: remove these parentheses
+    |
+103 -     mut pn: &'h1 mut (size_t),
+103 +     mut pn: &'h1 mut size_t,
+    |
+
+warning: unnecessary parentheses around type
+   --> src/lib/xmalloc.rs:104:11
+    |
+104 | ) -> &'h2 (libc::c_void) {
+    |           ^            ^
+    |
+help: remove these parentheses
+    |
+104 - ) -> &'h2 (libc::c_void) {
+104 + ) -> &'h2 libc::c_void {
+    |
+
+warning: unnecessary parentheses around type
+   --> src/lib/xmalloc.rs:108:62
+    |
+108 | pub unsafe extern "C" fn xzalloc<'h0>(mut s: size_t) -> &'h0 (libc::c_void) {
+    |                                                              ^            ^
+    |
+help: remove these parentheses
+    |
+108 - pub unsafe extern "C" fn xzalloc<'h0>(mut s: size_t) -> &'h0 (libc::c_void) {
+108 + pub unsafe extern "C" fn xzalloc<'h0>(mut s: size_t) -> &'h0 libc::c_void {
+    |
+
+warning: unnecessary parentheses around type
+   --> src/lib/xmalloc.rs:112:77
+    |
+112 | pub unsafe extern "C" fn xcalloc<'h0>(mut n: size_t, mut s: size_t) -> &'h0 (libc::c_void) {
+    |                                                                             ^            ^
+    |
+help: remove these parentheses
+    |
+112 - pub unsafe extern "C" fn xcalloc<'h0>(mut n: size_t, mut s: size_t) -> &'h0 (libc::c_void) {
+112 + pub unsafe extern "C" fn xcalloc<'h0>(mut n: size_t, mut s: size_t) -> &'h0 libc::c_void {
+    |
+
+warning: unnecessary parentheses around type
+   --> src/lib/xmalloc.rs:113:17
+    |
+113 |     let mut p: &(libc::c_void) = 0 as *mut libc::c_void;
+    |                 ^            ^
+    |
+help: remove these parentheses
+    |
+113 -     let mut p: &(libc::c_void) = 0 as *mut libc::c_void;
+113 +     let mut p: &libc::c_void = 0 as *mut libc::c_void;
+    |
+
+warning: unnecessary parentheses around type
+   --> src/lib/xmalloc.rs:136:18
+    |
+136 |     mut p: &'h0 [(libc::c_void)],
+    |                  ^            ^
+    |
+help: remove these parentheses
+    |
+136 -     mut p: &'h0 [(libc::c_void)],
+136 +     mut p: &'h0 [libc::c_void],
+    |
+
+warning: unnecessary parentheses around type
+   --> src/lib/xmalloc.rs:138:11
+    |
+138 | ) -> &'h1 (libc::c_void) {
+    |           ^            ^
+    |
+help: remove these parentheses
+    |
+138 - ) -> &'h1 (libc::c_void) {
+138 + ) -> &'h1 libc::c_void {
+    |
+
+warning: unnecessary parentheses around type
+   --> src/lib/xmalloc.rs:147:61
+    |
+147 | pub unsafe extern "C" fn xstrdup<'h0,'h1>(mut string: &'h0 [(libc::c_char)]) -> &'h1 (libc::c_char) {
+    |                                                             ^            ^
+    |
+help: remove these parentheses
+    |
+147 - pub unsafe extern "C" fn xstrdup<'h0,'h1>(mut string: &'h0 [(libc::c_char)]) -> &'h1 (libc::c_char) {
+147 + pub unsafe extern "C" fn xstrdup<'h0,'h1>(mut string: &'h0 [libc::c_char]) -> &'h1 (libc::c_char) {
+    |
+
+warning: unnecessary parentheses around type
+   --> src/lib/xmalloc.rs:147:86
+    |
+147 | pub unsafe extern "C" fn xstrdup<'h0,'h1>(mut string: &'h0 [(libc::c_char)]) -> &'h1 (libc::c_char) {
+    |                                                                                      ^            ^
+    |
+help: remove these parentheses
+    |
+147 - pub unsafe extern "C" fn xstrdup<'h0,'h1>(mut string: &'h0 [(libc::c_char)]) -> &'h1 (libc::c_char) {
+147 + pub unsafe extern "C" fn xstrdup<'h0,'h1>(mut string: &'h0 [(libc::c_char)]) -> &'h1 libc::c_char {
+    |
+
+warning: unnecessary parentheses around type
+  --> src/trees.rs:41:43
+   |
+41 |     pub dyn_tree: &'h71 [core::cell::Cell<(ct_data)>],
+   |                                           ^       ^
+   |
+help: remove these parentheses
+   |
+41 -     pub dyn_tree: &'h71 [core::cell::Cell<(ct_data)>],
+41 +     pub dyn_tree: &'h71 [core::cell::Cell<ct_data>],
+   |
+
+warning: unnecessary parentheses around type
+  --> src/trees.rs:42:29
+   |
+42 |     pub static_tree: &'h72 [(ct_data)],
+   |                             ^       ^
+   |
+help: remove these parentheses
+   |
+42 -     pub static_tree: &'h72 [(ct_data)],
+42 +     pub static_tree: &'h72 [ct_data],
+   |
+
+warning: unnecessary parentheses around type
+  --> src/trees.rs:43:28
+   |
+43 |     pub extra_bits: &'h73 [(libc::c_int)],
+   |                            ^           ^
+   |
+help: remove these parentheses
+   |
+43 -     pub extra_bits: &'h73 [(libc::c_int)],
+43 +     pub extra_bits: &'h73 [libc::c_int],
+   |
+
+warning: unnecessary parentheses around type
+   --> src/util.rs:557:59
+    |
+557 | pub unsafe extern "C" fn xunlink<'h0>(mut filename: &'h0 [(libc::c_char)]) -> libc::c_int {
+    |                                                           ^            ^
+    |
+help: remove these parentheses
+    |
+557 - pub unsafe extern "C" fn xunlink<'h0>(mut filename: &'h0 [(libc::c_char)]) -> libc::c_int {
+557 + pub unsafe extern "C" fn xunlink<'h0>(mut filename: &'h0 [libc::c_char]) -> libc::c_int {
+    |
+
+warning: unnecessary parentheses around type
+   --> src/util.rs:562:68
+    |
+562 | pub unsafe extern "C" fn make_simple_name<'h0>(mut name: &'h0 mut [(libc::c_char)]) {
+    |                                                                    ^            ^
+    |
+help: remove these parentheses
+    |
+562 - pub unsafe extern "C" fn make_simple_name<'h0>(mut name: &'h0 mut [(libc::c_char)]) {
+562 + pub unsafe extern "C" fn make_simple_name<'h0>(mut name: &'h0 mut [libc::c_char]) {
+    |
+
+warning: unnecessary parentheses around type
+   --> src/util.rs:563:35
+    |
+563 |     let mut p: &[core::cell::Cell<(libc::c_char)>] = strrchr(name, '.' as i32);
+    |                                   ^            ^
+    |
+help: remove these parentheses
+    |
+563 -     let mut p: &[core::cell::Cell<(libc::c_char)>] = strrchr(name, '.' as i32);
+563 +     let mut p: &[core::cell::Cell<libc::c_char>] = strrchr(name, '.' as i32);
+    |
+
+warning: unnecessary parentheses around method argument
+   --> src/util.rs:574:21
+    |
+574 |             (p).set(('_' as i32 as libc::c_char));
+    |                     ^                          ^
+    |
+help: remove these parentheses
+    |
+574 -             (p).set(('_' as i32 as libc::c_char));
+574 +             (p).set('_' as i32 as libc::c_char);
+    |
+
+warning: the feature `asm` has been stable since 1.59.0 and no longer requires an attribute to enable
+ --> lib.rs:8:12
+  |
+8 | #![feature(asm)]
+  |            ^^^
+  |
+  = note: `#[warn(stable_features)]` on by default
+
+error[E0308]: mismatched types
+   --> src/trees.rs:156:23
+    |
+156 |             dyn_tree: dyn_ltree.as_ptr() as *mut _,
+    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&[Cell<ct_data>]`, found *-ptr
+    |
+    = note: expected reference `&[Cell<ct_data>]`
+             found raw pointer `*mut _`
+
+error[E0308]: mismatched types
+   --> src/trees.rs:157:26
+    |
+157 |             static_tree: static_ltree.as_ptr() as *mut _,
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&[ct_data]`, found *-ptr
+    |
+    = note: expected reference `&[ct_data]`
+             found raw pointer `*mut _`
+
+error[E0308]: mismatched types
+   --> src/trees.rs:158:25
+    |
+158 |             extra_bits: extra_lbits.as_ptr() as *mut _,
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&[i32]`, found *-ptr
+    |
+    = note: expected reference `&[i32]`
+             found raw pointer `*mut _`
+
+error[E0308]: mismatched types
+   --> src/trees.rs:170:23
+    |
+170 |             dyn_tree: dyn_dtree.as_ptr() as *mut _,
+    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&[Cell<ct_data>]`, found *-ptr
+    |
+    = note: expected reference `&[Cell<ct_data>]`
+             found raw pointer `*mut _`
+
+error[E0308]: mismatched types
+   --> src/trees.rs:171:26
+    |
+171 |             static_tree: static_dtree.as_ptr() as *mut _,
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&[ct_data]`, found *-ptr
+    |
+    = note: expected reference `&[ct_data]`
+             found raw pointer `*mut _`
+
+error[E0308]: mismatched types
+   --> src/trees.rs:172:25
+    |
+172 |             extra_bits: extra_dbits.as_ptr() as *mut _,
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&[i32]`, found *-ptr
+    |
+    = note: expected reference `&[i32]`
+             found raw pointer `*mut _`
+
+error[E0308]: mismatched types
+   --> src/trees.rs:184:23
+    |
+184 |             dyn_tree: bl_tree.as_ptr() as *mut _,
+    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&[Cell<ct_data>]`, found *-ptr
+    |
+    = note: expected reference `&[Cell<ct_data>]`
+             found raw pointer `*mut _`
+
+error[E0308]: mismatched types
+   --> src/trees.rs:185:26
+    |
+185 |             static_tree: 0 as *const ct_data as *mut ct_data,
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&[ct_data]`, found *-ptr
+    |
+    = note: expected reference `&[ct_data]`
+             found raw pointer `*mut ct_data`
+
+error[E0308]: mismatched types
+   --> src/trees.rs:186:25
+    |
+186 |             extra_bits: extra_blbits.as_ptr() as *mut _,
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&[i32]`, found *-ptr
+    |
+    = note: expected reference `&[i32]`
+             found raw pointer `*mut _`
+
+error[E0308]: mismatched types
+   --> src/lib/dirname_lgpl.rs:61:82
+    |
+61  |       let mut dir: &[core::cell::Cell<(libc::c_char)>] = std::cell::Cell::from_mut((malloc(
+    |  ________________________________________________________-------------------------_^
+    | |                                                        |
+    | |                                                        arguments to this function are incorrect
+62  | |         length
+63  | |             .wrapping_add(append_dot as libc::c_ulong)
+64  | |             .wrapping_add(1 as libc::c_int as libc::c_ulong),
+65  | |     )));
+    | |______^ expected `&mut _`, found *-ptr
+    |
+    = note: expected mutable reference `&mut _`
+                     found raw pointer `*mut c_void`
+note: associated function defined here
+   --> /home/hzy/.rustup/toolchains/nightly-2022-08-08-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cell.rs:544:12
+    |
+544 |     pub fn from_mut(t: &mut T) -> &Cell<T> {
+    |            ^^^^^^^^
+help: consider mutably borrowing here
+    |
+61  ~     let mut dir: &[core::cell::Cell<(libc::c_char)>] = std::cell::Cell::from_mut(&mut (malloc(
+62  +         length
+63  +             .wrapping_add(append_dot as libc::c_ulong)
+64  +             .wrapping_add(1 as libc::c_int as libc::c_ulong),
+65  ~     )));
+    |
+
+error[E0308]: mismatched types
+  --> src/lib/dirname_lgpl.rs:61:56
+   |
+61 |       let mut dir: &[core::cell::Cell<(libc::c_char)>] = std::cell::Cell::from_mut((malloc(
+   |  __________________-----------------------------------___^
+   | |                  |
+   | |                  expected due to this
+62 | |         length
+63 | |             .wrapping_add(append_dot as libc::c_ulong)
+64 | |             .wrapping_add(1 as libc::c_int as libc::c_ulong),
+65 | |     )));
+   | |_______^ expected slice, found struct `Cell`
+   |
+   = note: expected reference `&[Cell<i8>]`
+              found reference `&Cell<_>`
+
+error[E0599]: no method named `is_null` found for struct `Cell` in the current scope
+  --> src/lib/dirname_lgpl.rs:66:18
+   |
+66 |     if &(dir)[0].is_null() {
+   |                  ^^^^^^^ method not found in `Cell<i8>`
+
+error[E0308]: mismatched types
+  --> src/lib/dirname_lgpl.rs:67:16
+   |
+55 | pub unsafe extern "C" fn mdir_name<'h0,'h1>(mut file: &'h0 [(libc::c_char)]) -> &'h1 core::cell::Cell<(libc::c_char)> {
+   |                                                                                 ------------------------------------- expected `&'h1 Cell<i8>` because of return type
+...
+67 |         return 0 as *mut libc::c_char;
+   |                ^^^^^^^^^^^^^^^^^^^^^^ expected `&Cell<i8>`, found *-ptr
+   |
+   = note: expected reference `&'h1 Cell<i8>`
+            found raw pointer `*mut i8`
+
+error[E0308]: mismatched types
+    --> src/lib/dirname_lgpl.rs:95:52
+     |
+95   |             ptr::copy_nonoverlapping(src.as_ptr(), this.as_mut_ptr(), this.len());
+     |             ------------------------               ^^^^^^^^^^^^^^^^^ expected `i8`, found struct `Cell`
+     |             |
+     |             arguments to this function are incorrect
+     |
+     = note: expected raw pointer `*mut i8`
+                found raw pointer `*mut Cell<i8>`
+note: function defined here
+    --> /home/hzy/.rustup/toolchains/nightly-2022-08-08-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/intrinsics.rs:2458:21
+     |
+2458 | pub const unsafe fn copy_nonoverlapping<T>(src: *const T, dst: *mut T, count: usize) {
+     |                     ^^^^^^^^^^^^^^^^^^^
+
+error[E0308]: mismatched types
+  --> src/lib/pipe_safer.rs:10:13
+   |
+10 |     if pipe(fd) == 0 as libc::c_int {
+   |        ---- ^^ expected `i32`, found slice `[i32]`
+   |        |
+   |        arguments to this function are incorrect
+   |
+   = note:    expected raw pointer `*mut i32`
+           found mutable reference `&'h0 mut [i32]`
+note: function defined here
+  --> src/lib/pipe_safer.rs:5:8
+   |
+5  |     fn pipe(__pipedes: *mut libc::c_int) -> libc::c_int;
+   |        ^^^^
+
+error[E0599]: no method named `get` found for raw pointer `*mut i32` in the current scope
+  --> src/lib/pipe_safer.rs:16:63
+   |
+16 |                 let mut e: libc::c_int = (__errno_location()).get();
+   |                                                               ^^^ method not found in `*mut i32`
+   |
+   = note: try using `<*const T>::as_ref()` to get a reference to the type behind the pointer: https://doc.rust-lang.org/std/primitive.pointer.html#method.as_ref
+   = note: using `<*const T>::as_ref()` on a pointer which is unaligned or points to invalid or uninitialized memory is undefined behavior
+
+error[E0599]: no method named `set` found for raw pointer `*mut i32` in the current scope
+   --> src/lib/pipe_safer.rs:18:38
+    |
+18  |                 (__errno_location()).set((e));
+    |                                      ^^^
+    |
+   ::: /home/hzy/.rustup/toolchains/nightly-2022-08-08-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/pin.rs:659:12
+    |
+659 |     pub fn set(&mut self, value: P::Target)
+    |            --- the method is available for `Pin<&mut *mut i32>` here
+    |
+    = note: try using `<*const T>::as_ref()` to get a reference to the type behind the pointer: https://doc.rust-lang.org/std/primitive.pointer.html#method.as_ref
+    = note: using `<*const T>::as_ref()` on a pointer which is unaligned or points to invalid or uninitialized memory is undefined behavior
+help: consider wrapping the receiver expression with the appropriate type
+    |
+18  |                 Pin::new(&mut (__errno_location())).set((e));
+    |                 +++++++++++++                     +
+help: there is an associated function with a similar name
+    |
+18  |                 (__errno_location()).offset((e));
+    |                                      ~~~~~~
+
+error[E0599]: no method named `offset` found for reference `&printf_args::argument<'_, '_, '_, '_, '_, '_, '_, '_>` in the current scope
+  --> src/lib/printf_args.rs:85:27
+   |
+85 |     ap = &mut *((*a).arg).offset(0 as libc::c_int as isize) as *mut argument;
+   |                           ^^^^^^ method not found in `&printf_args::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_args.rs:139:36
+    |
+139 |                 (*ap).a.a_string = args.arg::<*const libc::c_char>();
+    |                 ----------------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i8`, found *-ptr
+    |                 |
+    |                 expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*const i8`
+
+error[E0599]: no method named `is_null` found for reference `&i8` in the current scope
+   --> src/lib/printf_args.rs:140:39
+    |
+140 |                 if ((*ap).a.a_string).is_null() {
+    |                                       ^^^^^^^ method not found in `&i8`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_args.rs:141:40
+    |
+141 |                     (*ap).a.a_string = b"(NULL)\0" as *const u8 as *const libc::c_char;
+    |                     ----------------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i8`, found *-ptr
+    |                     |
+    |                     expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*const i8`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_args.rs:145:41
+    |
+145 |                 (*ap).a.a_wide_string = args.arg::<*const wchar_t>();
+    |                 ---------------------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i32`, found *-ptr
+    |                 |
+    |                 expected due to the type of this binding
+    |
+    = note: expected reference `&i32`
+             found raw pointer `*const i32`
+
+error[E0599]: no method named `is_null` found for reference `&i32` in the current scope
+   --> src/lib/printf_args.rs:146:44
+    |
+146 |                 if ((*ap).a.a_wide_string).is_null() {
+    |                                            ^^^^^^^ method not found in `&i32`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_args.rs:156:45
+    |
+156 |                     (*ap).a.a_wide_string = wide_null_string.as_ptr();
+    |                     ---------------------   ^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i32`, found *-ptr
+    |                     |
+    |                     expected due to the type of this binding
+    |
+    = note: expected reference `&i32`
+             found raw pointer `*const i32`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_args.rs:160:37
+    |
+160 |                 (*ap).a.a_pointer = args.arg::<*mut libc::c_void>();
+    |                 -----------------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&c_void`, found *-ptr
+    |                 |
+    |                 expected due to the type of this binding
+    |
+    = note: expected reference `&c_void`
+             found raw pointer `*mut c_void`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_args.rs:163:49
+    |
+163 |                 (*ap).a.a_count_schar_pointer = args.arg::<*mut libc::c_schar>();
+    |                 -----------------------------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i8`, found *-ptr
+    |                 |
+    |                 expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*mut i8`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_args.rs:166:49
+    |
+166 |                 (*ap).a.a_count_short_pointer = args.arg::<*mut libc::c_short>();
+    |                 -----------------------------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i16`, found *-ptr
+    |                 |
+    |                 expected due to the type of this binding
+    |
+    = note: expected reference `&i16`
+             found raw pointer `*mut i16`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_args.rs:169:47
+    |
+169 |                 (*ap).a.a_count_int_pointer = args.arg::<*mut libc::c_int>();
+    |                 ---------------------------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i32`, found *-ptr
+    |                 |
+    |                 expected due to the type of this binding
+    |
+    = note: expected reference `&i32`
+             found raw pointer `*mut i32`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_args.rs:172:51
+    |
+172 |                 (*ap).a.a_count_longint_pointer = args.arg::<*mut libc::c_long>();
+    |                 -------------------------------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i64`, found *-ptr
+    |                 |
+    |                 expected due to the type of this binding
+    |
+    = note: expected reference `&i64`
+             found raw pointer `*mut i64`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_args.rs:177:52
+    |
+175 | /                 (*ap)
+176 | |                     .a
+177 | |                     .a_count_longlongint_pointer = args.arg::<*mut libc::c_longlong>();
+    | |                                                -   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i64`, found *-ptr
+    | |________________________________________________|
+    |                                                  expected due to the type of this binding
+    |
+    = note: expected reference `&i64`
+             found raw pointer `*mut i64`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:130:16
+    |
+130 |     (*a).arg = ((*a).direct_alloc_arg).as_mut_ptr();
+    |     --------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`, found *-ptr
+    |     |
+    |     expected due to the type of this binding
+    |
+    = note: expected reference `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+             found raw pointer `*mut printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0599]: no method named `offset` found for reference `&printf_parse::char_directive<'_, '_, '_, '_, '_, '_>` in the current scope
+   --> src/lib/printf_parse.rs:143:60
+    |
+143 |         let mut dp: *mut char_directive = &mut *((*d).dir).offset((*d).count as isize)
+    |                                                            ^^^^^^ method not found in `&printf_parse::char_directive<'_, '_, '_, '_, '_, '_>`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:145:27
+    |
+145 |         (*dp).dir_start = cp.offset(-(1 as libc::c_int as isize));
+    |         ---------------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i8`, found *-ptr
+    |         |
+    |         expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*const i8`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:147:29
+    |
+147 |         (*dp).width_start = 0 as *const libc::c_char;
+    |         -----------------   ^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i8`, found *-ptr
+    |         |
+    |         expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*const i8`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:148:27
+    |
+148 |         (*dp).width_end = 0 as *const libc::c_char;
+    |         ---------------   ^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i8`, found *-ptr
+    |         |
+    |         expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*const i8`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:150:33
+    |
+150 |         (*dp).precision_start = 0 as *const libc::c_char;
+    |         ---------------------   ^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i8`, found *-ptr
+    |         |
+    |         expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*const i8`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:151:31
+    |
+151 |         (*dp).precision_end = 0 as *const libc::c_char;
+    |         -------------------   ^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i8`, found *-ptr
+    |         |
+    |         expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*const i8`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:228:33
+    |
+228 |             (*dp).width_start = cp;
+    |             -----------------   ^^ expected `&i8`, found *-ptr
+    |             |
+    |             expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*const i8`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:231:31
+    |
+231 |             (*dp).width_end = cp;
+    |             ---------------   ^^ expected `&i8`, found *-ptr
+    |             |
+    |             expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*const i8`
+
+error[E0369]: binary operation `!=` cannot be applied to type `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+   --> src/lib/printf_parse.rs:319:39
+    |
+319 |                 memory = (if (*a).arg != ((*a).direct_alloc_arg).as_mut_ptr() {
+    |                              -------- ^^ ------------------------------------ *mut printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>
+    |                              |
+    |                              &printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>
+
+error[E0369]: binary operation `==` cannot be applied to type `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+   --> src/lib/printf_parse.rs:328:29
+    |
+328 |                 if (*a).arg == ((*a).direct_alloc_arg).as_mut_ptr() {
+    |                    -------- ^^ ------------------------------------ *mut printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>
+    |                    |
+    |                    &printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:338:28
+    |
+338 |                 (*a).arg = memory;
+    |                 --------   ^^^^^^ expected `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`, found *-ptr
+    |                 |
+    |                 expected due to the type of this binding
+    |
+    = note: expected reference `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+             found raw pointer `*mut printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0599]: no method named `offset` found for reference `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` in the current scope
+   --> src/lib/printf_parse.rs:343:30
+    |
+343 |                 (*((*a).arg).offset(fresh2 as isize)).type_0 = TYPE_NONE;
+    |                              ^^^^^^ method not found in `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0599]: no method named `offset` found for reference `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` in the current scope
+   --> src/lib/printf_parse.rs:345:29
+    |
+345 |             if (*((*a).arg).offset(n_1 as isize)).type_0 as libc::c_uint
+    |                             ^^^^^^ method not found in `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0599]: no method named `offset` found for reference `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` in the current scope
+   --> src/lib/printf_parse.rs:348:30
+    |
+348 |                 (*((*a).arg).offset(n_1 as isize)).type_0 = TYPE_INT;
+    |                              ^^^^^^ method not found in `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0599]: no method named `offset` found for reference `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` in the current scope
+   --> src/lib/printf_parse.rs:349:36
+    |
+349 |             } else if (*((*a).arg).offset(n_1 as isize)).type_0 as libc::c_uint
+    |                                    ^^^^^^ method not found in `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:357:33
+    |
+357 |             (*dp).width_start = cp;
+    |             -----------------   ^^ expected `&i8`, found *-ptr
+    |             |
+    |             expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*const i8`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:362:31
+    |
+362 |             (*dp).width_end = cp;
+    |             ---------------   ^^ expected `&i8`, found *-ptr
+    |             |
+    |             expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*const i8`
+
+error[E0599]: no method named `offset_from` found for reference `&i8` in the current scope
+   --> src/lib/printf_parse.rs:363:46
+    |
+363 |             width_length = ((*dp).width_end).offset_from((*dp).width_start)
+    |                                              ^^^^^^^^^^^ method not found in `&i8`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:373:41
+    |
+373 |                 (*dp).precision_start = cp.offset(-(1 as libc::c_int as isize));
+    |                 ---------------------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i8`, found *-ptr
+    |                 |
+    |                 expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*const i8`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:376:39
+    |
+376 |                 (*dp).precision_end = cp;
+    |                 -------------------   ^^ expected `&i8`, found *-ptr
+    |                 |
+    |                 expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*const i8`
+
+error[E0369]: binary operation `!=` cannot be applied to type `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+   --> src/lib/printf_parse.rs:464:45
+    |
+464 |                     memory_0 = (if (*a).arg != ((*a).direct_alloc_arg).as_mut_ptr() {
+    |                                    -------- ^^ ------------------------------------ *mut printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>
+    |                                    |
+    |                                    &printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>
+
+error[E0369]: binary operation `==` cannot be applied to type `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+   --> src/lib/printf_parse.rs:473:33
+    |
+473 |                     if (*a).arg == ((*a).direct_alloc_arg).as_mut_ptr() {
+    |                        -------- ^^ ------------------------------------ *mut printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>
+    |                        |
+    |                        &printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:483:32
+    |
+483 |                     (*a).arg = memory_0;
+    |                     --------   ^^^^^^^^ expected `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`, found *-ptr
+    |                     |
+    |                     expected due to the type of this binding
+    |
+    = note: expected reference `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+             found raw pointer `*mut printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0599]: no method named `offset` found for reference `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` in the current scope
+   --> src/lib/printf_parse.rs:488:34
+    |
+488 |                     (*((*a).arg).offset(fresh4 as isize)).type_0 = TYPE_NONE;
+    |                                  ^^^^^^ method not found in `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0599]: no method named `offset` found for reference `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` in the current scope
+   --> src/lib/printf_parse.rs:490:33
+    |
+490 |                 if (*((*a).arg).offset(n_3 as isize)).type_0 as libc::c_uint
+    |                                 ^^^^^^ method not found in `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0599]: no method named `offset` found for reference `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` in the current scope
+   --> src/lib/printf_parse.rs:493:34
+    |
+493 |                     (*((*a).arg).offset(n_3 as isize)).type_0 = TYPE_INT;
+    |                                  ^^^^^^ method not found in `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0599]: no method named `offset` found for reference `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` in the current scope
+   --> src/lib/printf_parse.rs:494:40
+    |
+494 |                 } else if (*((*a).arg).offset(n_3 as isize)).type_0 as libc::c_uint
+    |                                        ^^^^^^ method not found in `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:502:41
+    |
+502 |                 (*dp).precision_start = cp.offset(-(1 as libc::c_int as isize));
+    |                 ---------------------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i8`, found *-ptr
+    |                 |
+    |                 expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*const i8`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:509:39
+    |
+509 |                 (*dp).precision_end = cp;
+    |                 -------------------   ^^ expected `&i8`, found *-ptr
+    |                 |
+    |                 expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*const i8`
+
+error[E0599]: no method named `offset_from` found for reference `&i8` in the current scope
+   --> src/lib/printf_parse.rs:511:22
+    |
+511 |                     .offset_from((*dp).precision_start) as libc::c_long as size_t;
+    |                      ^^^^^^^^^^^ method not found in `&i8`
+
+error[E0369]: binary operation `!=` cannot be applied to type `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+   --> src/lib/printf_parse.rs:701:41
+    |
+701 |                 memory_1 = (if (*a).arg != ((*a).direct_alloc_arg).as_mut_ptr() {
+    |                                -------- ^^ ------------------------------------ *mut printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>
+    |                                |
+    |                                &printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>
+
+error[E0369]: binary operation `==` cannot be applied to type `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+   --> src/lib/printf_parse.rs:710:29
+    |
+710 |                 if (*a).arg == ((*a).direct_alloc_arg).as_mut_ptr() {
+    |                    -------- ^^ ------------------------------------ *mut printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>
+    |                    |
+    |                    &printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:720:28
+    |
+720 |                 (*a).arg = memory_1;
+    |                 --------   ^^^^^^^^ expected `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`, found *-ptr
+    |                 |
+    |                 expected due to the type of this binding
+    |
+    = note: expected reference `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+             found raw pointer `*mut printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0599]: no method named `offset` found for reference `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` in the current scope
+   --> src/lib/printf_parse.rs:725:30
+    |
+725 |                 (*((*a).arg).offset(fresh7 as isize)).type_0 = TYPE_NONE;
+    |                              ^^^^^^ method not found in `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0599]: no method named `offset` found for reference `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` in the current scope
+   --> src/lib/printf_parse.rs:727:29
+    |
+727 |             if (*((*a).arg).offset(n_4 as isize)).type_0 as libc::c_uint
+    |                             ^^^^^^ method not found in `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0599]: no method named `offset` found for reference `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` in the current scope
+   --> src/lib/printf_parse.rs:730:30
+    |
+730 |                 (*((*a).arg).offset(n_4 as isize)).type_0 = type_0;
+    |                              ^^^^^^ method not found in `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0599]: no method named `offset` found for reference `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` in the current scope
+   --> src/lib/printf_parse.rs:731:36
+    |
+731 |             } else if (*((*a).arg).offset(n_4 as isize)).type_0 as libc::c_uint
+    |                                    ^^^^^^ method not found in `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:739:25
+    |
+739 |         (*dp).dir_end = cp;
+    |         -------------   ^^ expected `&i8`, found *-ptr
+    |         |
+    |         expected due to the type of this binding
+    |
+    = note: expected reference `&i8`
+             found raw pointer `*const i8`
+
+error[E0369]: binary operation `!=` cannot be applied to type `&printf_parse::char_directive<'_, '_, '_, '_, '_, '_>`
+   --> src/lib/printf_parse.rs:768:37
+    |
+768 |             memory_2 = (if (*d).dir != ((*d).direct_alloc_dir).as_mut_ptr() {
+    |                            -------- ^^ ------------------------------------ *mut printf_parse::char_directive<'_, '_, '_, '_, '_, '_>
+    |                            |
+    |                            &printf_parse::char_directive<'_, '_, '_, '_, '_, '_>
+
+error[E0369]: binary operation `==` cannot be applied to type `&printf_parse::char_directive<'_, '_, '_, '_, '_, '_>`
+   --> src/lib/printf_parse.rs:777:25
+    |
+777 |             if (*d).dir == ((*d).direct_alloc_dir).as_mut_ptr() {
+    |                -------- ^^ ------------------------------------ *mut printf_parse::char_directive<'_, '_, '_, '_, '_, '_>
+    |                |
+    |                &printf_parse::char_directive<'_, '_, '_, '_, '_, '_>
+
+error[E0308]: mismatched types
+   --> src/lib/printf_parse.rs:787:24
+    |
+787 |             (*d).dir = memory_2;
+    |             --------   ^^^^^^^^ expected `&printf_parse::char_directive<'_, '_, '_, '_, '_, '_>`, found *-ptr
+    |             |
+    |             expected due to the type of this binding
+    |
+    = note: expected reference `&printf_parse::char_directive<'_, '_, '_, '_, '_, '_>`
+             found raw pointer `*mut printf_parse::char_directive<'_, '_, '_, '_, '_, '_>`
+
+error[E0369]: binary operation `!=` cannot be applied to type `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+   --> src/lib/printf_parse.rs:792:25
+    |
+792 |             if (*a).arg != ((*a).direct_alloc_arg).as_mut_ptr() {
+    |                -------- ^^ ------------------------------------ *mut printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>
+    |                |
+    |                &printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>
+
+error[E0369]: binary operation `!=` cannot be applied to type `&printf_parse::char_directive<'_, '_, '_, '_, '_, '_>`
+   --> src/lib/printf_parse.rs:795:25
+    |
+795 |             if (*d).dir != ((*d).direct_alloc_dir).as_mut_ptr() {
+    |                -------- ^^ ------------------------------------ *mut printf_parse::char_directive<'_, '_, '_, '_, '_, '_>
+    |                |
+    |                &printf_parse::char_directive<'_, '_, '_, '_, '_, '_>
+
+error[E0369]: binary operation `!=` cannot be applied to type `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>`
+   --> src/lib/printf_parse.rs:802:25
+    |
+802 |             if (*a).arg != ((*a).direct_alloc_arg).as_mut_ptr() {
+    |                -------- ^^ ------------------------------------ *mut printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>
+    |                |
+    |                &printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>
+
+error[E0369]: binary operation `!=` cannot be applied to type `&printf_parse::char_directive<'_, '_, '_, '_, '_, '_>`
+   --> src/lib/printf_parse.rs:805:25
+    |
+805 |             if (*d).dir != ((*d).direct_alloc_dir).as_mut_ptr() {
+    |                -------- ^^ ------------------------------------ *mut printf_parse::char_directive<'_, '_, '_, '_, '_, '_>
+    |                |
+    |                &printf_parse::char_directive<'_, '_, '_, '_, '_, '_>
+
+error[E0599]: no method named `offset` found for reference `&printf_parse::char_directive<'_, '_, '_, '_, '_, '_>` in the current scope
+   --> src/lib/printf_parse.rs:812:47
+    |
+812 |             let ref mut fresh8 = (*((*d).dir).offset((*d).count as isize)).dir_start;
+    |                                               ^^^^^^ method not found in `&printf_parse::char_directive<'_, '_, '_, '_, '_, '_>`
+
+error[E0606]: casting `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` as `*mut c_void` is invalid
+   --> src/lib/printf_parse.rs:320:29
+    |
+320 |                     realloc((*a).arg as *mut libc::c_void, memory_size)
+    |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0606]: casting `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` as `*const c_void` is invalid
+   --> src/lib/printf_parse.rs:331:25
+    |
+331 |                         (*a).arg as *const libc::c_void,
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0606]: casting `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` as `*mut c_void` is invalid
+   --> src/lib/printf_parse.rs:465:33
+    |
+465 |                         realloc((*a).arg as *mut libc::c_void, memory_size_0)
+    |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0606]: casting `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` as `*const c_void` is invalid
+   --> src/lib/printf_parse.rs:476:29
+    |
+476 | ...                   (*a).arg as *const libc::c_void,
+    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0606]: casting `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` as `*mut c_void` is invalid
+   --> src/lib/printf_parse.rs:702:29
+    |
+702 |                     realloc((*a).arg as *mut libc::c_void, memory_size_1)
+    |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0606]: casting `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` as `*const c_void` is invalid
+   --> src/lib/printf_parse.rs:713:25
+    |
+713 |                         (*a).arg as *const libc::c_void,
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0606]: casting `&printf_parse::char_directive<'_, '_, '_, '_, '_, '_>` as `*mut c_void` is invalid
+   --> src/lib/printf_parse.rs:769:25
+    |
+769 |                 realloc((*d).dir as *mut libc::c_void, memory_size_2)
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0606]: casting `&printf_parse::char_directive<'_, '_, '_, '_, '_, '_>` as `*const c_void` is invalid
+   --> src/lib/printf_parse.rs:780:21
+    |
+780 |                     (*d).dir as *const libc::c_void,
+    |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0606]: casting `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` as `*mut c_void` is invalid
+   --> src/lib/printf_parse.rs:793:22
+    |
+793 |                 free((*a).arg as *mut libc::c_void);
+    |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0606]: casting `&printf_parse::char_directive<'_, '_, '_, '_, '_, '_>` as `*mut c_void` is invalid
+   --> src/lib/printf_parse.rs:796:22
+    |
+796 |                 free((*d).dir as *mut libc::c_void);
+    |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0606]: casting `&printf_parse::argument<'_, '_, '_, '_, '_, '_, '_, '_>` as `*mut c_void` is invalid
+   --> src/lib/printf_parse.rs:803:22
+    |
+803 |                 free((*a).arg as *mut libc::c_void);
+    |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0606]: casting `&printf_parse::char_directive<'_, '_, '_, '_, '_, '_>` as `*mut c_void` is invalid
+   --> src/lib/printf_parse.rs:806:22
+    |
+806 |                 free((*d).dir as *mut libc::c_void);
+    |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0308]: mismatched types
+  --> src/lib/save_cwd.rs:20:19
+   |
+20 |     (*cwd).name = 0 as *mut libc::c_char;
+   |     -----------   ^^^^^^^^^^^^^^^^^^^^^^ expected `&i8`, found *-ptr
+   |     |
+   |     expected due to the type of this binding
+   |
+   = note: expected reference `&i8`
+            found raw pointer `*mut i8`
+
+error[E0308]: mismatched types
+  --> src/lib/save_cwd.rs:30:23
+   |
+30 |         (*cwd).name = getcwd(0 as *mut libc::c_char, 0 as libc::c_int as size_t);
+   |         -----------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&i8`, found *-ptr
+   |         |
+   |         expected due to the type of this binding
+   |
+   = note: expected reference `&i8`
+            found raw pointer `*mut i8`
+
+error[E0599]: no method named `is_null` found for reference `&i8` in the current scope
+  --> src/lib/save_cwd.rs:31:34
+   |
+31 |         return if !((*cwd).name).is_null() {
+   |                                  ^^^^^^^ method not found in `&i8`
+
+error[E0308]: mismatched types
+  --> src/lib/save_cwd.rs:44:27
+   |
+44 |         return chdir_long((*cwd).name)
+   |                ---------- ^^^^^^^^^^^ types differ in mutability
+   |                |
+   |                arguments to this function are incorrect
+   |
+   = note: expected raw pointer `*mut i8`
+                found reference `&i8`
+note: function defined here
+  --> src/lib/save_cwd.rs:7:8
+   |
+7  |     fn chdir_long(dir: *mut libc::c_char) -> libc::c_int;
+   |        ^^^^^^^^^^
+
+error[E0606]: casting `&'h1 i8` as `*mut c_void` is invalid
+  --> src/lib/save_cwd.rs:52:10
+   |
+52 |     free((*cwd).name as *mut libc::c_void);
+   |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0308]: arguments to this function are incorrect
+   --> src/lib/savedir.rs:114:12
+    |
+114 |     return strcmp((*dea).name, (*deb).name);
+    |            ^^^^^^ -----------  ----------- expected `i8`, found slice `[i8]`
+    |                   |
+    |                   expected `i8`, found slice `[i8]`
+    |
+    = note: expected raw pointer `*const i8`
+                 found reference `&[i8]`
+    = note: expected raw pointer `*const i8`
+                 found reference `&[i8]`
+note: function defined here
+   --> src/lib/savedir.rs:20:8
+    |
+20  |     fn strcmp(_: *const libc::c_char, _: *const libc::c_char) -> libc::c_int;
+    |        ^^^^^^
+
+error[E0308]: mismatched types
+   --> src/lib/savedir.rs:182:27
+    |
+182 |                 *fresh0 = xstrdup(entry);
+    |                 -------   ^^^^^^^^^^^^^^ expected `&[i8]`, found *-ptr
+    |                 |
+    |                 expected due to the type of this binding
+    |
+    = note: expected reference `&[i8]`
+             found raw pointer `*mut i8`
+
+error[E0308]: mismatched types
+   --> src/lib/savedir.rs:232:36
+    |
+232 |                     ((stpcpy(dest, (*entries.offset(i as isize)).name)).offset_from(dest)
+    |                       ------       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `i8`, found slice `[i8]`
+    |                       |
+    |                       arguments to this function are incorrect
+    |
+    = note: expected raw pointer `*const i8`
+                 found reference `&[i8]`
+note: function defined here
+   --> src/lib/savedir.rs:22:8
+    |
+22  |     fn stpcpy(_: *mut libc::c_char, _: *const libc::c_char) -> *mut libc::c_char;
+    |        ^^^^^^
+
+error[E0606]: casting `&[i8]` as `*mut c_void` is invalid
+   --> src/lib/savedir.rs:236:18
+    |
+236 |             free((*entries.offset(i as isize)).name as *mut libc::c_void);
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0599]: no method named `is_null` found for reference `&'h0 c_void` in the current scope
+  --> src/lib/xmalloc.rs:34:10
+   |
+34 |     if p.is_null() {
+   |          ^^^^^^^ method not found in `&'h0 c_void`
+
+error[E0308]: mismatched types
+  --> src/lib/xmalloc.rs:79:54
+   |
+79 |     let mut p: &[core::cell::Cell<(libc::c_void)>] = malloc(n);
+   |                -----------------------------------   ^^^^^^^^^ expected `&[Cell<c_void>]`, found *-ptr
+   |                |
+   |                expected due to this
+   |
+   = note: expected reference `&[Cell<c_void>]`
+            found raw pointer `*mut c_void`
+
+error[E0599]: no method named `is_null` found for struct `Cell` in the current scope
+  --> src/lib/xmalloc.rs:80:16
+   |
+80 |     if &(p)[0].is_null() && n != 0 as libc::c_int as libc::c_ulong {
+   |                ^^^^^^^ method not found in `Cell<c_void>`
+
+error[E0599]: no method named `is_null` found for reference `&'h0 c_void` in the current scope
+  --> src/lib/xmalloc.rs:90:21
+   |
+90 |     if n == 0 && !p.is_null() {
+   |                     ^^^^^^^ method not found in `&'h0 c_void`
+
+error[E0308]: mismatched types
+  --> src/lib/xmalloc.rs:91:14
+   |
+91 |         free(p);
+   |         ---- ^ types differ in mutability
+   |         |
+   |         arguments to this function are incorrect
+   |
+   = note: expected raw pointer `*mut c_void`
+                found reference `&'h0 c_void`
+note: function defined here
+  --> src/lib/xmalloc.rs:7:8
+   |
+7  |     fn free(__ptr: *mut libc::c_void);
+   |        ^^^^
+
+error[E0308]: mismatched types
+  --> src/lib/xmalloc.rs:92:16
+   |
+89 | ) -> &'h1 (libc::c_void) {
+   |      ------------------- expected `&'h1 c_void` because of return type
+...
+92 |         return 0 as *mut libc::c_void;
+   |                ^^^^^^^^^^^^^^^^^^^^^^ expected `&c_void`, found *-ptr
+   |
+   = note: expected reference `&'h1 c_void`
+            found raw pointer `*mut c_void`
+
+error[E0308]: mismatched types
+  --> src/lib/xmalloc.rs:94:17
+   |
+94 |     p = realloc(p, n);
+   |         ------- ^ types differ in mutability
+   |         |
+   |         arguments to this function are incorrect
+   |
+   = note: expected raw pointer `*mut c_void`
+                found reference `&'h0 c_void`
+note: function defined here
+  --> src/lib/xmalloc.rs:6:8
+   |
+6  |     fn realloc(_: *mut libc::c_void, _: libc::c_ulong) -> *mut libc::c_void;
+   |        ^^^^^^^
+
+error[E0308]: mismatched types
+  --> src/lib/xmalloc.rs:94:9
+   |
+87 |     mut p: &'h0 (libc::c_void),
+   |            ------------------- expected due to this parameter type
+...
+94 |     p = realloc(p, n);
+   |         ^^^^^^^^^^^^^ expected `&c_void`, found *-ptr
+   |
+   = note: expected reference `&'h0 c_void`
+            found raw pointer `*mut c_void`
+
+error[E0599]: no method named `is_null` found for reference `&'h0 c_void` in the current scope
+  --> src/lib/xmalloc.rs:95:10
+   |
+95 |     if p.is_null() && n != 0 {
+   |          ^^^^^^^ method not found in `&'h0 c_void`
+
+error[E0308]: mismatched types
+   --> src/lib/xmalloc.rs:109:19
+    |
+109 |     return memset(xmalloc(s), 0 as libc::c_int, s);
+    |            ------ ^^^^^^^^^^ types differ in mutability
+    |            |
+    |            arguments to this function are incorrect
+    |
+    = note: expected raw pointer `*mut c_void`
+                 found reference `&[Cell<c_void>]`
+note: function defined here
+   --> src/lib/xmalloc.rs:13:8
+    |
+13  |     fn memset(
+    |        ^^^^^^
+
+error[E0308]: mismatched types
+   --> src/lib/xmalloc.rs:109:12
+    |
+108 | pub unsafe extern "C" fn xzalloc<'h0>(mut s: size_t) -> &'h0 (libc::c_void) {
+    |                                                         ------------------- expected `&'h0 c_void` because of return type
+109 |     return memset(xmalloc(s), 0 as libc::c_int, s);
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&c_void`, found *-ptr
+    |
+    = note: expected reference `&'h0 c_void`
+             found raw pointer `*mut c_void`
+
+error[E0308]: mismatched types
+   --> src/lib/xmalloc.rs:113:34
+    |
+113 |     let mut p: &(libc::c_void) = 0 as *mut libc::c_void;
+    |                ---------------   ^^^^^^^^^^^^^^^^^^^^^^ expected `&c_void`, found *-ptr
+    |                |
+    |                expected due to this
+    |
+    = note: expected reference `&c_void`
+             found raw pointer `*mut c_void`
+
+error[E0308]: mismatched types
+   --> src/lib/xmalloc.rs:124:17
+    |
+113 |     let mut p: &(libc::c_void) = 0 as *mut libc::c_void;
+    |                --------------- expected due to this type
+...
+124 |             p = calloc(n, s);
+    |                 ^^^^^^^^^^^^ expected `&c_void`, found *-ptr
+    |
+    = note: expected reference `&c_void`
+             found raw pointer `*mut c_void`
+
+error[E0599]: no method named `is_null` found for reference `&c_void` in the current scope
+   --> src/lib/xmalloc.rs:125:15
+    |
+125 |             p.is_null()
+    |               ^^^^^^^ method not found in `&c_void`
+
+error[E0277]: the trait bound `Cell<c_void>: std::marker::Copy` is not satisfied
+    --> src/lib/xmalloc.rs:142:15
+     |
+142  |     dest[..n].copy_from_slice(&src[..n]);
+     |               ^^^^^^^^^^^^^^^ the trait `std::marker::Copy` is not implemented for `Cell<c_void>`
+     |
+note: required by a bound in `core::slice::<impl [T]>::copy_from_slice`
+    --> /home/hzy/.rustup/toolchains/nightly-2022-08-08-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/mod.rs:3216:12
+     |
+3216 |         T: Copy,
+     |            ^^^^ required by this bound in `core::slice::<impl [T]>::copy_from_slice`
+
+error[E0308]: mismatched types
+    --> src/lib/xmalloc.rs:142:31
+     |
+142  |     dest[..n].copy_from_slice(&src[..n]);
+     |               --------------- ^^^^^^^^^ expected struct `Cell`, found enum `c_void`
+     |               |
+     |               arguments to this function are incorrect
+     |
+     = note: expected reference `&[Cell<c_void>]`
+                found reference `&[c_void]`
+note: associated function defined here
+    --> /home/hzy/.rustup/toolchains/nightly-2022-08-08-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/mod.rs:3214:12
+     |
+3214 |     pub fn copy_from_slice(&mut self, src: &[T])
+     |            ^^^^^^^^^^^^^^^
+
+error[E0308]: mismatched types
+   --> src/lib/xmalloc.rs:143:5
+    |
+143 |     dest
+    |     ^^^^ expected enum `c_void`, found slice
+    |
+    = note: expected reference `&'h1 c_void`
+               found reference `&[Cell<c_void>]`
+
+error[E0308]: mismatched types
+   --> src/lib/xmalloc.rs:150:17
+    |
+150 |         (strlen(string)).wrapping_add(1 as libc::c_int as libc::c_ulong),
+    |          ------ ^^^^^^ expected `i8`, found slice `[i8]`
+    |          |
+    |          arguments to this function are incorrect
+    |
+    = note: expected raw pointer `*const i8`
+                 found reference `&'h0 [i8]`
+note: function defined here
+   --> src/lib/xmalloc.rs:18:8
+    |
+18  |     fn strlen(_: *const libc::c_char) -> libc::c_ulong;
+    |        ^^^^^^
+
+error[E0308]: mismatched types
+   --> src/lib/xmalloc.rs:149:9
+    |
+148 |     return xmemdup(
+    |            ------- arguments to this function are incorrect
+149 |         string as *const libc::c_void,
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&[c_void]`, found *-ptr
+    |
+    = note: expected reference `&[c_void]`
+             found raw pointer `*const c_void`
+note: function defined here
+   --> src/lib/xmalloc.rs:135:26
+    |
+135 | pub unsafe extern "C" fn xmemdup<'h0,'h1>(
+    |                          ^^^^^^^
+136 |     mut p: &'h0 [(libc::c_void)],
+    |     ----------------------------
+137 |     mut s: size_t,
+    |     -------------
+
+error[E0308]: mismatched types
+   --> src/lib/xmalloc.rs:148:12
+    |
+147 |   pub unsafe extern "C" fn xstrdup<'h0,'h1>(mut string: &'h0 [(libc::c_char)]) -> &'h1 (libc::c_char) {
+    |                                                                                   ------------------- expected `&'h1 i8` because of return type
+148 |       return xmemdup(
+    |  ____________^
+149 | |         string as *const libc::c_void,
+150 | |         (strlen(string)).wrapping_add(1 as libc::c_int as libc::c_ulong),
+151 | |     ) as *mut libc::c_char;
+    | |__________________________^ expected `&i8`, found *-ptr
+    |
+    = note: expected reference `&'h1 i8`
+             found raw pointer `*mut i8`
+
+error[E0606]: casting `&'h0 [i8]` as `*const c_void` is invalid
+   --> src/lib/xmalloc.rs:149:9
+    |
+149 |         string as *const libc::c_void,
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0606]: casting `&c_void` as `*mut i8` is invalid
+   --> src/lib/xmalloc.rs:148:12
+    |
+148 |       return xmemdup(
+    |  ____________^
+149 | |         string as *const libc::c_void,
+150 | |         (strlen(string)).wrapping_add(1 as libc::c_int as libc::c_ulong),
+151 | |     ) as *mut libc::c_char;
+    | |__________________________^
+
+error[E0308]: mismatched types
+   --> src/trees.rs:414:34
+    |
+414 |     let mut tree: *mut ct_data = (*desc).dyn_tree;
+    |                   ------------   ^^^^^^^^^^^^^^^^ types differ in mutability
+    |                   |
+    |                   expected due to this
+    |
+    = note: expected raw pointer `*mut ct_data`
+                 found reference `&[Cell<ct_data>]`
+
+error[E0308]: mismatched types
+   --> src/trees.rs:415:39
+    |
+415 |     let mut extra: *mut libc::c_int = (*desc).extra_bits;
+    |                    ----------------   ^^^^^^^^^^^^^^^^^^ types differ in mutability
+    |                    |
+    |                    expected due to this
+    |
+    = note: expected raw pointer `*mut i32`
+                 found reference `&[i32]`
+
+error[E0308]: mismatched types
+   --> src/trees.rs:419:35
+    |
+419 |     let mut stree: *mut ct_data = (*desc).static_tree;
+    |                    ------------   ^^^^^^^^^^^^^^^^^^^ types differ in mutability
+    |                    |
+    |                    expected due to this
+    |
+    = note: expected raw pointer `*mut ct_data`
+                 found reference `&[ct_data]`
+
+error[E0308]: mismatched types
+   --> src/trees.rs:550:34
+    |
+550 |     let mut tree: *mut ct_data = (*desc).dyn_tree;
+    |                   ------------   ^^^^^^^^^^^^^^^^ types differ in mutability
+    |                   |
+    |                   expected due to this
+    |
+    = note: expected raw pointer `*mut ct_data`
+                 found reference `&[Cell<ct_data>]`
+
+error[E0308]: mismatched types
+   --> src/trees.rs:551:35
+    |
+551 |     let mut stree: *mut ct_data = (*desc).static_tree;
+    |                    ------------   ^^^^^^^^^^^^^^^^^^^ types differ in mutability
+    |                    |
+    |                    expected due to this
+    |
+    = note: expected raw pointer `*mut ct_data`
+                 found reference `&[ct_data]`
+
+error[E0308]: mismatched types
+   --> src/util.rs:558:37
+    |
+558 |     let mut r: libc::c_int = unlink(filename);
+    |                              ------ ^^^^^^^^ expected `i8`, found slice `[i8]`
+    |                              |
+    |                              arguments to this function are incorrect
+    |
+    = note: expected raw pointer `*const i8`
+                 found reference `&'h0 [i8]`
+note: function defined here
+   --> src/util.rs:11:8
+    |
+11  |     fn unlink(__name: *const libc::c_char) -> libc::c_int;
+    |        ^^^^^^
+
+error[E0308]: mismatched types
+   --> src/util.rs:563:62
+    |
+563 |     let mut p: &[core::cell::Cell<(libc::c_char)>] = strrchr(name, '.' as i32);
+    |                                                      ------- ^^^^ expected `i8`, found slice `[i8]`
+    |                                                      |
+    |                                                      arguments to this function are incorrect
+    |
+    = note:    expected raw pointer `*const i8`
+            found mutable reference `&'h0 mut [i8]`
+note: function defined here
+   --> src/util.rs:19:8
+    |
+19  |     fn strrchr(_: *const libc::c_char, _: libc::c_int) -> *mut libc::c_char;
+    |        ^^^^^^^
+
+error[E0308]: mismatched types
+   --> src/util.rs:563:54
+    |
+563 |     let mut p: &[core::cell::Cell<(libc::c_char)>] = strrchr(name, '.' as i32);
+    |                -----------------------------------   ^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&[Cell<i8>]`, found *-ptr
+    |                |
+    |                expected due to this
+    |
+    = note: expected reference `&[Cell<i8>]`
+             found raw pointer `*mut i8`
+
+error[E0599]: no method named `is_null` found for struct `Cell` in the current scope
+   --> src/util.rs:564:16
+    |
+564 |     if &(p)[0].is_null() {
+    |                ^^^^^^^ method not found in `Cell<i8>`
+
+error[E0277]: can't compare `Cell<i8>` with `i8`
+   --> src/util.rs:567:16
+    |
+567 |     if &(p)[0] == &(&*(name))[0] {
+    |                ^^ no implementation for `Cell<i8> == i8`
+    |
+    = help: the trait `PartialEq<i8>` is not implemented for `Cell<i8>`
+    = help: the trait `PartialEq` is implemented for `Cell<T>`
+    = note: required because of the requirements on the impl of `PartialEq<&i8>` for `&Cell<i8>`
+
+error[E0600]: cannot apply unary operator `-` to type `usize`
+   --> src/util.rs:572:19
+    |
+572 |         p = &(p)[((-1) as usize) ..];
+    |                   ^^^^
+    |                   |
+    |                   cannot apply unary operator `-`
+    |                   help: you may have meant the maximum value of `usize`: `usize::MAX`
+    |
+    = note: unsigned values cannot be negated
+
+error[E0599]: no method named `set` found for reference `&[Cell<i8>]` in the current scope
+   --> src/util.rs:574:17
+    |
+574 |             (p).set(('_' as i32 as libc::c_char));
+    |                 ^^^
+    |
+   ::: /home/hzy/.rustup/toolchains/nightly-2022-08-08-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/pin.rs:659:12
+    |
+659 |     pub fn set(&mut self, value: P::Target)
+    |            --- the method is available for `Pin<&mut &[Cell<i8>]>` here
+    |
+help: consider wrapping the receiver expression with the appropriate type
+    |
+574 |             Pin::new(&mut (p)).set(('_' as i32 as libc::c_char));
+    |             +++++++++++++    +
+help: there is an associated function with a similar name
+    |
+574 |             (p).get(('_' as i32 as libc::c_char));
+    |                 ~~~
+
+error[E0277]: can't compare `Cell<i8>` with `i8`
+   --> src/util.rs:576:22
+    |
+576 |         if !(&(p)[0] != &(&*(name))[0]) {
+    |                      ^^ no implementation for `Cell<i8> == i8`
+    |
+    = help: the trait `PartialEq<i8>` is not implemented for `Cell<i8>`
+    = help: the trait `PartialEq` is implemented for `Cell<T>`
+    = note: required because of the requirements on the impl of `PartialEq<&i8>` for `&Cell<i8>`
+
+error[E0605]: non-primitive cast: `Option<&Cell<i8>>` as `i32`
+   --> src/util.rs:573:12
+    |
+573 |         if (p).get(0) as libc::c_int == '.' as i32 {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^ an `as` expression can only be used to convert between primitive types or to coerce to a specific trait object
+
+Some errors have detailed explanations: E0106, E0277, E0308, E0369, E0599, E0600, E0605, E0606.
+For more information about an error, try `rustc --explain E0106`.
+warning: `rust_dir` (lib) generated 150 warnings
+error: could not compile `rust_dir` due to 140 previous errors; 150 warnings emitted

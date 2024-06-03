@@ -1,3 +1,5 @@
+use std::ptr;
+
 use ::libc;
 extern "C" {
     fn last_component(file: *const libc::c_char) -> *mut libc::c_char;
@@ -67,7 +69,32 @@ pub unsafe extern "C" fn mdir_name<'h0,'h1>(mut file: &'h0 [(libc::c_char)]) -> 
     {
     let (dest, src, byte_len, ) = (((dir)), ((file)), (length), );
     let (n, ) = (byte_len as usize / 1, );
-    dest[..n].copy_from_slice(&src[..n]);
+    {
+        let this = &mut dest[..n];
+        let src = &src[..n];
+        // The panic code path was put into a cold function to not bloat the
+        // call site.
+        #[inline(never)]
+        #[cold]
+        #[track_caller]
+        fn len_mismatch_fail(dst_len: usize, src_len: usize) -> ! {
+            panic!(
+                "source slice length ({}) does not match destination slice length ({})",
+                src_len, dst_len,
+            );
+        }
+
+        if this.len() != src.len() {
+            len_mismatch_fail(this.len(), src.len());
+        }
+
+        // SAFETY: `self` is valid for `self.len()` elements by definition, and `src` was
+        // checked to have the same length. The slices cannot overlap because
+        // mutable references are exclusive.
+        unsafe {
+            ptr::copy_nonoverlapping(src.as_ptr(), this.as_mut_ptr(), this.len());
+        }
+    };
     dest
 };
     if append_dot {

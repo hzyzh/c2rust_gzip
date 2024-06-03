@@ -4,19 +4,19 @@ extern "C" {
 }
 pub type size_t = libc::c_ulong;
 #[no_mangle]
-pub unsafe extern "C" fn last_component<'h0,'h1>(
+pub extern "C" fn last_component<'h0,'h1>(
     mut name: &'h0 [(libc::c_char)],
 ) -> &'h1 (libc::c_char) {
     let mut base: &[(libc::c_char)] = &(name)[((0 as libc::c_int as isize) as usize) ..];
-    let mut p: &[(libc::c_char)] = 0 as *const libc::c_char;
+    let mut p: &[(libc::c_char)] = &[0 as libc::c_char];
     let mut saw_slash: bool = 0 as libc::c_int != 0;
-    while *base as libc::c_int == '/' as i32 {
+    while base[0] as libc::c_int == '/' as i32 {
         base = &(base)[((1) as usize) ..];
         &(base)[0];
     }
     p = base;
-    while *p != 0 {
-        if *p as libc::c_int == '/' as i32 {
+    while p[0] != 0 {
+        if p[0] as libc::c_int == '/' as i32 {
             saw_slash = 1 as libc::c_int != 0;
         } else if saw_slash {
             base = p;
@@ -31,7 +31,7 @@ pub unsafe extern "C" fn last_component<'h0,'h1>(
 pub unsafe extern "C" fn base_len<'h0>(mut name: &'h0 [(libc::c_char)]) -> size_t {
     let mut len: size_t = 0;
     let mut prefix_len: size_t = 0 as libc::c_int as size_t;
-    len = strlen(name);
+    len = strlen(name.as_ptr());
     while (1 as libc::c_int as libc::c_ulong) < len
         && *&(&(name)[((len.wrapping_sub(1 as libc::c_int as libc::c_ulong) as isize) as usize) ..])[0]
             as libc::c_int == '/' as i32

@@ -41,7 +41,7 @@ pub struct _IO_FILE<'h7,'h8,'h9,'h10,'h11,'h12,'h13,'h14,'h15,'h16,'h17,'h18,'h1
     pub _unused2: [libc::c_char; 20],
 }
 pub type _IO_lock_t = ();
-pub type FILE = _IO_FILE;
+pub type FILE<'a> = _IO_FILE<'a, 'a, 'a, 'a, 'a, 'a, 'a, 'a, 'a, 'a, 'a, 'a, 'a, 'a, 'a, 'a, 'a, 'a>;
 #[no_mangle]
 pub unsafe extern "C" fn fseterr<'h0,'h1,'h2,'h3,'h4,'h5,'h6,'h7,'h8,'h9,'h10,'h11,'h12,'h13,'h14,'h15,'h16,'h17,'h18>(mut fp: &'h0 mut (_IO_FILE)) {
     (*fp)._flags |= 0x20 as libc::c_int;

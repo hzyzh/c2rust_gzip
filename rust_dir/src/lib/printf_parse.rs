@@ -124,7 +124,7 @@ pub unsafe extern "C" fn printf_parse(
     let mut max_precision_length: size_t = 0 as libc::c_int as size_t;
     (*d).count = 0 as libc::c_int as size_t;
     d_allocated = 7 as libc::c_int as size_t;
-    (*d).dir = ((*d).direct_alloc_dir).as_mut_ptr();
+    (*d).dir = &((*d).direct_alloc_dir)[0];
     (*a).count = 0 as libc::c_int as size_t;
     a_allocated = 7 as libc::c_int as size_t;
     (*a).arg = ((*a).direct_alloc_arg).as_mut_ptr();

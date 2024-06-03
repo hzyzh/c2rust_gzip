@@ -43,14 +43,18 @@ pub unsafe extern "C" fn mmalloca(mut n: size_t) -> *mut libc::c_void {
 }
 #[no_mangle]
 pub unsafe extern "C" fn freea<'h0>(mut p: &'h0 [u8]) {
-    if &(p)[0] as uintptr_t
+    let rp: *mut u8 = &mut (p)[0];
+    if rp as uintptr_t
         & (sa_alignment_max as libc::c_int - 1 as libc::c_int) as libc::c_ulong != 0
     {
         abort();
     }
-    if &(p)[0] as uintptr_t & sa_alignment_max as libc::c_int as libc::c_ulong != 0 {
-        let mut mem: &(libc::c_void) = &(&((p as *mut libc::c_char))[((-(*&(&((p))[((-(1 as libc::c_int) as isize) as usize) ..])[0]
-                    as libc::c_int as isize)) as usize) ..])[0] as *mut libc::c_void;
+    if rp as uintptr_t & sa_alignment_max as libc::c_int as libc::c_ulong != 0 {
+        let mut mem: *mut libc::c_void = (rp as *mut libc::c_char)
+            .offset(
+                -(*(rp as *mut small_t).offset(-(1 as libc::c_int) as isize)
+                    as libc::c_int as isize),
+            ) as *mut libc::c_void;
         free(mem);
     }
 }

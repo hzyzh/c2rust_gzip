@@ -11,9 +11,9 @@ pub unsafe extern "C" fn fd_safer_flag(
 ) -> libc::c_int {
     if 0 as libc::c_int <= fd && fd <= 2 as libc::c_int {
         let mut f: libc::c_int = dup_safer_flag(fd, flag);
-        let mut e: libc::c_int = (__errno_location()).get();
+        let mut e: libc::c_int = *__errno_location();
         close(fd);
-        (__errno_location()).set((e));
+        *__errno_location() = e;
         fd = f;
     }
     return fd;

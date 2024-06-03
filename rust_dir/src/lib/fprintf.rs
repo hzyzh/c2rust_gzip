@@ -19,7 +19,7 @@ extern "C" {
         args: ::core::ffi::VaList,
     ) -> *mut libc::c_char;
 }
-pub type __builtin_va_list = [__va_list_tag; 1];
+pub type __builtin_va_list<'a> = [__va_list_tag<'a, 'a>; 1];
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct __va_list_tag<'h5,'h6> {
@@ -29,7 +29,7 @@ pub struct __va_list_tag<'h5,'h6> {
     pub reg_save_area: &'h6 (libc::c_void),
 }
 pub type size_t = libc::c_ulong;
-pub type va_list = __builtin_va_list;
+pub type va_list<'a> = __builtin_va_list<'a>;
 pub type __off_t = libc::c_long;
 pub type __off64_t = libc::c_long;
 #[derive(Copy, Clone)]
