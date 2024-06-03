@@ -13,8 +13,8 @@ pub type __builtin_va_list<'h1, 'h2> = [__va_list_tag<'h1, 'h2>; 1];
 pub struct __va_list_tag<'h1,'h2> {
     pub gp_offset: libc::c_uint,
     pub fp_offset: libc::c_uint,
-    pub overflow_arg_area: &'h1 (libc::c_void),
-    pub reg_save_area: &'h2 (libc::c_void),
+    pub overflow_arg_area: &'h1 libc::c_void,
+    pub reg_save_area: &'h2 libc::c_void,
 }
 pub type va_list<'h1, 'h2> = __builtin_va_list<'h1, 'h2>;
 pub type size_t = libc::c_ulong;

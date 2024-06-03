@@ -38,9 +38,9 @@ pub union C2RustUnnamed_0 {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct tree_desc<'h71,'h72,'h73> {
-    pub dyn_tree: &'h71 [core::cell::Cell<(ct_data)>],
-    pub static_tree: &'h72 [(ct_data)],
-    pub extra_bits: &'h73 [(libc::c_int)],
+    pub dyn_tree: &'h71 [core::cell::Cell<ct_data>],
+    pub static_tree: &'h72 [ct_data],
+    pub extra_bits: &'h73 [libc::c_int],
     pub extra_base: libc::c_int,
     pub elems: libc::c_int,
     pub max_length: libc::c_int,

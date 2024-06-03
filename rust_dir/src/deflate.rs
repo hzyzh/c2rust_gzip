@@ -599,14 +599,14 @@ unsafe extern "C" fn deflate_fast() -> off_t {
         }
         if flush != 0 {
             flush_block(
-                (if block_start >= 0 as libc::c_long {
+                if block_start >= 0 as libc::c_long {
                     &mut *window
                         .as_mut_ptr()
                         .offset(block_start as libc::c_uint as isize) as *mut uch
                         as *mut libc::c_char
                 } else {
                     0 as *mut libc::c_void as *mut libc::c_char
-                }),
+                },
                 (strstart as libc::c_long - block_start) as ulg,
                 flush - 1 as libc::c_int,
                 0 as libc::c_int,
@@ -761,14 +761,14 @@ pub unsafe extern "C" fn deflate() -> off_t {
             }
             if flush != 0 {
                 flush_block(
-                    (if block_start >= 0 as libc::c_long {
+                    if block_start >= 0 as libc::c_long {
                         &mut *window
                             .as_mut_ptr()
                             .offset(block_start as libc::c_uint as isize) as *mut uch
                             as *mut libc::c_char
                     } else {
                         0 as *mut libc::c_void as *mut libc::c_char
-                    }),
+                    },
                     (strstart as libc::c_long - block_start) as ulg,
                     flush - 1 as libc::c_int,
                     0 as libc::c_int,
@@ -790,14 +790,14 @@ pub unsafe extern "C" fn deflate() -> off_t {
             }
             if flush != 0 {
                 flush_block(
-                    (if block_start >= 0 as libc::c_long {
+                    if block_start >= 0 as libc::c_long {
                         &mut *window
                             .as_mut_ptr()
                             .offset(block_start as libc::c_uint as isize) as *mut uch
                             as *mut libc::c_char
                     } else {
                         0 as *mut libc::c_void as *mut libc::c_char
-                    }),
+                    },
                     (strstart as libc::c_long - block_start) as ulg,
                     flush - 1 as libc::c_int,
                     0 as libc::c_int,
@@ -816,14 +816,14 @@ pub unsafe extern "C" fn deflate() -> off_t {
                 rsync_chunk_end = 0xffffffff as libc::c_ulong;
                 flush = 2 as libc::c_int;
                 flush_block(
-                    (if block_start >= 0 as libc::c_long {
+                    if block_start >= 0 as libc::c_long {
                         &mut *window
                             .as_mut_ptr()
                             .offset(block_start as libc::c_uint as isize) as *mut uch
                             as *mut libc::c_char
                     } else {
                         0 as *mut libc::c_void as *mut libc::c_char
-                    }),
+                    },
                     (strstart as libc::c_long - block_start) as ulg,
                     flush - 1 as libc::c_int,
                     0 as libc::c_int,

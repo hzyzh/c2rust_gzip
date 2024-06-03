@@ -14,8 +14,8 @@ pub type __builtin_va_list = [__va_list_tag; 1];
 pub struct __va_list_tag<'h27,'h28> {
     pub gp_offset: libc::c_uint,
     pub fp_offset: libc::c_uint,
-    pub overflow_arg_area: &'h27 (libc::c_void),
-    pub reg_save_area: &'h28 (libc::c_void),
+    pub overflow_arg_area: &'h27 libc::c_void,
+    pub reg_save_area: &'h28 libc::c_void,
 }
 pub type __mode_t = libc::c_uint;
 pub type mode_t = __mode_t;

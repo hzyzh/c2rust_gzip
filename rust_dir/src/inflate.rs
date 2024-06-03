@@ -644,7 +644,7 @@ unsafe extern "C" fn inflate_codes(
             loop {
                 d &= (0x8000 as libc::c_int - 1 as libc::c_int) as libc::c_uint;
                 e = (0x8000 as libc::c_int as libc::c_uint)
-                    .wrapping_sub((if d > w { d } else { w }));
+                    .wrapping_sub(if d > w { d } else { w });
                 e = if e > n { n } else { e };
                 n = n.wrapping_sub(e);
                 if e <= (if d < w { w.wrapping_sub(d) } else { d.wrapping_sub(w) }) {

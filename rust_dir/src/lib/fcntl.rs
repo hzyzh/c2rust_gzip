@@ -10,8 +10,8 @@ pub type __builtin_va_list<'a> = [__va_list_tag<'a, 'a>; 1];
 pub struct __va_list_tag<'h3,'h4> {
     pub gp_offset: libc::c_uint,
     pub fp_offset: libc::c_uint,
-    pub overflow_arg_area: &'h3 (libc::c_void),
-    pub reg_save_area: &'h4 (libc::c_void),
+    pub overflow_arg_area: &'h3 libc::c_void,
+    pub reg_save_area: &'h4 libc::c_void,
 }
 pub type va_list<'a> = [__va_list_tag<'a, 'a>; 1];
 #[no_mangle]

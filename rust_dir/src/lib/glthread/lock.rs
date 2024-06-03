@@ -157,7 +157,7 @@ static fresh_once: pthread_once_t = 0 as libc::c_int;
 pub unsafe extern "C" fn glthread_once_singlethreaded<'h0>(
     mut once_control: &'h0 mut i8,
 ) -> libc::c_int {
-    let mut firstbyte: &mut (libc::c_char) = (once_control);
+    let mut firstbyte: &mut libc::c_char = once_control;
     if *firstbyte as libc::c_int
         == *((&*(&fresh_once))) as libc::c_int
     {

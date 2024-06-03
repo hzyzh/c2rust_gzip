@@ -35,7 +35,7 @@ pub type size_t = libc::c_ulong;
 pub struct cd_buf {
     pub fd: libc::c_int,
 }
-unsafe extern "C" fn cdb_init<'h0>(mut cdb: &'h0 mut (cd_buf)) {
+unsafe extern "C" fn cdb_init<'h0>(mut cdb: &'h0 mut cd_buf) {
     (*cdb).fd = -(100 as libc::c_int);
 }
 unsafe fn cdb_init_shim(arg0: *mut cd_buf) {
@@ -47,7 +47,7 @@ unsafe fn cdb_init_shim(arg0: *mut cd_buf) {
 }
 }
 
-unsafe extern "C" fn cdb_fchdir<'h0>(mut cdb: &'h0 (cd_buf)) -> libc::c_int {
+unsafe extern "C" fn cdb_fchdir<'h0>(mut cdb: &'h0 cd_buf) -> libc::c_int {
     return fchdir((*cdb).fd);
 }
 unsafe fn cdb_fchdir_shim(arg0: *const cd_buf) -> libc::c_int {

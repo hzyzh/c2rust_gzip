@@ -554,13 +554,13 @@ pub unsafe extern "C" fn gzip_base_name(
     return fname;
 }
 #[no_mangle]
-pub unsafe extern "C" fn xunlink<'h0>(mut filename: &'h0 [(libc::c_char)]) -> libc::c_int {
+pub unsafe extern "C" fn xunlink<'h0>(mut filename: &'h0 [libc::c_char]) -> libc::c_int {
     let mut r: libc::c_int = unlink(filename);
     return r;
 }
 #[no_mangle]
-pub unsafe extern "C" fn make_simple_name<'h0>(mut name: &'h0 mut [(libc::c_char)]) {
-    let mut p: &[core::cell::Cell<(libc::c_char)>] = strrchr(name, '.' as i32);
+pub unsafe extern "C" fn make_simple_name<'h0>(mut name: &'h0 mut [libc::c_char]) {
+    let mut p: &[core::cell::Cell<libc::c_char>] = strrchr(name, '.' as i32);
     if &(p)[0].is_null() {
         return;
     }
@@ -571,7 +571,7 @@ pub unsafe extern "C" fn make_simple_name<'h0>(mut name: &'h0 mut [(libc::c_char
     loop {
         p = &(p)[((-1) as usize) ..];
         if (p).get(0) as libc::c_int == '.' as i32 {
-            (p).set(('_' as i32 as libc::c_char));
+            (p).set('_' as i32 as libc::c_char);
         }
         if !(&(p)[0] != &(&*(name))[0]) {
             break;

@@ -5,10 +5,10 @@ extern "C" {
 pub type size_t = libc::c_ulong;
 #[no_mangle]
 pub extern "C" fn last_component<'h0,'h1>(
-    mut name: &'h0 [(libc::c_char)],
-) -> &'h1 (libc::c_char) {
-    let mut base: &[(libc::c_char)] = &(name)[((0 as libc::c_int as isize) as usize) ..];
-    let mut p: &[(libc::c_char)] = &[0 as libc::c_char];
+    mut name: &'h0 [libc::c_char],
+) -> &'h1 libc::c_char {
+    let mut base: &[libc::c_char] = &(name)[((0 as libc::c_int as isize) as usize) ..];
+    let mut p: &[libc::c_char] = &[0 as libc::c_char];
     let mut saw_slash: bool = 0 as libc::c_int != 0;
     while base[0] as libc::c_int == '/' as i32 {
         base = &(base)[((1) as usize) ..];
@@ -28,7 +28,7 @@ pub extern "C" fn last_component<'h0,'h1>(
     return &(base)[0];
 }
 #[no_mangle]
-pub unsafe extern "C" fn base_len<'h0>(mut name: &'h0 [(libc::c_char)]) -> size_t {
+pub unsafe extern "C" fn base_len<'h0>(mut name: &'h0 [libc::c_char]) -> size_t {
     let mut len: size_t = 0;
     let mut prefix_len: size_t = 0 as libc::c_int as size_t;
     len = strlen(name.as_ptr());

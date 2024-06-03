@@ -24,8 +24,8 @@ extern "C" {
 pub struct __va_list_tag<'h69,'h70> {
     pub gp_offset: libc::c_uint,
     pub fp_offset: libc::c_uint,
-    pub overflow_arg_area: &'h69 (libc::c_void),
-    pub reg_save_area: &'h70 (libc::c_void),
+    pub overflow_arg_area: &'h69 libc::c_void,
+    pub reg_save_area: &'h70 libc::c_void,
 }
 pub type size_t = libc::c_ulong;
 pub type __off_t = libc::c_long;

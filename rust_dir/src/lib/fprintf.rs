@@ -25,8 +25,8 @@ pub type __builtin_va_list<'a> = [__va_list_tag<'a, 'a>; 1];
 pub struct __va_list_tag<'h5,'h6> {
     pub gp_offset: libc::c_uint,
     pub fp_offset: libc::c_uint,
-    pub overflow_arg_area: &'h5 (libc::c_void),
-    pub reg_save_area: &'h6 (libc::c_void),
+    pub overflow_arg_area: &'h5 libc::c_void,
+    pub reg_save_area: &'h6 libc::c_void,
 }
 pub type size_t = libc::c_ulong;
 pub type va_list<'a> = __builtin_va_list<'a>;

@@ -45,7 +45,7 @@ pub const SAVEDIR_SORT_NONE: savedir_option = 0;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct direntry_t<'h59> {
-    pub name: &'h59 [(libc::c_char)],
+    pub name: &'h59 [libc::c_char],
 }
 pub type comparison_function = Option::<
     unsafe extern "C" fn(*const libc::c_void, *const libc::c_void) -> libc::c_int,
@@ -156,13 +156,13 @@ pub unsafe extern "C" fn streamsavedir(
                 {
                     0 as libc::c_int
                 } else {
-                    (if *entry.offset(1 as libc::c_int as isize) as libc::c_int
+                    if *entry.offset(1 as libc::c_int as isize) as libc::c_int
                         != '.' as i32
                     {
                         1 as libc::c_int
                     } else {
                         2 as libc::c_int
-                    })
+                    }
                 }) as isize,
             ) as libc::c_int != '\0' as i32
         {

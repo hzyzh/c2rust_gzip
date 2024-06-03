@@ -12,7 +12,7 @@ pub struct __sigset_t {
 #[repr(C)]
 pub union sigval<'h60> {
     pub sival_int: libc::c_int,
-    pub sival_ptr: &'h60 (libc::c_void),
+    pub sival_ptr: &'h60 libc::c_void,
 }
 pub type __sigval_t = sigval;
 #[derive(Copy, Clone)]
@@ -39,7 +39,7 @@ pub union C2RustUnnamed<'h60,'h62,'h61,'h63,'h64> {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2RustUnnamed_0<'h61> {
-    pub _call_addr: &'h61 (libc::c_void),
+    pub _call_addr: &'h61 libc::c_void,
     pub _syscall: libc::c_int,
     pub _arch: libc::c_uint,
 }
@@ -52,7 +52,7 @@ pub struct C2RustUnnamed_1 {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2RustUnnamed_2<'h62,'h63,'h64> {
-    pub si_addr: &'h62 (libc::c_void),
+    pub si_addr: &'h62 libc::c_void,
     pub si_addr_lsb: libc::c_short,
     pub _bounds: C2RustUnnamed_3<'h63,'h64>,
 }
@@ -65,8 +65,8 @@ pub union C2RustUnnamed_3<'h63,'h64> {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2RustUnnamed_4<'h63,'h64> {
-    pub _lower: &'h63 (libc::c_void),
-    pub _upper: &'h64 (libc::c_void),
+    pub _lower: &'h63 libc::c_void,
+    pub _upper: &'h64 libc::c_void,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -111,13 +111,13 @@ pub struct sigaction<'h65,'h66,'h60,'h62,'h61,'h63,'h64> {
 pub union C2RustUnnamed_9<'h65,'h66,'h60,'h62,'h61,'h63,'h64> {
     pub sa_handler: std::option::Option<unsafe extern "C" fn(i32)>,
     pub sa_sigaction: Option::<
-        unsafe extern "C" fn(libc::c_int, &'h65 (siginfo_t<'h60,'h62,'h61,'h63,'h64>), &'h66 (libc::c_void)) -> (),
+        unsafe extern "C" fn(libc::c_int, &'h65 siginfo_t<'h60,'h62,'h61,'h63,'h64>, &'h66 libc::c_void) -> (),
     >,
 }
 pub type sa_handler_t = Option::<unsafe extern "C" fn(libc::c_int) -> ()>;
 #[no_mangle]
 #[inline]
 #[linkage = "external"]
-pub unsafe extern "C" fn get_handler<'h0,'h1,'h2,'h3,'h4,'h5,'h6,'h7>(mut a: &'h0 (sigaction<'h1,'h2,'h3,'h4,'h5,'h6,'h7>)) -> std::option::Option<unsafe extern "C" fn(i32)> {
+pub unsafe extern "C" fn get_handler<'h0,'h1,'h2,'h3,'h4,'h5,'h6,'h7>(mut a: &'h0 sigaction<'h1,'h2,'h3,'h4,'h5,'h6,'h7>) -> std::option::Option<unsafe extern "C" fn(i32)> {
     return (*a).__sigaction_handler.sa_handler;
 }

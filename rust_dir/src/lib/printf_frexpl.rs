@@ -12,11 +12,11 @@ pub unsafe extern "C" fn printf_frexpl(
 ) -> f128::f128 {
     let mut exponent: libc::c_int = 0;
     let mut oldcw: fpucw_t = 0;
-    oldcw = ({
+    oldcw = {
         let mut _cw: fpucw_t = 0;
         asm!("fnstcw [{0}]", in (reg) & mut _cw, options(preserves_flags));
         _cw
-    });
+    };
     let mut _ncw: fpucw_t = (oldcw as libc::c_int & !(0x300 as libc::c_int)
         | 0x300 as libc::c_int) as fpucw_t;
     asm!("fldcw [{0}]", in (reg) & _ncw, options(preserves_flags));

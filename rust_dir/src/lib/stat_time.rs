@@ -40,14 +40,14 @@ pub struct stat {
 #[linkage = "external"]
 pub unsafe extern "C" fn stat_time_normalize<'h0>(
     mut result: libc::c_int,
-    mut st: &'h0 (stat),
+    mut st: &'h0 stat,
 ) -> libc::c_int {
     return result;
 }
 #[no_mangle]
 #[inline]
 #[linkage = "external"]
-pub unsafe extern "C" fn get_stat_birthtime<'h0>(mut st: &'h0 (stat)) -> timespec {
+pub unsafe extern "C" fn get_stat_birthtime<'h0>(mut st: &'h0 stat) -> timespec {
     let mut t: timespec = timespec { tv_sec: 0, tv_nsec: 0 };
     t.tv_sec = -(1 as libc::c_int) as __time_t;
     t.tv_nsec = -(1 as libc::c_int) as __syscall_slong_t;
@@ -56,42 +56,42 @@ pub unsafe extern "C" fn get_stat_birthtime<'h0>(mut st: &'h0 (stat)) -> timespe
 #[no_mangle]
 #[inline]
 #[linkage = "external"]
-pub unsafe extern "C" fn get_stat_mtime<'h0>(mut st: &'h0 (stat)) -> timespec {
+pub unsafe extern "C" fn get_stat_mtime<'h0>(mut st: &'h0 stat) -> timespec {
     return (*st).st_mtim;
 }
 #[no_mangle]
 #[inline]
 #[linkage = "external"]
-pub unsafe extern "C" fn get_stat_ctime<'h0>(mut st: &'h0 (stat)) -> timespec {
+pub unsafe extern "C" fn get_stat_ctime<'h0>(mut st: &'h0 stat) -> timespec {
     return (*st).st_ctim;
 }
 #[no_mangle]
 #[inline]
 #[linkage = "external"]
-pub unsafe extern "C" fn get_stat_atime<'h0>(mut st: &'h0 (stat)) -> timespec {
+pub unsafe extern "C" fn get_stat_atime<'h0>(mut st: &'h0 stat) -> timespec {
     return (*st).st_atim;
 }
 #[no_mangle]
 #[inline]
 #[linkage = "external"]
-pub unsafe extern "C" fn get_stat_birthtime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+pub unsafe extern "C" fn get_stat_birthtime_ns<'h0>(mut st: &'h0 stat) -> libc::c_long {
     return 0 as libc::c_int as libc::c_long;
 }
 #[no_mangle]
 #[inline]
 #[linkage = "external"]
-pub unsafe extern "C" fn get_stat_atime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+pub unsafe extern "C" fn get_stat_atime_ns<'h0>(mut st: &'h0 stat) -> libc::c_long {
     return (*st).st_atim.tv_nsec;
 }
 #[no_mangle]
 #[inline]
 #[linkage = "external"]
-pub unsafe extern "C" fn get_stat_ctime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+pub unsafe extern "C" fn get_stat_ctime_ns<'h0>(mut st: &'h0 stat) -> libc::c_long {
     return (*st).st_ctim.tv_nsec;
 }
 #[no_mangle]
 #[inline]
 #[linkage = "external"]
-pub unsafe extern "C" fn get_stat_mtime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+pub unsafe extern "C" fn get_stat_mtime_ns<'h0>(mut st: &'h0 stat) -> libc::c_long {
     return (*st).st_mtim.tv_nsec;
 }

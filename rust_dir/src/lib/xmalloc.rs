@@ -26,10 +26,10 @@ pub type C2RustUnnamed_0 = libc::c_uint;
 #[inline]
 #[linkage = "external"]
 pub unsafe extern "C" fn x2nrealloc<'h0,'h1,'h2>(
-    mut p: &'h0 (libc::c_void),
-    mut pn: &'h1 mut (size_t),
+    mut p: &'h0 libc::c_void,
+    mut pn: &'h1 mut size_t,
     mut s: size_t,
-) -> &'h2 (libc::c_void) {
+) -> &'h2 libc::c_void {
     let mut n: size_t = *pn;
     if p.is_null() {
         if n == 0 {
@@ -75,8 +75,8 @@ pub unsafe extern "C" fn x2nrealloc<'h0,'h1,'h2>(
     return xrealloc(p, n.wrapping_mul(s));
 }
 #[no_mangle]
-pub unsafe extern "C" fn xmalloc<'h0>(mut n: size_t) -> &'h0 [core::cell::Cell<(libc::c_void)>] {
-    let mut p: &[core::cell::Cell<(libc::c_void)>] = malloc(n);
+pub unsafe extern "C" fn xmalloc<'h0>(mut n: size_t) -> &'h0 [core::cell::Cell<libc::c_void>] {
+    let mut p: &[core::cell::Cell<libc::c_void>] = malloc(n);
     if &(p)[0].is_null() && n != 0 as libc::c_int as libc::c_ulong {
         xalloc_die();
     }
@@ -84,9 +84,9 @@ pub unsafe extern "C" fn xmalloc<'h0>(mut n: size_t) -> &'h0 [core::cell::Cell<(
 }
 #[no_mangle]
 pub unsafe extern "C" fn xrealloc<'h0,'h1>(
-    mut p: &'h0 (libc::c_void),
+    mut p: &'h0 libc::c_void,
     mut n: size_t,
-) -> &'h1 (libc::c_void) {
+) -> &'h1 libc::c_void {
     if n == 0 && !p.is_null() {
         free(p);
         return 0 as *mut libc::c_void;
@@ -99,18 +99,18 @@ pub unsafe extern "C" fn xrealloc<'h0,'h1>(
 }
 #[no_mangle]
 pub unsafe extern "C" fn x2realloc<'h0,'h1,'h2>(
-    mut p: &'h0 (libc::c_void),
-    mut pn: &'h1 mut (size_t),
-) -> &'h2 (libc::c_void) {
+    mut p: &'h0 libc::c_void,
+    mut pn: &'h1 mut size_t,
+) -> &'h2 libc::c_void {
     return x2nrealloc(p, pn, 1 as libc::c_int as size_t);
 }
 #[no_mangle]
-pub unsafe extern "C" fn xzalloc<'h0>(mut s: size_t) -> &'h0 (libc::c_void) {
+pub unsafe extern "C" fn xzalloc<'h0>(mut s: size_t) -> &'h0 libc::c_void {
     return memset(xmalloc(s), 0 as libc::c_int, s);
 }
 #[no_mangle]
-pub unsafe extern "C" fn xcalloc<'h0>(mut n: size_t, mut s: size_t) -> &'h0 (libc::c_void) {
-    let mut p: &(libc::c_void) = 0 as *mut libc::c_void;
+pub unsafe extern "C" fn xcalloc<'h0>(mut n: size_t, mut s: size_t) -> &'h0 libc::c_void {
+    let mut p: &libc::c_void = 0 as *mut libc::c_void;
     if (if (9223372036854775807 as libc::c_long as libc::c_ulong)
         < 18446744073709551615 as libc::c_ulong
     {
@@ -133,9 +133,9 @@ pub unsafe extern "C" fn xcalloc<'h0>(mut n: size_t, mut s: size_t) -> &'h0 (lib
 }
 #[no_mangle]
 pub unsafe extern "C" fn xmemdup<'h0,'h1>(
-    mut p: &'h0 [(libc::c_void)],
+    mut p: &'h0 [libc::c_void],
     mut s: size_t,
-) -> &'h1 (libc::c_void) {
+) -> &'h1 libc::c_void {
     return {
     let (dest, src, byte_len, ) = ((xmalloc(s)), (p), (s), );
     let (n, ) = (byte_len as usize / 1, );
@@ -144,7 +144,7 @@ pub unsafe extern "C" fn xmemdup<'h0,'h1>(
 };
 }
 #[no_mangle]
-pub unsafe extern "C" fn xstrdup<'h0,'h1>(mut string: &'h0 [(libc::c_char)]) -> &'h1 (libc::c_char) {
+pub unsafe extern "C" fn xstrdup<'h0,'h1>(mut string: &'h0 [libc::c_char]) -> &'h1 libc::c_char {
     return xmemdup(
         string as *const libc::c_void,
         (strlen(string)).wrapping_add(1 as libc::c_int as libc::c_ulong),

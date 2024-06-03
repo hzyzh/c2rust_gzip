@@ -13,7 +13,7 @@ pub struct timespec {
 }
 pub type clockid_t = __clockid_t;
 #[no_mangle]
-pub unsafe extern "C" fn gettime<'h0>(mut ts: &'h0 mut (timespec)) {
+pub unsafe extern "C" fn gettime<'h0>(mut ts: &'h0 mut timespec) {
     clock_gettime(0 as libc::c_int, ts);
 }
 #[no_mangle]

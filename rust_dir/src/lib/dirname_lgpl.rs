@@ -52,13 +52,13 @@ pub unsafe extern "C" fn dir_len(mut file: *const libc::c_char) -> size_t {
     return length;
 }
 #[no_mangle]
-pub unsafe extern "C" fn mdir_name<'h0,'h1>(mut file: &'h0 [(libc::c_char)]) -> &'h1 core::cell::Cell<(libc::c_char)> {
+pub unsafe extern "C" fn mdir_name<'h0,'h1>(mut file: &'h0 [libc::c_char]) -> &'h1 core::cell::Cell<libc::c_char> {
     let mut length: size_t = dir_len(core::ptr::addr_of!(*&(file)[0]));
     let mut append_dot: bool = length == 0 as libc::c_int as libc::c_ulong
         || 0 as libc::c_int != 0 && length == 0 as libc::c_int as libc::c_ulong
             && *&(&(file)[((2 as libc::c_int as isize) as usize) ..])[0] as libc::c_int != '\0' as i32
             && !(*&(&(file)[((2 as libc::c_int as isize) as usize) ..])[0] as libc::c_int == '/' as i32);
-    let mut dir: &[core::cell::Cell<(libc::c_char)>] = std::cell::Cell::from_mut((malloc(
+    let mut dir: &[core::cell::Cell<libc::c_char>] = std::cell::Cell::from_mut(&mut (malloc(
         length
             .wrapping_add(append_dot as libc::c_ulong)
             .wrapping_add(1 as libc::c_int as libc::c_ulong),
@@ -100,8 +100,8 @@ pub unsafe extern "C" fn mdir_name<'h0,'h1>(mut file: &'h0 [(libc::c_char)]) -> 
     if append_dot {
         let fresh0 = length;
         length = length.wrapping_add(1);
-        (&(&(dir)[((fresh0 as isize) as usize) ..])[0]).set(('.' as i32 as libc::c_char));
+        (&(&(dir)[((fresh0 as isize) as usize) ..])[0]).set('.' as i32 as libc::c_char);
     }
-    (&(&(dir)[((length as isize) as usize) ..])[0]).set(('\0' as i32 as libc::c_char));
+    (&(&(dir)[((length as isize) as usize) ..])[0]).set('\0' as i32 as libc::c_char);
     return &(dir)[0];
 }

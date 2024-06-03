@@ -66,7 +66,7 @@ pub struct stat {
 pub const TIMESPEC_HZ: C2RustUnnamed = 1000000000;
 pub type C2RustUnnamed = libc::c_uint;
 #[inline]
-unsafe extern "C" fn get_stat_atime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+unsafe extern "C" fn get_stat_atime_ns<'h0>(mut st: &'h0 stat) -> libc::c_long {
     return (*st).st_atim.tv_nsec;
 }
 unsafe fn get_stat_atime_ns_shim(arg0: *const stat) -> libc::c_long {
@@ -79,7 +79,7 @@ unsafe fn get_stat_atime_ns_shim(arg0: *const stat) -> libc::c_long {
 }
 
 #[inline]
-unsafe extern "C" fn get_stat_mtime_ns<'h0>(mut st: &'h0 (stat)) -> libc::c_long {
+unsafe extern "C" fn get_stat_mtime_ns<'h0>(mut st: &'h0 stat) -> libc::c_long {
     return (*st).st_mtim.tv_nsec;
 }
 unsafe fn get_stat_mtime_ns_shim(arg0: *const stat) -> libc::c_long {
@@ -92,7 +92,7 @@ unsafe fn get_stat_mtime_ns_shim(arg0: *const stat) -> libc::c_long {
 }
 
 #[inline]
-unsafe extern "C" fn get_stat_atime<'h0>(mut st: &'h0 (stat)) -> timespec {
+unsafe extern "C" fn get_stat_atime<'h0>(mut st: &'h0 stat) -> timespec {
     return (*st).st_atim;
 }
 unsafe fn get_stat_atime_shim(arg0: *const stat) -> timespec {
@@ -105,7 +105,7 @@ unsafe fn get_stat_atime_shim(arg0: *const stat) -> timespec {
 }
 
 #[inline]
-unsafe extern "C" fn get_stat_mtime<'h0>(mut st: &'h0 (stat)) -> timespec {
+unsafe extern "C" fn get_stat_mtime<'h0>(mut st: &'h0 stat) -> timespec {
     return (*st).st_mtim;
 }
 unsafe fn get_stat_mtime_shim(arg0: *const stat) -> timespec {
@@ -394,8 +394,8 @@ pub unsafe extern "C" fn fdutimens(
 }
 #[no_mangle]
 pub unsafe extern "C" fn utimens<'h0,'h1>(
-    mut file: &'h0 (libc::c_char),
-    mut timespec: &'h1 (timespec),
+    mut file: &'h0 libc::c_char,
+    mut timespec: &'h1 timespec,
 ) -> libc::c_int {
     return fdutimens(-(1 as libc::c_int), core::ptr::addr_of!(*(file)), core::ptr::addr_of!(*(timespec)));
 }
