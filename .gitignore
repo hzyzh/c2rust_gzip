@@ -1,5 +1,3 @@
-rust_dir/target/
-rust_dir/*.log
-rust_dir/*.txt
-rust_dir/inspect/
-rust_dir/polonius_cache/
+*
+
+!examples/
