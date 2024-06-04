@@ -3,7 +3,7 @@ extern "C" {
     fn open(__file: *const libc::c_char, __oflag: libc::c_int, _: ...) -> libc::c_int;
     fn fd_safer(_: libc::c_int) -> libc::c_int;
 }
-pub type __builtin_va_list = [__va_list_tag; 1];
+pub type __builtin_va_list<'a> = [__va_list_tag<'a, 'a>; 1];
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct __va_list_tag<'h25,'h26> {
@@ -14,7 +14,7 @@ pub struct __va_list_tag<'h25,'h26> {
 }
 pub type __mode_t = libc::c_uint;
 pub type mode_t = __mode_t;
-pub type va_list = __builtin_va_list;
+pub type va_list<'a> = __builtin_va_list<'a>;
 #[no_mangle]
 pub unsafe extern "C" fn open_safer(
     mut file: *const libc::c_char,

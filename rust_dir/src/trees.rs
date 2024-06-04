@@ -154,7 +154,7 @@ static mut l_desc: tree_desc = unsafe {
     {
         let mut init = tree_desc {
             dyn_tree: dyn_ltree.as_ptr() as *mut _,
-            static_tree: static_ltree.as_ptr() as *mut _,
+            static_tree: & static_ltree,
             extra_bits: extra_lbits.as_ptr() as *mut _,
             extra_base: 256 as libc::c_int + 1 as libc::c_int,
             elems: 256 as libc::c_int + 1 as libc::c_int + 29 as libc::c_int,

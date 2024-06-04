@@ -14,7 +14,7 @@ pub union sigval<'h60> {
     pub sival_int: libc::c_int,
     pub sival_ptr: &'h60 libc::c_void,
 }
-pub type __sigval_t = sigval;
+pub type __sigval_t<'a> = sigval<'a>;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct siginfo_t<'h60,'h62,'h61,'h63,'h64> {
@@ -82,14 +82,14 @@ pub struct C2RustUnnamed_5 {
 pub struct C2RustUnnamed_6<'h60> {
     pub si_pid: __pid_t,
     pub si_uid: __uid_t,
-    pub si_sigval: sigval,
+    pub si_sigval: sigval<'h60>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2RustUnnamed_7<'h60> {
     pub si_tid: libc::c_int,
     pub si_overrun: libc::c_int,
-    pub si_sigval: sigval,
+    pub si_sigval: sigval<'h60>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
