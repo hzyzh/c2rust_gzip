@@ -38,9 +38,9 @@ pub union C2RustUnnamed_0 {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct tree_desc<'h71,'h72,'h73> {
-    pub dyn_tree: Option<&'h71 [core::cell::Cell<ct_data>]>,
-    pub static_tree: Option<&'h72 [ct_data]>,
-    pub extra_bits: Option<&'h73 [libc::c_int]>,
+    pub dyn_tree: &'h71 [core::cell::Cell<ct_data>],
+    pub static_tree: &'h72 [ct_data],
+    pub extra_bits: &'h73 [libc::c_int],
     pub extra_base: libc::c_int,
     pub elems: libc::c_int,
     pub max_length: libc::c_int,
@@ -154,8 +154,8 @@ static mut l_desc: tree_desc = unsafe {
     {
         let mut init = tree_desc {
             dyn_tree: dyn_ltree.as_ptr() as *mut _,
-            static_tree: Some(& static_ltree),
-            extra_bits: Some(& extra_lbits),
+            static_tree: & static_ltree,
+            extra_bits: extra_lbits.as_ptr() as *mut _,
             extra_base: 256 as libc::c_int + 1 as libc::c_int,
             elems: 256 as libc::c_int + 1 as libc::c_int + 29 as libc::c_int,
             max_length: 15 as libc::c_int,
@@ -168,8 +168,8 @@ static mut d_desc: tree_desc = unsafe {
     {
         let mut init = tree_desc {
             dyn_tree: dyn_dtree.as_ptr() as *mut _,
-            static_tree: Some(& static_dtree),
-            extra_bits: Some(& extra_dbits),
+            static_tree: static_dtree.as_ptr() as *mut _,
+            extra_bits: extra_dbits.as_ptr() as *mut _,
             extra_base: 0 as libc::c_int,
             elems: 30 as libc::c_int,
             max_length: 15 as libc::c_int,
@@ -182,8 +182,8 @@ static mut bl_desc: tree_desc = unsafe {
     {
         let mut init = tree_desc {
             dyn_tree: bl_tree.as_ptr() as *mut _,
-            static_tree: None,
-            extra_bits: Some(& extra_blbits),
+            static_tree: 0 as *const ct_data as *mut ct_data,
+            extra_bits: xtra_blbits as *mut _,
             extra_base: 0 as libc::c_int,
             elems: 19 as libc::c_int,
             max_length: 7 as libc::c_int,
